@@ -1,0 +1,115 @@
+---
+title: "Benford's Law, Values of $L$-Functions and the $3x + 1$ Problem"
+subtitle: "Annotated Quarto Edition of Alex Kontorovich & Steven J. Miller (Acta Arithmetica, 2005) for Number Theory Seminars"
+author:
+  - name: "Alex V. Kontorovich"
+    affiliation: "Department of Mathematics, Columbia University"
+  - name: "Steven J. Miller"
+    affiliation: "Department of Mathematics, Brown University"
+  - name: "เรียบเรียงและเสริมบทวิเคราะห์: อาจารย์ ดร.กิตติพงศ์ ทรัพย์วัฒนาชัย"
+    affiliation: "ภาควิชาวิทยาการคำนวณและเทคโนโลยีดิจิทัล คณะศิลปศาสตร์และวิทยาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์ กำแพงแสน"
+date: "2005-01-01"
+description: "Acta Arithmetica, Vol. 120, No. 3 (2005), pp. 269–297; DOI: 10.4064/aa120-3-4"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    theme: cosmo
+    code-fold: true
+    fig-cap-location: bottom
+  typst:
+    toc: true
+    number-sections: true
+    columns: 1
+---
+
+::: {.callout-note title="ความสำคัญในวิชาสัมมนาคณิตศาสตร์ประยุกต์และสถิติ"}
+เปเปอร์ของ **Alex Kontorovich และ Steven J. Miller (2005)** ตีพิมพ์ใน *Acta Arithmetica* เป็นงานวิจัยระดับสูงที่พิสูจน์ว่า: **ลำดับตัวเลขที่เกิดขึ้นในวิถีของคอลลัทซ์ เป็นไปตาม "กฎของเบนฟอร์ด (Benford's Law)"**
+
+สำหรับนิสิตปริญญาตรี นี่คือโจทย์สัมมนาที่น่าประทับใจมาก เพราะนิสิตสามารถนำความรู้ **สถิติอนุมาน (Inferential Statistics)** และ **การทดสอบไคสแควร์ (Chi-Square Test)** มาจับคู่กับทฤษฎีจำนวนได้อย่างเป็นรูปธรรม 100%
+:::
+
+---
+
+# 1. กฎของเบนฟอร์ดคืออะไร? (What is Benford's Law?)
+
+ในชุดข้อมูลธรรมชาติจำนวนมาก (เช่น พื้นที่ของแม่น้ำ, จำนวนประชากรของเมือง, ราคาหุ้น) เลขโดดตัวแรกสุด $d \in \{1, 2, \dots, 9\}$ ไม่ได้เกิดขึ้นด้วยความน่าจะเป็นเท่ากัน ($1/9 \approx 11.1\%$) แต่เกิดขึ้นด้วยความน่าจะเป็นลอการิทึม:
+
+$$
+P(d) = \log_{10} \left( 1 + \frac{1}{d} \right)
+$$ {#eq-benford-law}
+
+ตารางความน่าจะเป็นตามกฎของเบนฟอร์ดในฐาน 10:
+
+| เลขโดดตัวแรก ($d$) | ความน่าจะเป็นทางทฤษฎี ($P(d)$) | สัดส่วนเปอร์เซ็นต์ |
+|:---:|:---:|:---:|
+| 1 | $\log_{10}(2) \approx 0.3010$ | 30.1% |
+| 2 | $\log_{10}(3/2) \approx 0.1761$ | 17.6% |
+| 3 | $\log_{10}(4/3) \approx 0.1249$ | 12.5% |
+| 4 | $\log_{10}(5/4) \approx 0.0969$ | 9.7% |
+| 5 | $\log_{10}(6/5) \approx 0.0792$ | 7.9% |
+| 6 | $\log_{10}(7/6) \approx 0.0669$ | 6.7% |
+| 7 | $\log_{10}(8/7) \approx 0.0580$ | 5.8% |
+| 8 | $\log_{10}(9/8) \approx 0.0512$ | 5.1% |
+| 9 | $\log_{10}(10/9) \approx 0.0458$ | 4.6% |
+
+---
+
+# 2. ปรากฏการณ์เบนฟอร์ดในวงโคจรคอลลัทซ์ (Benford Behavior in Collatz Orbits)
+
+Kontorovich และ Miller ได้พิสูจน์ว่า สำหรับลำดับคอลลัทซ์ที่เริ่มต้นจาก $n$ ขนาดใหญ่ อัตราส่วนระหว่างการคูณ $3$ และการหาร $2$ ทำให้ค่าในวงโคจรเมื่อนำมาพิจารณาค่า $\log_{10}(x_k) \bmod 1$ จะมี **การแจกแจงแบบสม่ำเสมออย่างเท่าเทียม (Equidistributed modulo 1)**
+
+ส่งผลให้เลขโดดตัวแรกในวงโคจรของคอลลัทซ์ลู่เข้าสู่กฎของเบนฟอร์ดเกือบทุกกรณี!
+
+---
+
+# 3. โค้ดทดสอบทางสถิติ Chi-Square Goodness-of-Fit ใน Python
+
+นิสิตสามารถรันการทดลองทางสถิติได้จริงใน Python:
+
+```python
+import math
+import numpy as np
+from scipy import stats
+
+
+def collatz_orbit(n: int) -> list[int]:
+    orbit = [n]
+    curr = n
+    while curr > 1:
+        curr = curr // 2 if curr % 2 == 0 else 3 * curr + 1
+        orbit.append(curr)
+    return orbit
+
+
+def test_benford_collatz(seeds: list[int]):
+    digits = []
+    for s in seeds:
+        orb = collatz_orbit(s)
+        for num in orb:
+            first_digit = int(str(num)[0])
+            digits.append(first_digit)
+
+    total = len(digits)
+    observed = [digits.count(d) for d in range(1, 10)]
+    expected = [total * math.log10(1 + 1 / d) for d in range(1, 10)]
+
+    chi2, p_val = stats.chisquare(f_obs=observed, f_exp=expected)
+
+    print(f"Total digits analyzed: {total}")
+    print(f"Chi-square statistic: {chi2:.4f}, p-value: {p_val:.4f}")
+    if p_val > 0.05:
+        print("Result: Consistent with Benford's Law (Fail to reject H0)!")
+
+
+test_benford_collatz([27, 871, 6171, 77031, 837799])
+```
+
+---
+
+# เอกสารอ้างอิง (References)
+
+1. **Kontorovich, A. V., & Miller, S. J.** (2005). *Benford's law, values of $L$-functions and the $3x+1$ problem.* Acta Arithmetica, 120(3), 269–297.
+2. **Lagarias, J. C., & Soundararajan, K.** (2006). *Benford's law for the $3x + 1$ function.* Journal of the London Mathematical Society, 74(2), 289–303.
+3. **Benford, F.** (1938). *The law of anomalous numbers.* Proceedings of the American Philosophical Society, 78(4), 551–572.

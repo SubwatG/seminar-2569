@@ -1,0 +1,113 @@
+---
+title: "The Long Search for Collatz Counterexamples: Algorithmic Composition & Audio Synthesis"
+subtitle: "Annotated Quarto Edition of Oliver K. Clay (Journal of Humanistic Mathematics, 2023) for Interdisciplinary Seminars"
+author:
+  - name: "Oliver K. Clay"
+    affiliation: "Department of Mathematics, Claremont Colleges"
+  - name: "เรียบเรียงและเสริมบทวิเคราะห์: อาจารย์ ดร.กิตติพงศ์ ทรัพย์วัฒนาชัย"
+    affiliation: "ภาควิชาวิทยาการคำนวณและเทคโนโลยีดิจิทัล คณะศิลปศาสตร์และวิทยาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์ กำแพงแสน"
+date: "2023-07-01"
+description: "Journal of Humanistic Mathematics, Vol. 13, Issue 2 (2023), pp. 199–227; DOI: 10.5642/jhummath.YQHO7207"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    theme: cosmo
+    code-fold: true
+    fig-cap-location: bottom
+  typst:
+    toc: true
+    number-sections: true
+    columns: 1
+---
+
+::: {.callout-note title="จุดเด่นของเปเปอร์นี้ในวิชาสัมมนา"}
+เปเปอร์ของ **Oliver K. Clay (2023)** ตีพิมพ์ใน *Journal of Humanistic Mathematics* เป็นงานที่ผสมผสาน **ทฤษฎีจำนวนบริสุทธิ์ (Pure Number Theory)** เข้ากับ **ฟิสิกส์คลื่นเสียงและการประพันธ์ดนตรีอัลกอริทึม (Acoustics & Algorithmic Music Composition)**
+
+เปเปอร์นี้นำเสนอแนวคิดว่า: วงโคจรของคอลลัทซ์สามารถแปลงเป็น **คะแนนดนตรี (Musical Score)** ได้อย่างไพเราะ โดยใช้อัตราส่วนฮาร์มอนิกของความถี่เสียง ทำให้นิสิตสามารถสร้างผลงานที่มีเสียงให้กรรมการฟังในห้องสัมมนาได้จริง!
+:::
+
+---
+
+# 1. บทนำและแนวคิดดนตรีจากวิถีคอลลัทซ์ (The Music of a Collatz Run)
+
+The music of a Collatz run is worth a note: After converting values (altitudes) to frequencies (in Hertz) and multiplying them by a constant (transposing them) to bring them into an audible range, a Collatz run becomes a musical score.
+
+เมื่อจำนวนเต็ม $n$ ไต่ระดับขึ้นและลงตามกฎ $3x+1$:
+
+- ในช่วงที่คูณ $3x+1$ ความถี่จะดีดตัวสูงขึ้น (Melodic Ascent)
+- ในช่วงที่หาร $2$ ซ้ำ ๆ ความถี่จะลดลงทีละหนึ่งคู่แปด (Octave Drop: ความถี่ลดลงครึ่งหนึ่งคือโน้ตตัวเดิมในคู่แปดที่ต่ำลง)
+
+---
+
+# 2. การแปลงตัวเลขสู่ความถี่เสียงดนตรี (Frequency Mapping)
+
+มี 2 แนวทางหลักในการแมปตัวเลขสู่งานดนตรี:
+
+1. **Continuous Frequency Mapping (Hz):**
+   $$
+   f(x) = f_0 \cdot \left( \frac{x}{x_0} \right)^\alpha
+   $$
+   เมื่อ $f_0$ คือความถี่ฐาน (เช่น $440$ Hz โน้ต A4)
+
+2. **Discrete 12-Tone Chromatic Mapping (MIDI Notes):**
+   แปลงตัวเลขเป็นระดับเสียงโน้ตดนตรี 12 เสียงด้วยการใช้มอดุโล 12:
+   $$
+   \text{MIDI Note} = 60 + (x \bmod 12)
+   $$
+   โดยโน้ต 60 คือ Middle C (C4)
+
+---
+
+# 3. โค้ดสร้างไฟล์เสียง WAV ด้วย Python (SciPy)
+
+นิสิตสามารถนำสคริปต์นี้ไปรันสร้างไฟล์เสียง `.wav` ได้ทันที:
+
+```python
+import numpy as np
+from scipy.io import wavfile
+
+
+def collatz_orbit(n: int) -> list[int]:
+    orbit = [n]
+    curr = n
+    while curr > 1:
+        curr = curr // 2 if curr % 2 == 0 else 3 * curr + 1
+        orbit.append(curr)
+    return orbit
+
+
+def generate_collatz_audio(seed: int = 27, filename: str = "collatz_music.wav"):
+    orbit = collatz_orbit(seed)
+    sr = 44100  # 44.1 kHz sampling rate
+    note_duration = 0.1  # 100 ms ต่อตัวโน้ต
+    t = np.linspace(0, note_duration, int(sr * note_duration), endpoint=False)
+
+    audio_chunks = []
+    base_freq = 220.0  # โน้ต A3
+
+    for val in orbit:
+        # แมปค่าให้อยู่ในช่วง 150 Hz ถึง 1200 Hz
+        freq = base_freq * (1.0 + (val % 36) / 12.0)
+        # สร้างคลื่นเสียง Sine wave พร้อมลดการกระแทกหัว-ท้าย
+        envelope = np.sin(np.pi * np.linspace(0, 1, len(t)))
+        tone = 0.5 * np.sin(2 * np.pi * freq * t) * envelope
+        audio_chunks.append(tone)
+
+    full_audio = np.concatenate(audio_chunks)
+    full_audio_int16 = (full_audio * 32767).astype(np.int16)
+    wavfile.write(filename, sr, full_audio_int16)
+    print(f"Generated {filename} from seed {seed} (Total notes: {len(orbit)})")
+
+
+generate_collatz_audio(27)
+```
+
+---
+
+# เอกสารอ้างอิง (References)
+
+1. **Clay, O. K.** (2023). *The long search for Collatz counterexamples.* Journal of Humanistic Mathematics, 13(2), 199–227.
+2. **Toussaint, G.** (2005). *The Euclidean algorithm generates traditional musical rhythms.* Proceedings of BRIDGES: Mathematical Connections in Art, Music, and Science.
+3. **Mazzola, G.** (2002). *The Topos of Music: Geometric Logic of Concepts, Theory, and Performance.* Birkhäuser.

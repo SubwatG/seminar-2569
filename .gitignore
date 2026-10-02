@@ -1,0 +1,13 @@
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.bak
+*.bak-*
+
+# Quarto internal caches
+.quarto/
+
+# Local Python caches
+__pycache__/
+*.pyc

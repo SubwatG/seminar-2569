@@ -1,0 +1,181 @@
+---
+title: "The $3x + 1$ Problem and Its Generalizations"
+subtitle: "Annotated Quarto Edition of Jeffrey C. Lagarias (AMM, 1985) for Number Theory Seminars"
+author:
+  - name: "Jeffrey C. Lagarias"
+    affiliation: "AT&T Bell Laboratories, Murray Hill, New Jersey (Original Author)"
+  - name: "เรียบเรียงและเสริมบทวิเคราะห์: อาจารย์ ดร.กิตติพงศ์ ทรัพย์วัฒนาชัย"
+    affiliation: "ภาควิชาวิทยาการคำนวณและเทคโนโลยีดิจิทัล คณะศิลปศาสตร์และวิทยาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์ กำแพงแสน"
+date: "1985-01-01"
+description: "The American Mathematical Monthly, Vol. 92, No. 1 (1985), pp. 3–23; DOI: 10.1080/00029890.1985.11971528"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    theme: cosmo
+    code-fold: true
+    fig-cap-location: bottom
+  typst:
+    toc: true
+    number-sections: true
+    columns: 1
+---
+
+::: {.callout-note title="บทบาทของเปเปอร์นี้ในวิชาสัมมนาคณิตศาสตร์"}
+เปเปอร์นี้ของ **Jeffrey C. Lagarias (1985)** ได้รับรางวัล *Lester R. Ford Award* จากสมาคมคณิตศาสตร์แห่งอเมริกา (MAA) และได้รับการยกย่องให้เป็น **"คัมภีร์แม่บท (The Master Survey)"** ของปัญหาคอลลัทซ์ที่สมบูรณ์ที่สุดในศตวรรษที่ 20
+
+สำหรับนิสิตสัมมนาคณิตศาสตร์ประยุกต์ เปเปอร์นี้เปิดโลกทัศน์ว่า ปัญหาที่ดูเหมือนเลขคณิตประถม ($3x+1$) แท้จริงแล้วเป็นจุดตัดของ **4 สาขาคณิตศาสตร์ขั้นสูง**:
+
+1. **ทฤษฎีจำนวนเชิงวิเคราะห์และไดโอแฟนไทน์ (Diophantine Approximation & Continued Fractions)**
+2. **การวัดบนระบบตัวเลข 2-adic (Ergodic Theory on $\mathbb{Z}_2$)**
+3. **ทฤษฎีการคำนวณและความตัดสินไม่ได้ของทัวริง (Turing Undecidability)**
+4. **ความน่าจะเป็นและกระบวนการสโตแคสติก (Geometric Brownian Motion)**
+:::
+
+---
+
+# 1. บทนำ (Introduction)
+
+The $3x + 1$ Conjecture is simple to state and apparently intractably hard to solve. It shares these properties with other iteration problems and with celebrated Diophantine equations such as Fermat's Last Theorem.
+
+Paul Erdős said of the $3x + 1$ problem: *"Mathematics is not yet ready for such problems."* He offered a $\$500$ prize for its solution.
+
+## นิยามฟังก์ชันมาตรฐาน (The Standard Formulation)
+
+กำหนดฟังก์ชันคอลลัทซ์ $C: \mathbb{Z}^+ \to \mathbb{Z}^+$ ดังนี้:
+
+$$
+C(x) = \begin{cases} 3x + 1 & \text{ถ้า } x \text{ เป็นจำนวนคี่} \\ x/2 & \text{ถ้า } x \text{ เป็นจำนวนคู่} \end{cases}
+$$ {#eq-collatz-std}
+
+สังเกตว่าถ้า $x$ เป็นจำนวนคี่ ค่า $3x + 1$ จะเป็นจำนวนคู่เสมอ ดังนั้นในการศึกษาระบบพลวัต นักคณิตศาสตร์มักใช้ **ฟังก์ชันแบบย่นย่อ (Compressed Collatz Map)** $T: \mathbb{Z}^+ \to \mathbb{Z}^+$:
+
+$$
+T(x) = \begin{cases} \frac{3x+1}{2} & \text{ถ้า } x \equiv 1 \pmod 2 \\ \frac{x}{2} & \text{ถ้า } x \equiv 0 \pmod 2 \end{cases}
+$$ {#eq-collatz-compressed}
+
+**The $3x + 1$ Conjecture:**  
+*สำหรับจำนวนเต็มบวก $x$ ใด ๆ ลำดับการวนซ้ำ $x, T(x), T^2(x), T^3(x), \dots$ จะลู่เข้าสู่วัฏจักร $1 \to 2 \to 1$ เสมอ*
+
+---
+
+# 2. การวิเคราะห์เชิงฮิวริสติก (A Heuristic Argument)
+
+ทำไมลำดับ $3x+1$ จึงน่าจะลู่เข้าสู่ $1$ เสมอ? Lagarias อธิบายด้วยแบบจำลองความน่าจะเป็น (Probabilistic Heuristic):
+
+สมมติว่าในแต่ละขั้นตอน ตัวเลข $x$ มีโอกาสเป็นเลขคู่ด้วยความน่าจะเป็น $1/2$ และเป็นเลขคี่ด้วยความน่าจะเป็น $1/2$:
+
+- ถ้าเป็นเลขคู่ ค่าจะถูกคูณด้วยอัตราส่วน $1/2$
+- ถ้าเป็นเลขคี่ ค่าจะถูกคูณด้วยอัตราส่วน $\approx 3/2$
+
+เมื่อรันไป $2k$ ขั้นตอน โดยมีจำนวนก้าวที่เป็นคี่และคู่เท่า ๆ กันอย่างละ $k$ ก้าว ขนาดของตัวเลขจะเปลี่ยนไปด้วยตัวคูณเฉลี่ยเชิงเรขาคณิต:
+
+$$
+\left( \frac{1}{2} \right)^k \left( \frac{3}{2} \right)^k = \left( \frac{3}{4} \right)^k
+$$ {#eq-drift-factor}
+
+เนื่องจากตัวคูณเฉลี่ย $\frac{3}{4} < 1$ ทำให้เกิด **อัตราการดริฟต์ลง (Downward Geometric Drift)** ในทางสถิติ วงโคจรจึงมีแนวโน้มลดลงสู่ค่าขนาดเล็กเสมอในอัตราเฉลี่ย:
+
+$$
+\frac{1}{2} \log_2 \left( \frac{1}{2} \right) + \frac{1}{2} \log_2 \left( \frac{3}{2} \right) = \frac{1}{2} \log_2 \left( \frac{3}{4} \right) \approx -0.2075 < 0
+$$
+
+::: {.callout-tip title="โจทย์จำลองเชิงตัวเลขสำหรับนิสิต"}
+นิสิตสามารถเขียนโปรแกรมสุ่มจำลองทางสถิติ (Monte Carlo Simulation) สุ่มตัวเลขเริ่มต้น $n \in [10^6, 10^7]$ จำนวน 10,000 ตัว แล้วบันทึกสัดส่วนของก้าวคี่ต่อก้าวคู่ พบว่าสัดส่วน $k_{\text{odd}} / k_{\text{total}} \to \log_3 2 \approx 0.6309$ เมื่อระบบเสถียร
+:::
+
+---
+
+# 3. เวลาหยุดและทฤษฎีบทของเทอร์รัส (Stopping Time & Terras' Theorem)
+
+## 3.1 นิยามเวลาหยุด (Stopping Time)
+
+สำหรับจำนวนเต็มบวก $n$:
+
+- **Stopping Time (เวลาหยุด):**
+  $$
+  \sigma(n) = \inf \{ k \ge 1 : T^k(n) < n \}
+  $$
+
+- **Total Stopping Time (เวลาหยุดสมบูรณ์):**
+  $$
+  \sigma_\infty(n) = \inf \{ k \ge 1 : T^k(n) = 1 \}
+  $$
+
+## 3.2 เวกเตอร์ภาวะคู่คี่ (The Parity Vector)
+
+กำหนดเวกเตอร์ภาวะคู่คี่ความยาว $k$:
+$$
+v_k(n) = (n \bmod 2, T(n) \bmod 2, \dots, T^{k-1}(n) \bmod 2) \in \{0, 1\}^k
+$$
+
+ความสัมพันธ์เชิงพีชคณิตที่สำคัญยิ่งคือ:
+$$
+T^k(n) = \frac{3^{s_k(n)}}{2^k} n + \rho_k(n)
+$$ {#eq-terras-repr}
+
+เมื่อ $s_k(n) = \sum_{j=0}^{k-1} (T^j(n) \bmod 2)$ คือจำนวนครั้งที่เกิดการแปลงแบบคี่ใน $k$ ขั้นแรก
+
+::: {.callout-important title="ทฤษฎีบทสำคัญ A (Terras' Parity Vector Bijection, 1976)"}
+ฟังก์ชัน $v_k: \mathbb{Z} / 2^k \mathbb{Z} \to \{0, 1\}^k$ เป็น **ฟังก์ชันหนึ่งต่อหนึ่งและทั่วถึง (Bijection)**  
+นั่นหมายความว่า: พฤติกรรมของวงโคจร $k$ ขั้นแรก ถูกกำหนดโดยเศษเหลือของ $n$ มอดุโล $2^k$ อย่างสมบูรณ์แบบ
+:::
+
+---
+
+# 4. ปัญหาวัฏจักรและการประมาณค่าไดโอแฟนไทน์ (Cycles & Diophantine Approximations)
+
+คำถามสำคัญทางทฤษฎีจำนวน: *มีวัฏจักรอื่นนอกจาก $1 \to 2 \to 1$ บน $\mathbb{Z}^+$ หรือไม่?*
+
+สมมติว่ามีวัฏจักรความยาว $k$ ที่ประกอบด้วยจำนวนคี่ $m$ ตัว และจำนวนคู่ $k - m$ ตัว จากสมการการวนซ้ำรอบวัฏจักร จะได้สมการไดโอแฟนไทน์:
+
+$$
+x_0 (2^k - 3^m) = \sum_{j=0}^{m-1} 3^{m-1-j} 2^{a_j}
+$$ {#eq-cycle-diophantine}
+
+เนื่องจาก $x_0 \ge 1$ และผลบวกทางขวามือเป็นบวกแท้จริง ทำให้ได้เงื่อนไขจำเป็นทันทีว่า:
+
+$$
+2^k > 3^m \implies \frac{k}{m} > \frac{\log 3}{\log 2} \approx 1.5849625\dots
+$$
+
+## ทฤษฎีบทของสไตเนอร์ (Steiner's Theorem, 1977)
+วัฏจักรที่ง่ายที่สุดคือ **$1$-Cycle** (มีช่วงของเลขคี่เรียงติดกันกลุ่มเดียว แล้วตามด้วยเลขคู่จนจบรอบ)  
+Ray Steiner พิสูจน์โดยใช้ทฤษฎี **เศษส่วนต่อเนื่อง (Continued Fractions)** ของ $\log_2 3$ ว่า:  
+*ไม่มี $1$-cycle อื่นใดบนจำนวนเต็มบวกนอกจากวัฏจักรพื้นฐาน $\{1, 2\}$*
+
+---
+
+# 5. การขยายปัญหาและความตัดสินไม่ได้ (Generalizations & Undecidability)
+
+## 5.1 ทฤษฎีบทความตัดสินไม่ได้ของคอนเวย์ (Conway's Undecidability Theorem, 1972)
+
+John Horton Conway ได้พิจารณาฟังก์ชันวางนัยทั่วไปของคอลลัทซ์:
+
+$$
+g(n) = a_i n + b_i \quad \text{เมื่อ } n \equiv i \pmod p
+$$
+
+Conway พิสูจน์โดยการจำลองการทำงานของ **เครื่องจักรทัวริง (Turing Machine)** ว่า:  
+*ปัญหาการตรวจสอบว่า $g^k(n) = 1$ หรือไม่ สำหรับระบบฟังก์ชันพีชคณิตเชิงเส้นเป็นช่วง เป็น **ปัญหาที่ตัดสินไม่ได้ทางขั้นตอนวิธี (Algorithmically Undecidable Problem)***
+
+ความหมายเชิงปรัชญาคณิตศาสตร์: เป็นไปได้ว่าสมมติฐานคอลลัทซ์อาจเป็นข้อความจริงที่ไม่สามารถพิสูจน์ได้ภายในระบบสัจพจน์ ZFC (Gödel Incompleteness)
+
+---
+
+# 6. สรุปคำถามเปิดและหัวข้อวิจัยสำหรับนิสิตสัมมนา
+
+1. **Cycle Nonexistence:** พิสูจน์ขอบเขตของ $m$-cycles สำหรับค่า $m$ ที่สูงขึ้น โดยศึกษาต่อยอดจากเปเปอร์ของ Simons & de Weger (2005)
+2. **Distribution of Stopping Times:** วิเคราะห์การกระจายตัวของค่า $\sigma(n)$ เปรียบเทียบกับการแจกแจงแบบเบี่ยงเบนปรกติ (Log-Normal Distribution)
+3. **Structured Subsets:** สำรวจพฤติกรรมของลำดับคอลลัทซ์บนเซตจำนวนรูปหลายเหลี่ยม (Polygonal Numbers) หรือลำดับเรขาคณิต
+
+---
+
+# เอกสารอ้างอิงหลัก (Selected Key References)
+
+1. **Lagarias, J. C.** (1985). *The $3x + 1$ problem and its generalizations.* The American Mathematical Monthly, 92(1), 3–23.
+2. **Terras, R.** (1976). *A stopping time problem on the positive integers.* Acta Arithmetica, 30(3), 241–252.
+3. **Steiner, R.** (1977). *A theorem on the Syracuse problem.* Proceedings of the 7th Manitoba Conference on Numerical Mathematics, 553–559.
+4. **Conway, J. H.** (1972). *Unpredictable iterations.* Proceedings of the 1972 Number Theory Conference, University of Colorado, Boulder, 49–52.
+5. **Baker, A.** (1975). *Transcendental Number Theory.* Cambridge University Press.

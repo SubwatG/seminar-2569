@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Riho Terras">
+<meta name="author" content="เรียบเรียงและเสริมบทวิเคราะห์: อาจารย์ ดร.กิตติพงศ์ ทรัพย์วัฒนาชัย">
+<meta name="dcterms.date" content="1976-01-01">
+<meta name="description" content="Acta Arithmetica, Vol. 30, No.&nbsp;3 (1976), pp.&nbsp;241–252; DOI: 10.4064/aa-30-3-241-252">
+
+<title>A Stopping Time Problem on the Positive Integers</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="terras-1976_files/libs/clipboard/clipboard.min.js"></script>
+<script src="terras-1976_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="terras-1976_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="terras-1976_files/libs/quarto-html/popper.min.js"></script>
+<script src="terras-1976_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="terras-1976_files/libs/quarto-html/anchor.min.js"></script>
+<link href="terras-1976_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="terras-1976_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="terras-1976_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="terras-1976_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="terras-1976_files/libs/bootstrap/bootstrap-7fca231f0f6bfd3bec1af756033c583c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#บทนำและนยามฟงกชน-introduction-definitions" id="toc-บทนำและนยามฟงกชน-introduction-definitions" class="nav-link active" data-scroll-target="#บทนำและนยามฟงกชน-introduction-definitions"><span class="header-section-number">1</span> 1. บทนำและนิยามฟังก์ชัน (Introduction &amp; Definitions)</a>
+  <ul class="collapse">
+  <li><a href="#นยามเวลาหยด-stopping-time" id="toc-นยามเวลาหยด-stopping-time" class="nav-link" data-scroll-target="#นยามเวลาหยด-stopping-time"><span class="header-section-number">1.1</span> 1.1 นิยามเวลาหยุด (Stopping Time)</a></li>
+  </ul></li>
+  <li><a href="#เวกเตอรภาวะคคและบทตงการสมนยหนงตอหนง-the-parity-vector-bijection-lemma" id="toc-เวกเตอรภาวะคคและบทตงการสมนยหนงตอหนง-the-parity-vector-bijection-lemma" class="nav-link" data-scroll-target="#เวกเตอรภาวะคคและบทตงการสมนยหนงตอหนง-the-parity-vector-bijection-lemma"><span class="header-section-number">2</span> 2. เวกเตอร์ภาวะคู่คี่และบทตั้งการสมนัยหนึ่งต่อหนึ่ง (The Parity Vector Bijection Lemma)</a>
+  <ul class="collapse">
+  <li><a href="#สตรการแทนคาพชคณตของ-tkn" id="toc-สตรการแทนคาพชคณตของ-tkn" class="nav-link" data-scroll-target="#สตรการแทนคาพชคณตของ-tkn"><span class="header-section-number">2.1</span> 2.1 สูตรการแทนค่าพีชคณิตของ <span class="math inline">\(T^k(n)\)</span></a>
+  <ul class="collapse">
+  <li><a href="#บทพสจนอยางยอดวยการอปนยเชงคณตศาสตร-proof-by-mathematical-induction" id="toc-บทพสจนอยางยอดวยการอปนยเชงคณตศาสตร-proof-by-mathematical-induction" class="nav-link" data-scroll-target="#บทพสจนอยางยอดวยการอปนยเชงคณตศาสตร-proof-by-mathematical-induction"><span class="header-section-number">2.1.1</span> บทพิสูจน์อย่างย่อด้วยการอุปนัยเชิงคณิตศาสตร์ (Proof by Mathematical Induction):</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#ทฤษฎบทความหนาแนนของเวลาหยด-natural-density-theorem" id="toc-ทฤษฎบทความหนาแนนของเวลาหยด-natural-density-theorem" class="nav-link" data-scroll-target="#ทฤษฎบทความหนาแนนของเวลาหยด-natural-density-theorem"><span class="header-section-number">3</span> 3. ทฤษฎีบทความหนาแน่นของเวลาหยุด (Natural Density Theorem)</a></li>
+  <li><a href="#โคดทดลองภาษา-python-สำหรบนสตสมมนา" id="toc-โคดทดลองภาษา-python-สำหรบนสตสมมนา" class="nav-link" data-scroll-target="#โคดทดลองภาษา-python-สำหรบนสตสมมนา"><span class="header-section-number">4</span> 4. โค้ดทดลองภาษา Python สำหรับนิสิตสัมมนา</a></li>
+  <li><a href="#เอกสารอางอง-references" id="toc-เอกสารอางอง-references" class="nav-link" data-scroll-target="#เอกสารอางอง-references"><span class="header-section-number">5</span> เอกสารอ้างอิง (References)</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="terras-1976.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">A Stopping Time Problem on the Positive Integers</h1>
+<p class="subtitle lead">Annotated Quarto Edition of Riho Terras (Acta Arithmetica, 1976) for Number Theory Seminars</p>
+</div>
+
+<div>
+  <div class="description">
+    Acta Arithmetica, Vol. 30, No.&nbsp;3 (1976), pp.&nbsp;241–252; DOI: 10.4064/aa-30-3-241-252
+  </div>
+</div>
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Riho Terras </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of California, San Diego (Original Author)
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">เรียบเรียงและเสริมบทวิเคราะห์: อาจารย์ ดร.กิตติพงศ์ ทรัพย์วัฒนาชัย </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            ภาควิชาวิทยาการคำนวณและเทคโนโลยีดิจิทัล คณะศิลปศาสตร์และวิทยาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์ กำแพงแสน
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 1, 1976</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="ความสำคัญทางประวัติศาสตร์ของเปเปอร์ฉบับนี้">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>ความสำคัญทางประวัติศาสตร์ของเปเปอร์ฉบับนี้
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>เปเปอร์ของ <strong>Riho Terras (1976)</strong> ตีพิมพ์ในวารสารระดับตำนาน <em>Acta Arithmetica</em> ถือเป็น <strong>“เปเปอร์วิจัยฉบับแรกของโลกที่สร้างทฤษฎีบททางคณิตศาสตร์แท้จริงให้กับปัญหาคอลลัทซ์”</strong> (ก่อนหน้านั้นมีเพียงรายงานการทดลองด้วยคอมพิวเตอร์และการคาดเดา)</p>
+<p>จุดเด่นที่สุดสำหรับนิสิตสัมมนาคือ: <strong>บทพิสูจน์หลักใช้เพียงความรู้คณิตศาสตร์ระดับปี 2 (ทฤษฎีจำนวนเบื้องต้น: การหารลงตัว มอดุโล <span class="math inline">\(2^k\)</span> และการอุปนัยเชิงคณิตศาสตร์)</strong> นิสิตทุกคนสามารถอ่านเข้าใจและแกะบทพิสูจน์ได้จนจบ 100%</p>
+</div>
+</div>
+<hr>
+<section id="บทนำและนยามฟงกชน-introduction-definitions" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 1. บทนำและนิยามฟังก์ชัน (Introduction &amp; Definitions)</h1>
+<p>ให้ <span class="math inline">\(\mathbb{Z}^+\)</span> แทนเซตของจำนวนเต็มบวก สำหรับ <span class="math inline">\(n \in \mathbb{Z}^+\)</span> กำหนดฟังก์ชัน <span class="math inline">\(T: \mathbb{Z}^+ \to \mathbb{Z}^+\)</span>:</p>
+<p><span id="eq-terras-map"><span class="math display">\[
+T(n) = \begin{cases} \frac{n}{2} &amp; \text{ถ้า } n \text{ เป็นจำนวนคู่} \\ \frac{3n+1}{2} &amp; \text{ถ้า } n \text{ เป็นจำนวนคี่} \end{cases}
+\tag{1}\]</span></span></p>
+<section id="นยามเวลาหยด-stopping-time" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="นยามเวลาหยด-stopping-time"><span class="header-section-number">1.1</span> 1.1 นิยามเวลาหยุด (Stopping Time)</h2>
+<ul>
+<li><p><strong>เวลาหยุด (Stopping Time) <span class="math inline">\(\sigma(n)\)</span>:</strong> <span class="math display">\[
+\sigma(n) = \inf \{ k \ge 1 : T^k(n) &lt; n \}
+\]</span> ถ้าไม่มี <span class="math inline">\(k\)</span> ดังกล่าว ให้ <span class="math inline">\(\sigma(n) = \infty\)</span></p></li>
+<li><p><strong>เวลาหยุดสมบูรณ์ (Total Stopping Time) <span class="math inline">\(\sigma_\infty(n)\)</span>:</strong> <span class="math display">\[
+\sigma_\infty(n) = \inf \{ k \ge 1 : T^k(n) = 1 \}
+\]</span></p></li>
+</ul>
+<p>เป้าหมายสูงสุดของสมมติฐานคอลลัทซ์คือการพิสูจน์ว่า <span class="math inline">\(\sigma_\infty(n) &lt; \infty\)</span> สำหรับทุก <span class="math inline">\(n \ge 2\)</span> แต่ Terras ได้พิสูจน์ในระดับที่อ่อนลงมาแต่น่าทึ่งยิ่ง คือการพิสูจน์ว่า <strong>เกือบทุกจำนวนเต็มมีค่า <span class="math inline">\(\sigma(n)\)</span> ที่จำกัด</strong></p>
+<hr>
+</section>
+</section>
+<section id="เวกเตอรภาวะคคและบทตงการสมนยหนงตอหนง-the-parity-vector-bijection-lemma" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 2. เวกเตอร์ภาวะคู่คี่และบทตั้งการสมนัยหนึ่งต่อหนึ่ง (The Parity Vector Bijection Lemma)</h1>
+<p>สำหรับจำนวนเต็มบวก <span class="math inline">\(k\)</span> กำหนด <strong>เวกเตอร์ภาวะคู่คี่ (Parity Vector)</strong> ความยาว <span class="math inline">\(k\)</span>:</p>
+<p><span id="eq-parity-vector"><span class="math display">\[
+v_k(n) = (x_0, x_1, \dots, x_{k-1}) \in \{0, 1\}^k
+\tag{2}\]</span></span></p>
+<p>โดยที่ <span class="math inline">\(x_j = T^j(n) \bmod 2\)</span> สำหรับ <span class="math inline">\(j = 0, 1, \dots, k-1\)</span></p>
+<section id="สตรการแทนคาพชคณตของ-tkn" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="สตรการแทนคาพชคณตของ-tkn"><span class="header-section-number">2.1</span> 2.1 สูตรการแทนค่าพีชคณิตของ <span class="math inline">\(T^k(n)\)</span></h2>
+<p>กำหนดค่าน้ำหนัก (Weight) <span class="math inline">\(w(v_k(n)) = \sum_{j=0}^{k-1} x_j\)</span> ซึ่งนับจำนวนก้าวที่เป็นคี่ จากการกระจายการวนซ้ำ จะได้เอกลักษณ์ทางพีชคณิตที่สำคัญยิ่ง:</p>
+<p><span id="eq-algebraic-form"><span class="math display">\[
+T^k(n) = \frac{3^{w(v_k(n))}}{2^k} n + \rho_k(v_k(n))
+\tag{3}\]</span></span></p>
+<p>โดยที่เศษตกค้าง <span class="math inline">\(\rho_k(v)\)</span> ถูกกำหนดโดยเวกเตอร์ <span class="math inline">\(v = (x_0, \dots, x_{k-1})\)</span> เพียงอย่างเดียวตามสูตร:</p>
+<p><span class="math display">\[
+\rho_k(v) = \sum_{j=0}^{k-1} x_j \frac{3^{\sum_{i=j+1}^{k-1} x_i}}{2^{k-j}}
+\]</span></p>
+<div class="callout callout-style-default callout-important callout-titled" title="บทตั้งหลัก 1.1 (The Parity Vector Bijection Lemma)">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>บทตั้งหลัก 1.1 (The Parity Vector Bijection Lemma)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>ฟังก์ชัน <span class="math inline">\(v_k: \mathbb{Z} / 2^k \mathbb{Z} \to \{0, 1\}^k\)</span> เป็น <strong>ฟังก์ชันหนึ่งต่อหนึ่งและทั่วถึง (Bijection)</strong><br>
+นั่นคือ: สำหรับเวกเตอร์บิตความยาว <span class="math inline">\(k\)</span> ใด ๆ จะมีเศษเหลือมอดุโล <span class="math inline">\(2^k\)</span> เพียงค่าเดียวเท่านั้นที่ให้เวกเตอร์ภาวะคู่คี่ตรงกับเวกเตอร์นั้น</p>
+</div>
+</div>
+<section id="บทพสจนอยางยอดวยการอปนยเชงคณตศาสตร-proof-by-mathematical-induction" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="บทพสจนอยางยอดวยการอปนยเชงคณตศาสตร-proof-by-mathematical-induction"><span class="header-section-number">2.1.1</span> บทพิสูจน์อย่างย่อด้วยการอุปนัยเชิงคณิตศาสตร์ (Proof by Mathematical Induction):</h3>
+<ol type="1">
+<li><p><strong>ขั้นฐาน (<span class="math inline">\(k = 1\)</span>):</strong><br>
+สำหรับ <span class="math inline">\(n \pmod 2\)</span> เศษเหลือ <span class="math inline">\(0\)</span> ให้เวกเตอร์ <span class="math inline">\((0)\)</span> และเศษเหลือ <span class="math inline">\(1\)</span> ให้เวกเตอร์ <span class="math inline">\((1)\)</span> เป็นการสมนัยหนึ่งต่อหนึ่งและทั่วถึงอย่างชัดเจน</p></li>
+<li><p><strong>ขั้นอุปนัย:</strong><br>
+สมมติว่า <span class="math inline">\(v_k\)</span> เป็นการสมนัยหนึ่งต่อหนึ่งและทั่วถึงบน <span class="math inline">\(\mathbb{Z} / 2^k \mathbb{Z}\)</span><br>
+พิจารณาเศษเหลือบน <span class="math inline">\(\mathbb{Z} / 2^{k+1} \mathbb{Z}\)</span> ซึ่งประกอบด้วย <span class="math inline">\(n\)</span> และ <span class="math inline">\(n + 2^k\)</span> (โดยที่ <span class="math inline">\(0 \le n &lt; 2^k\)</span>)<br>
+จากสูตร <a href="#eq-algebraic-form" class="quarto-xref">Equation&nbsp;3</a>: <span class="math display">\[
+T^k(n + 2^k) = T^k(n) + \frac{3^{w(v_k(n))}}{2^k} (2^k) = T^k(n) + 3^{w(v_k(n))}
+\]</span> เนื่องจาก <span class="math inline">\(3^w\)</span> เป็นจำนวนคี่เสมอ (เลข <span class="math inline">\(3\)</span> ยกกำลังจำนวนเต็มบวกย่อมเป็นเลขคี่) ดังนั้น: <span class="math display">\[
+T^k(n + 2^k) \equiv T^k(n) + 1 \pmod 2
+\]</span> ทำให้บิตที่ <span class="math inline">\(k\)</span> (คือค่า <span class="math inline">\(T^k \bmod 2\)</span>) ของ <span class="math inline">\(n\)</span> และ <span class="math inline">\(n + 2^k\)</span> <strong>มีค่าตรงข้ามกันเสมอ (หนึ่งตัวเป็น 0 อีกตัวเป็น 1)</strong><br>
+ดังนั้นเวกเตอร์ <span class="math inline">\(v_{k+1}\)</span> จึงขยายไปครอบคลุม <span class="math inline">\(\{0, 1\}^{k+1}\)</span> ครบทุกรูปแบบแบบหนึ่งต่อหนึ่งและทั่วถึง <span class="math inline">\(\blacksquare\)</span></p></li>
+</ol>
+<hr>
+</section>
+</section>
+</section>
+<section id="ทฤษฎบทความหนาแนนของเวลาหยด-natural-density-theorem" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 3. ทฤษฎีบทความหนาแน่นของเวลาหยุด (Natural Density Theorem)</h1>
+<p>Terras นิยาม <strong>เวลาหยุดเชิงสัมประสิทธิ์ (Coefficient Stopping Time)</strong>:</p>
+<p><span id="eq-coeff-stopping"><span class="math display">\[
+\kappa(n) = \inf \left\{ k \ge 1 : \frac{3^{w(v_k(n))}}{2^k} &lt; 1 \right\}
+\tag{4}\]</span></span></p>
+<p>เนื่องจากเงื่อนไข <span class="math inline">\(\frac{3^w}{2^k} &lt; 1\)</span> เทียบเท่ากับ:</p>
+<p><span class="math display">\[
+w &lt; k \frac{\log 2}{\log 3} \approx 0.6309 k
+\]</span></p>
+<p>จากบทตั้งหลัก 1.1 เวกเตอร์ <span class="math inline">\(v_k(n)\)</span> แต่ละรูปแบบมีความน่าจะเป็นเท่ากับ <span class="math inline">\(2^{-k}\)</span> ในเซตเศษเหลือ <span class="math inline">\(\mathbb{Z} / 2^k \mathbb{Z}\)</span> เสมือนการโยนเหรียญเที่ยงตรง <span class="math inline">\(k\)</span> ครั้ง!</p>
+<p>ตาม <strong>กฎว่าด้วยจำนวนมาก (Law of Large Numbers)</strong> สัดส่วนของจำนวนก้าวคี่จะลู่เข้าสู่ค่าเฉลี่ย <span class="math inline">\(1/2 = 0.50\)</span> เมื่อ <span class="math inline">\(k\)</span> มีขนาดใหญ่:</p>
+<p><span class="math display">\[
+\lim_{k \to \infty} P\left( \frac{w}{k} &lt; 0.6309 \right) = 1
+\]</span></p>
+<p>นำไปสู่ทฤษฎีบทประวัติศาสตร์ของ Terras:</p>
+<div class="callout callout-style-default callout-important callout-titled" title="ทฤษฎีบทหลัก 2.1 (Terras' Asymptotic Density Theorem, 1976)">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>ทฤษฎีบทหลัก 2.1 (Terras’ Asymptotic Density Theorem, 1976)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>เซตของจำนวนเต็มบวกที่มีเวลาหยุดจำกัด <span class="math inline">\(\{n \in \mathbb{Z}^+ : \sigma(n) &lt; \infty\}\)</span> มี <strong>ความหนาแน่นเชิงเส้นกำกับตามธรรมชาติ (Natural Asymptotic Density) เท่ากับ 1</strong>:</p>
+<p><span class="math display">\[
+\lim_{x \to \infty} \frac{1}{x} \#\{ n \le x : \sigma(n) &lt; \infty \} = 1
+\]</span></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="โคดทดลองภาษา-python-สำหรบนสตสมมนา" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 4. โค้ดทดลองภาษา Python สำหรับนิสิตสัมมนา</h1>
+<p>นิสิตสามารถนำบทตั้ง Parity Vector Bijection ไปเขียนโปรแกรมตรวจสอบความสมนัยหนึ่งต่อหนึ่งได้ด้วยตนเอง:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> collatz_step(n: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n <span class="op">//</span> <span class="dv">2</span> <span class="cf">if</span> n <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> (<span class="dv">3</span> <span class="op">*</span> n <span class="op">+</span> <span class="dv">1</span>) <span class="op">//</span> <span class="dv">2</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parity_vector(n: <span class="bu">int</span>, k: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">tuple</span>[<span class="bu">int</span>, ...]:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    vec <span class="op">=</span> []</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    curr <span class="op">=</span> n</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(k):</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        vec.append(curr <span class="op">%</span> <span class="dv">2</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        curr <span class="op">=</span> collatz_step(curr)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">tuple</span>(vec)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> verify_bijection(k: <span class="bu">int</span>):</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ตรวจสอบว่าเศษเหลือ 0 ถึง 2^k - 1 ให้เวกเตอร์ไม่ซ้ำกันเลย</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    mod <span class="op">=</span> <span class="dv">1</span> <span class="op">&lt;&lt;</span> k</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    vectors <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(mod):</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> parity_vector(n, k)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        vectors.add(v)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="bu">len</span>(vectors) <span class="op">==</span> mod</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"k = </span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">: Bijection verified! 2^</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>mod<span class="sc">}</span><span class="ss"> distinct vectors."</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># ทดสอบสำหรับ k = 1 ถึง 10</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>):</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    verify_bijection(k)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="เอกสารอางอง-references" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> เอกสารอ้างอิง (References)</h1>
+<ol type="1">
+<li><strong>Terras, R.</strong> (1976). <em>A stopping time problem on the positive integers.</em> Acta Arithmetica, 30(3), 241–252.</li>
+<li><strong>Everett, C. J.</strong> (1977). <em>Iteration of the number-theoretic function <span class="math inline">\(f(2n) = n, f(2n+1) = 3n+2\)</span>.</em> Advances in Mathematics, 25(1), 42–45.</li>
+<li><strong>Lagarias, J. C.</strong> (1985). <em>The <span class="math inline">\(3x + 1\)</span> problem and its generalizations.</em> The American Mathematical Monthly, 92(1), 3–23.</li>
+</ol>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

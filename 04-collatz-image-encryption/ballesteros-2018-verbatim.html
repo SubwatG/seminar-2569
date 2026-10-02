@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dora M. Ballesteros">
+<meta name="author" content="Jimmy Peña">
+<meta name="author" content="Diego Renza">
+<meta name="dcterms.date" content="2018-11-25">
+
+<title>A Novel Image Encryption Scheme Based on Collatz Conjecture</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="ballesteros-2018-verbatim_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ballesteros-2018-verbatim_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="ballesteros-2018-verbatim_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="ballesteros-2018-verbatim_files/libs/quarto-html/popper.min.js"></script>
+<script src="ballesteros-2018-verbatim_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="ballesteros-2018-verbatim_files/libs/quarto-html/anchor.min.js"></script>
+<link href="ballesteros-2018-verbatim_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ballesteros-2018-verbatim_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="ballesteros-2018-verbatim_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="ballesteros-2018-verbatim_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="ballesteros-2018-verbatim_files/libs/bootstrap/bootstrap-7fca231f0f6bfd3bec1af756033c583c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#background-of-concepts" id="toc-background-of-concepts" class="nav-link" data-scroll-target="#background-of-concepts"><span class="header-section-number">2</span> Background of Concepts</a>
+  <ul class="collapse">
+  <li><a href="#collatz-conjecture" id="toc-collatz-conjecture" class="nav-link" data-scroll-target="#collatz-conjecture"><span class="header-section-number">2.1</span> Collatz Conjecture</a></li>
+  <li><a href="#correlation-coefficient" id="toc-correlation-coefficient" class="nav-link" data-scroll-target="#correlation-coefficient"><span class="header-section-number">2.2</span> Correlation Coefficient</a></li>
+  <li><a href="#entropy" id="toc-entropy" class="nav-link" data-scroll-target="#entropy"><span class="header-section-number">2.3</span> Entropy</a></li>
+  <li><a href="#disorder-scrambling-ds" id="toc-disorder-scrambling-ds" class="nav-link" data-scroll-target="#disorder-scrambling-ds"><span class="header-section-number">2.4</span> Disorder Scrambling (DS)</a></li>
+  <li><a href="#structural-similarity-index-ssim" id="toc-structural-similarity-index-ssim" class="nav-link" data-scroll-target="#structural-similarity-index-ssim"><span class="header-section-number">2.5</span> Structural Similarity Index (SSIM)</a></li>
+  </ul></li>
+  <li><a href="#the-proposed-scheme" id="toc-the-proposed-scheme" class="nav-link" data-scroll-target="#the-proposed-scheme"><span class="header-section-number">3</span> The Proposed Scheme</a>
+  <ul class="collapse">
+  <li><a href="#image-coding" id="toc-image-coding" class="nav-link" data-scroll-target="#image-coding"><span class="header-section-number">3.1</span> Image Coding</a></li>
+  <li><a href="#image-recovering" id="toc-image-recovering" class="nav-link" data-scroll-target="#image-recovering"><span class="header-section-number">3.2</span> Image Recovering</a></li>
+  </ul></li>
+  <li><a href="#simulation-results" id="toc-simulation-results" class="nav-link" data-scroll-target="#simulation-results"><span class="header-section-number">4</span> Simulation Results</a></li>
+  <li><a href="#security-analysis" id="toc-security-analysis" class="nav-link" data-scroll-target="#security-analysis"><span class="header-section-number">5</span> Security Analysis</a>
+  <ul class="collapse">
+  <li><a href="#security-key-analysis" id="toc-security-key-analysis" class="nav-link" data-scroll-target="#security-key-analysis"><span class="header-section-number">5.1</span> Security Key Analysis</a>
+  <ul class="collapse">
+  <li><a href="#size-of-the-key-space" id="toc-size-of-the-key-space" class="nav-link" data-scroll-target="#size-of-the-key-space"><span class="header-section-number">5.1.1</span> Size of the Key Space</a></li>
+  <li><a href="#key-sensitivity-analysis" id="toc-key-sensitivity-analysis" class="nav-link" data-scroll-target="#key-sensitivity-analysis"><span class="header-section-number">5.1.2</span> Key Sensitivity Analysis</a></li>
+  </ul></li>
+  <li><a href="#sensitivity-to-the-changes-of-plain-image" id="toc-sensitivity-to-the-changes-of-plain-image" class="nav-link" data-scroll-target="#sensitivity-to-the-changes-of-plain-image"><span class="header-section-number">5.2</span> Sensitivity to the Changes of Plain Image</a></li>
+  <li><a href="#data-correlation-analysis" id="toc-data-correlation-analysis" class="nav-link" data-scroll-target="#data-correlation-analysis"><span class="header-section-number">5.3</span> Data Correlation Analysis</a></li>
+  <li><a href="#uncertainty-and-disorder-analysis" id="toc-uncertainty-and-disorder-analysis" class="nav-link" data-scroll-target="#uncertainty-and-disorder-analysis"><span class="header-section-number">5.4</span> Uncertainty and Disorder Analysis</a></li>
+  </ul></li>
+  <li><a href="#comparison-with-state-of-the-art-methods" id="toc-comparison-with-state-of-the-art-methods" class="nav-link" data-scroll-target="#comparison-with-state-of-the-art-methods"><span class="header-section-number">6</span> Comparison with State-of-the-Art Methods</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">7</span> Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">8</span> References</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ballesteros-2018-verbatim.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">A Novel Image Encryption Scheme Based on Collatz Conjecture</h1>
+<p class="subtitle lead">Entropy 2018, 20(12), 901; https://doi.org/10.3390/e20120901</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Dora M. Ballesteros </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Jimmy Peña </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Diego Renza <a href="mailto:diego.renza@unimilitar.edu.co" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 25, 2018</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Abstract:</strong> Image encryption methods aim to protect content privacy. Typically, they encompass scrambling and diffusion. Every pixel of the image is permuted (scrambling) and its value is transformed according to a key (diffusion). Although several methods have been proposed in the literature, some of them have been cryptanalyzed. In this paper, we present a novel method that deviates the traditional schemes. We use variable length codes based on Collatz conjecture for transforming the content of the image into non-intelligible audio; therefore, scrambling and diffusion processes are performed simultaneously in a non-linear way. With our method, different ciphered audio is obtained every time, and it depends exclusively on the selected key (the size of the key space equal to <span class="math inline">\(8.57 \times 10^{506}\)</span>). Several tests were performed in order to analyze randomness of the ciphered audio signals and the sensitivity of the key. Firstly, it was found that entropy and the level of disorder of ciphered audio signals are very close to the maximum value of randomness. Secondly, fractal behavior was detected into scatter plots of adjacent samples, altering completely the behavior of natural images. Finally, if the key was slightly modified, the image could not be recovered. With the above results, it was concluded that our method is very useful in image privacy protection applications.</p>
+<p><strong>Keywords:</strong> image encryption; Collatz conjecture; ciphered audio; scrambling; diffusion</p>
+<hr>
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>Nowadays, the amount of information posted on public sites or transmitted by digital form is huge. For example, the quantity of image uploads every day on Facebook is higher than three hundred million. Most times, the images are not content-sensitive, so it is not important if they are public; however, in other cases, the owner can wish to protect the privacy of its content. One way to provide privacy to images is through an encryption scheme [1], which has the objective of transforming the (secret) image to an unintelligible form to mask its perceptual content. The posted image can look like a noisy image, and only the authorized destination user can reveal the secret content.</p>
+<p>In general, an encryption process encompasses two parts, the first one is related to a permutation task (confusion) and the second one to diffusion [2,3]. The aim of the first stage is to place out every pixel of the image in another position, whereas its value is changed in the diffusion process. For image encryption, the combination of both processes in a non-linear way is highly recommended [4,5]. With the above conditions, it is expected that the ciphered image has the appearance of random noise, and thus its content is completely masked.</p>
+<p>In the last several years, chaotic sequences have been widely used [7–12]. G. Ye in 2010 [7] proposed an image scrambling encryption algorithm based on permutations of the pixel binary values in the image, by columns and rows, according to a chaotic sequence. Huang in 2011 [8] used the Chebyshev generator to obtain an encryption algorithm with only one permutation process and one diffusion process. Wang, Teng, and Qin in 2012 [9] developed a color image encryption algorithm based on a chaos system to encrypt the three components: R, G, and B simultaneously, with a low time-complexity. Zhou, Bao, and Chen in 2014 [10] proposed a new 1D chaotic system to combine with other chaotic maps (e.g., Logistic, Tent) for obtaining an algorithm with better performance in terms of chaos. Ye and Huang in 2016 [11] proposed an image encryption scheme that combines the chaotic sequence with the electrocardiography (ECG) signals of the user. Pak and Huang in 2017 [12] used a combination of 1D chaotic maps to encrypt color images; their method has a high-level of security and it is fast.</p>
+<p>Although the above methods reached good performance, some of them have been broken [13–19]. Tu, Liao, and Xiang in 2013 [13] used the chosen-plaintext attack to recover the equivalent key and the original image from the encrypted image, for the method presented in [9]. Wang, Luan, and Bao [14] in 2014 carried out the chosen-plaintext attack to the method of [8]. C. Li, D. Lin and J. Lü in 2017 [17] proposed an efficient known-plaintext attack and a general chosen-plaintext attack on the algorithm ISEA of the method in [7]. In a similar way, Dhall et al.&nbsp;in 2018 [15] demonstrated that differential cryptanalysis with linear equations allows one to discover the original images for the method proposed by [10]. Wang et al.&nbsp;[16] in 2018 broke the method proposed by [12]. C. Li, D. Lin, J. Lü, and F. Hao [18] recently published a summary of security defects of the algorithm proposed in [11]. Finally, Erick Yong Xie et al.&nbsp;in 2017 [19] provided some bases for further optimizing the attack on one of the well-known image encryption methods titled Fridrich’s scheme.</p>
+<p>A second group of image encryption methods includes deoxyribonucleic acid (DNA) encoding before the process of scrambling and ciphering [20,21]. In terms of the randomness of the encrypted image, the results are similar to that obtained by chaotic sequences, and again this kind of method has been cryptanalyzed (e.g., [22]). Alternative solutions use cellular automata to perform the confusion and diffusion tasks suitable for parallel computing [23]. In other works, the tasks are performed in the transform domain [24].</p>
+<p>The above approaches follow a traditional design. The permutation task is carried out, and the diffusion process is then applied. Although some proposals have simultaneously combined them [25], the structure of the encryption process has not been changed. Therefore, they are sensitive to being broken.</p>
+<p>In order to provide a novel solution to transform an image into an unintelligible content, we have designed an encryption scheme with the following main features:</p>
+<ul>
+<li>The permutation and diffusion processes are replaced by an encoding block which uses a non-fixed length mapping.</li>
+<li>The encoding process is accomplished by following the Collatz conjecture.</li>
+<li>The encrypted content corresponds to a speech signal instead of a ciphered image.</li>
+<li>Security of the scheme relies only on the key, with a size of the key space equal to <span class="math inline">\(8.57 \times 10^{506}\)</span>.</li>
+<li>The process is completely reversible and highly sensitive to the key.</li>
+</ul>
+<p>This paper is structured as follows. Section 2 summarizes the background of concepts used through the document: Collatz conjecture, correlation coefficient, entropy, Disorder Scrambling, and Structural Similarity Index. Section 3 describes in detail the proposed encryption scheme, which is composed of two modules: image coding and image recovering. Section 4 presents some preliminary results of the proposal. Section 5 evaluates the security of the method in terms of the size of the key space, key sensitivity, information entropy, Disorder Scrambling, correlation of adjacent data, and resistance against differential attacks. Section 6 presents the comparison with state-of-the-art methods. Finally, Section 7 concludes this paper.</p>
+<hr>
+</section>
+<section id="background-of-concepts" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Background of Concepts</h1>
+<section id="collatz-conjecture" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="collatz-conjecture"><span class="header-section-number">2.1</span> Collatz Conjecture</h2>
+<p>The Collatz conjecture is a mathematical problem also called the <span class="math inline">\(3x + 1\)</span> mapping with the following hypothesis: for any integer number, there is a specific number of iterations that can reduce the number to one, by:</p>
+<p><span id="eq-collatz"><span class="math display">\[
+T(x) = \begin{cases} x/2 &amp; \text{if } x \text{ is even} \\ 3x + 1 &amp; \text{if } x \text{ is odd} \end{cases}
+\tag{1}\]</span></span></p>
+<p>with <span class="math inline">\(T(x)\)</span> being the next value, and the applied operation is related to the type of the input number (even or odd). Although that conjecture has not been demonstrated theoretically, several documents have proved their truthfulness for small numbers [26,27].</p>
+<p>For example, suppose that the input number is <span class="math inline">\(3\)</span>. Then, the first operation is <span class="math inline">\(3x + 1\)</span> because this number is odd. The result is <span class="math inline">\(10\)</span>. Now, the value <span class="math inline">\(10\)</span> is divided by two, because that is an even number. The result is <span class="math inline">\(5\)</span>. Applying the corresponding rule, the number <span class="math inline">\(16\)</span> is obtained. A division by two is applied, and the result is <span class="math inline">\(8\)</span>. With another iteration, the value of <span class="math inline">\(4\)</span> is found. Again, a division by two is applied and the result is <span class="math inline">\(2\)</span>. With the final iteration, the value <span class="math inline">\(1\)</span> is reached. For this example, <span class="math inline">\(7\)</span> iterations are needed to reduce the number <span class="math inline">\(3\)</span> to <span class="math inline">\(1\)</span> with the rules presented in <a href="#eq-collatz" class="quarto-xref">Equation&nbsp;1</a>.</p>
+<p>A curious peculiarity of the Collatz conjecture is that every number reaches the sequence <span class="math inline">\(4 \to 2 \to 1\)</span>.</p>
+</section>
+<section id="correlation-coefficient" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="correlation-coefficient"><span class="header-section-number">2.2</span> Correlation Coefficient</h2>
+<p>This parameter is very useful to compare the entire image or the inter speech signal behavior. Its aim is to measure the level of linear correlation (similarity) between a pixel with its neighbors (diagonal, horizontal, or vertical) or between a sample with its neighbors (left or right). A natural image or speech signal is expected to have a high value of correlation coefficient, i.e., close to one. Otherwise, an encrypted image (or audio) tends to have this value very close to zero.</p>
+<p>In the case of adjacent pixels or samples, the correlation coefficient is calculated by:</p>
+<p><span id="eq-corr"><span class="math display">\[
+r_{A,B} = \frac{\operatorname{cov}(A, B)}{\sigma_A \sigma_B}
+\tag{2}\]</span></span></p>
+<p>where <span class="math inline">\(\sigma_A\)</span> and <span class="math inline">\(\sigma_B\)</span> are the standard deviation of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, respectively. <span class="math inline">\(B\)</span> is the image obtained with a shift of one pixel with respect to <span class="math inline">\(A\)</span> (or the speech signal obtained with a shift of one sample with respect to <span class="math inline">\(A\)</span>). The covariance between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is defined by:</p>
+<p><span class="math display">\[
+\operatorname{cov}(A, B) = \frac{1}{N} \sum_{i=1}^N (A_i - E(A))(B_i - E(B))
+\]</span></p>
+<p>with <span class="math inline">\(N\)</span> being the total number of pixels or samples, and <span class="math inline">\(E(A)\)</span> and <span class="math inline">\(E(B)\)</span> the expected values of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, respectively.</p>
+</section>
+<section id="entropy" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="entropy"><span class="header-section-number">2.3</span> Entropy</h2>
+<p>Entropy measures the level of uncertainty of a random variable. A high value of entropy means high uncertainty, and it is related to high unpredictability. For that reason, for encryption applications, it is expected that the encrypted data has the maximum value of entropy, according to:</p>
+<p><span id="eq-entropy"><span class="math display">\[
+H(S) = -\sum_{i=1}^n P(s_i) \log_2 P(s_i)
+\tag{3}\]</span></span></p>
+<p>where <span class="math inline">\(S\)</span> is the data (image or speech signal), <span class="math inline">\(s_i\)</span> are the possible values of <span class="math inline">\(S\)</span>, <span class="math inline">\(n\)</span> is the total number of states of <span class="math inline">\(S\)</span>, and <span class="math inline">\(P(s_i)\)</span> is the probability of occurrence of <span class="math inline">\(s_i\)</span>. In an 8-bit image, the maximum entropy is <span class="math inline">\(8\)</span>, whereas in a 16-bit audio signal it is <span class="math inline">\(16\)</span>.</p>
+</section>
+<section id="disorder-scrambling-ds" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="disorder-scrambling-ds"><span class="header-section-number">2.4</span> Disorder Scrambling (DS)</h2>
+<p>Typically for image encryption, one parameter used for measuring the correlation between adjacent pixels is the gray difference degree (GDD), which calculates the gray difference of current pixel of both the original image and the encrypted image. However, in the current proposal, the encrypted output is not an image but an audio file with a different quantity of bits with respect to the original image. Therefore, GDD is not a feasible measurement for our scheme. Instead of that, we selected the parameter of disorder scrambling (DS), which has been used in other works of speech scrambling [28,31,32], through the formula:</p>
+<p><span id="eq-ds"><span class="math display">\[
+\text{DS} = \frac{\sum_{i=2}^{m-1} \sqrt{|x_i - x_{i-1}| + |x_i - x_{i+1}|}}{m-2}
+\tag{4}\]</span></span></p>
+<p>where <span class="math inline">\(x_i\)</span> is the current sample of the audio, <span class="math inline">\(x_{i-1}\)</span> is the left sample of <span class="math inline">\(x_i\)</span>, <span class="math inline">\(x_{i+1}\)</span> is the right sample of <span class="math inline">\(x_i\)</span>, and <span class="math inline">\(m\)</span> is the total length of the audio signal. For normalized signals with amplitudes in <span class="math inline">\([-1, 1]\)</span>, the maximum value of <span class="math inline">\(\text{DS}\)</span> is <span class="math inline">\(2\)</span>.</p>
+</section>
+<section id="structural-similarity-index-ssim" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="structural-similarity-index-ssim"><span class="header-section-number">2.5</span> Structural Similarity Index (SSIM)</h2>
+<p>One metric widely used to compare two images in the perceptual domain is the Structural Similarity Index (SSIM) [29,30]. It combines three comparisons: luminance (<span class="math inline">\(l\)</span>), contrast (<span class="math inline">\(c\)</span>), and structure (<span class="math inline">\(s\)</span>):</p>
+<p><span id="eq-ssim-gen"><span class="math display">\[
+\text{SSIM}(x, y) = [l(x, y)]^\alpha [c(x, y)]^\beta [s(x, y)]^\gamma
+\tag{5}\]</span></span></p>
+<p>where:</p>
+<p><span id="eq-ssim-l"><span class="math display">\[
+l(x, y) = \frac{2\mu_x \mu_y + C_1}{\mu_x^2 + \mu_y^2 + C_1}
+\tag{6}\]</span></span></p>
+<p><span id="eq-ssim-c"><span class="math display">\[
+c(x, y) = \frac{2\sigma_x \sigma_y + C_2}{\sigma_x^2 + \sigma_y^2 + C_2}
+\tag{7}\]</span></span></p>
+<p><span id="eq-ssim-s"><span class="math display">\[
+s(x, y) = \frac{\sigma_{xy} + C_3}{\sigma_x \sigma_y + C_3}
+\tag{8}\]</span></span></p>
+<p>with <span class="math inline">\(\mu_x\)</span> and <span class="math inline">\(\mu_y\)</span> being the local means, <span class="math inline">\(\sigma_x\)</span> and <span class="math inline">\(\sigma_y\)</span> the standard deviations, and <span class="math inline">\(\sigma_{xy}\)</span> the cross-covariance for images <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. If <span class="math inline">\(\alpha = \beta = \gamma = 1\)</span>, and <span class="math inline">\(C_3 = 0.5 C_2\)</span>, then:</p>
+<p><span id="eq-ssim"><span class="math display">\[
+\text{SSIM}(x, y) = \left( \frac{2\mu_x \mu_y + C_1}{\mu_x^2 + \mu_y^2 + C_1} \right) \left( \frac{2\sigma_{xy} + C_2}{\sigma_x^2 + \sigma_y^2 + C_2} \right)
+\tag{9}\]</span></span></p>
+<p>If the value of <span class="math inline">\(\text{SSIM}\)</span> between two images is close to <span class="math inline">\(1\)</span>, they are perceptually equal; otherwise, if the value is close to <span class="math inline">\(0\)</span>, the perceptual similarity is null.</p>
+<hr>
+</section>
+</section>
+<section id="the-proposed-scheme" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> The Proposed Scheme</h1>
+<p>Our proposed scheme for image encryption deviates from the traditional way of transforming an image into an output with non-legible content. It is worth noting that the mapping process between the input and the output is not one to one (like in the classical structure). Therefore, a pixel is transformed not only in position and value; the size of the bit word to represent it also changes. Figure <a href="#fig-01" class="quarto-xref">Figure&nbsp;1</a> shows the general architecture of the proposed solution, with two main modules: image coding and image recovering.</p>
+<div id="fig-01" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-01-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/fig_01_general_block_diagram.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-01-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Figure 1: General block diagram of the proposed method.
+</figcaption>
+</figure>
+</div>
+<section id="image-coding" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="image-coding"><span class="header-section-number">3.1</span> Image Coding</h2>
+<p>Figure <a href="#fig-02" class="quarto-xref">Figure&nbsp;2</a> presents the block diagram of this module. Each block is explained as follows:</p>
+<div id="fig-02" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-02-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/fig_02_image_coding_module.png" class="img-fluid figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-02-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Figure 2: Specific block diagram of the image coding module.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><strong>Collatz-code structure generation:</strong> A total of <span class="math inline">\(256\)</span> codes are obtained according to the Collatz conjecture for integers <span class="math inline">\(1\)</span> to <span class="math inline">\(256\)</span>. A code is formed by the parity bits (odd = <code>1</code>, even = <code>0</code>) of each iteration until the number reaches <span class="math inline">\(1\)</span>. Every code starts with a header <code>11</code>. Figure <a href="#fig-03" class="quarto-xref">Figure&nbsp;3</a> illustrates an example for <span class="math inline">\(x = 3\)</span>.</li>
+</ul>
+<div id="fig-03" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-03-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/fig_03_collatz_code_example_3.png" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-03-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Figure 3: Example of Collatz code for the number 3.
+</figcaption>
+</figure>
+</div>
+<p>According to Figure <a href="#fig-03" class="quarto-xref">Figure&nbsp;3</a>, a 10-bit Collatz code is obtained for <span class="math inline">\(x = 3\)</span>. For <span class="math inline">\(x = 4\)</span>, only three bits are obtained (<code>110</code>). The length of the code varies between <span class="math inline">\(3\)</span> and <span class="math inline">\(130\)</span> bits.</p>
+<ul>
+<li><strong>Shift pixel values by 1:</strong> Since Collatz conjecture is defined for positive integers, the pixel values in <span class="math inline">\([0, 255]\)</span> are shifted to <span class="math inline">\([1, 256]\)</span> by adding <span class="math inline">\(1\)</span>.</li>
+<li><strong>Scrambling the Collatz-code structure:</strong> A permutation of the <span class="math inline">\(256\)</span> Collatz codes is performed using a secret key (seed), resulting in the Disordered Collatz Codes (DCC).</li>
+<li><strong>Transform image into a 1D sequence:</strong> The 2D image matrix of size <span class="math inline">\(M \times N\)</span> is converted into a 1D vector of length <span class="math inline">\(L = M \times N\)</span> by scanning row by row.</li>
+<li><strong>Search pixel into DCC:</strong> Each pixel value is mapped to its corresponding code in the scrambled structure DCC.</li>
+<li><strong>Assemble the binary sequence (<span class="math inline">\(bs\)</span>):</strong> The variable-length codes are concatenated alternately at the front and back of the bitstream, as illustrated in Figure <a href="#fig-04" class="quarto-xref">Figure&nbsp;4</a>.</li>
+</ul>
+<div id="fig-04" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-04-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/fig_04_binary_sequence_example.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-04-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Figure 4: Example of the binary sequence.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><strong>Convert binary sequence into audio file:</strong> The bitstream <span class="math inline">\(bs\)</span> is grouped into 16-bit words, converted to decimal values, normalized to the range <span class="math inline">\([-1, 1]\)</span>, and saved as an uncompressed WAV audio file (<span class="math inline">\(44.1\)</span> kHz sampling frequency, 16 bits per sample).</li>
+</ul>
+</section>
+<section id="image-recovering" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="image-recovering"><span class="header-section-number">3.2</span> Image Recovering</h2>
+<p>Figure <a href="#fig-05" class="quarto-xref">Figure&nbsp;5</a> shows the block diagram of the recovering module.</p>
+<div id="fig-05" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-05-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/fig_05_image_recovering_module.png" class="img-fluid figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-05-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Figure 5: Specific block diagram of the image recovering module.
+</figcaption>
+</figure>
+</div>
+<p>Each block performs the inverse operation:</p>
+<ul>
+<li>The encrypted audio file is read and converted back into the binary sequence <span class="math inline">\(bs\)</span>.</li>
+<li>With the key (seed) and image size (<span class="math inline">\(M \times N\)</span>), the authorized receiver regenerates the identical DCC structure.</li>
+<li>By searching for the header <code>11</code> and comparing the bit sequences against DCC, the pixel values are decoded in order.</li>
+<li>The 1D sequence is rearranged back into the original 2D image matrix of size <span class="math inline">\(M \times N\)</span>, and pixel values are shifted back by subtracting <span class="math inline">\(1\)</span>.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="simulation-results" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Simulation Results</h1>
+<p>The proposed method was tested with several standard benchmark images of size <span class="math inline">\(256 \times 256\)</span>, including Lena, Airplane, Baboon, and other natural images. Figure <a href="#fig-06" class="quarto-xref">Figure&nbsp;6</a> shows the original images, the resulting ciphered audio signals, and the recovered images.</p>
+<div id="fig-06" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-06-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/fig_06_preliminary_results.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-06-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Figure 6: Preliminary results: Graphs (a,d,g) show original images; graphs (b,e,h) show cipher audios; graphs (c,f,i) show their recovered images.
+</figcaption>
+</figure>
+</div>
+<p>Perceptual similarity between original and recovered images is complete ($ ext{SSIM} = 1.0000$), confirming that the decryption process is fully lossless.</p>
+<p>Next, Figure <a href="#fig-07" class="quarto-xref">Figure&nbsp;7</a> plots the histograms of the original images and their corresponding ciphered audio signals.</p>
+<div id="fig-07" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-07-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/fig_07_histograms.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-07-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Figure 7: Preliminary results: Graphs (a,c,e) show histograms of original images; graphs (b,d,f) show a histogram of cipher audios.
+</figcaption>
+</figure>
+</div>
+<p>While the histograms of the plain images have distinctive unimodal or multimodal distributions, the histograms of the ciphered audio signals are uniformly distributed across the amplitude range <span class="math inline">\([-1, 1]\)</span>, masking any statistical trace of the plain images.</p>
+<hr>
+</section>
+<section id="security-analysis" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Security Analysis</h1>
+<section id="security-key-analysis" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="security-key-analysis"><span class="header-section-number">5.1</span> Security Key Analysis</h2>
+<section id="size-of-the-key-space" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="size-of-the-key-space"><span class="header-section-number">5.1.1</span> Size of the Key Space</h3>
+<p>The proposed method uses a key to scramble the <span class="math inline">\(256\)</span> Collatz codes. The total number of permutations of <span class="math inline">\(256\)</span> elements is:</p>
+<p><span id="eq-keyspace"><span class="math display">\[
+|K| = 256! \approx 8.57 \times 10^{506} \approx 2^{1684}
+\tag{10}\]</span></span></p>
+<p>According to Shannon’s theory, unconditional security is achieved when the size of the key space is equal to or greater than the message space:</p>
+<p><span id="eq-shannon"><span class="math display">\[
+|K| = |M| = |C|
+\tag{11}\]</span></span></p>
+<p>Figure <a href="#fig-08" class="quarto-xref">Figure&nbsp;8</a> illustrates this concept within the proposal.</p>
+<div id="fig-08" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-08-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/fig_08_perfect_secrecy_analysis.png" class="img-fluid figure-img" style="width:65.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-08-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Figure 8: Analysis of perfect secrecy in our proposal.
+</figcaption>
+</figure>
+</div>
+<p>Because <span class="math inline">\(|K| \approx 8.57 \times 10^{506} \gg 2^{128}\)</span>, the key space is sufficiently large to resist brute-force attacks.</p>
+</section>
+<section id="key-sensitivity-analysis" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="key-sensitivity-analysis"><span class="header-section-number">5.1.2</span> Key Sensitivity Analysis</h3>
+<p>To verify key sensitivity, an encrypted audio signal obtained with key <span class="math inline">\(K_1\)</span> was deciphered using a slightly modified key <span class="math inline">\(K_2\)</span>. As shown in Figure <a href="#fig-09" class="quarto-xref">Figure&nbsp;9</a>, the recovered output displays complete noise with no visual correlation to the original image ($ ext{SSIM} $).</p>
+<div id="fig-09" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-09-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/fig_09_key_sensitivity.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-09-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Figure 9: Key sensitivity analysis: Graphs (a,c,e) show original images; graphs (b,d,f) show their recovered images with <span class="math inline">\(K_2 \neq K_1\)</span>.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="sensitivity-to-the-changes-of-plain-image" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sensitivity-to-the-changes-of-plain-image"><span class="header-section-number">5.2</span> Sensitivity to the Changes of Plain Image</h2>
+<p>The sensitivity to changes in the plain image was evaluated using the Unified Average Changing Intensity (UACI) adapted to the binary sequence <span class="math inline">\(bs\)</span>:</p>
+<p><span id="eq-uaci"><span class="math display">\[
+\text{UACI} = \frac{\sum |C_1 - C_2|}{L} \times 100
+\tag{12}\]</span></span></p>
+<p>where <span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_2\)</span> are the binary sequences corresponding to two plain images differing by only one bit, and <span class="math inline">\(L\)</span> is the total length. Across <span class="math inline">\(100\)</span> tests, the UACI value was found to be between <span class="math inline">\(0.44\)</span> and <span class="math inline">\(0.46\)</span> (<span class="math inline">\(44\%\)</span> to <span class="math inline">\(46\%\)</span>) with a <span class="math inline">\(95\%\)</span> confidence interval.</p>
+</section>
+<section id="data-correlation-analysis" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="data-correlation-analysis"><span class="header-section-number">5.3</span> Data Correlation Analysis</h2>
+<p>Figure <a href="#fig-10" class="quarto-xref">Figure&nbsp;10</a> presents scatter plots of horizontally adjacent pixels in the plain images alongside adjacent audio samples in the ciphered signals.</p>
+<div id="fig-10" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-10" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-10a" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-10a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/fig_10a_correlation_part1.png" class="img-fluid figure-img" style="width:90.0%" data-ref-parent="fig-10">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-10a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Figure 10: Correlation of adjacent pixels (Part 1).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-10" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-10b" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-10b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/fig_10b_correlation_part2.png" class="img-fluid figure-img" style="width:90.0%" data-ref-parent="fig-10">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-10b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Figure 10: Correlation of adjacent pixels (Part 2).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: Distribution of horizontal adjacent pixels of plain images vs adjacent samples of cipher audio signals.
+</figcaption>
+</figure>
+</div>
+<p>The strong linear correlation in plain images (<span class="math inline">\(r \approx 0.95\)</span>–<span class="math inline">\(0.98\)</span>) disappears in the ciphered audio (<span class="math inline">\(r \approx 0.00\)</span>), exhibiting an interesting fractal pattern.</p>
+</section>
+<section id="uncertainty-and-disorder-analysis" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="uncertainty-and-disorder-analysis"><span class="header-section-number">5.4</span> Uncertainty and Disorder Analysis</h2>
+<p>The information entropy and Disorder Scrambling (DS) metrics were computed across <span class="math inline">\(100\)</span> encrypted audio signals. Figure <a href="#fig-11" class="quarto-xref">Figure&nbsp;11 (a)</a> shows the radar plot of entropy values, which are consistently between <span class="math inline">\(13.5\)</span> and <span class="math inline">\(14.0\)</span> bits/sample (relative entropy <span class="math inline">\(\approx 87.5\%\)</span> of the theoretical maximum 16 bits). Figure <a href="#fig-12" class="quarto-xref">Figure&nbsp;11 (b)</a> shows the radar plot of DS values, ranging between <span class="math inline">\(0.8\)</span> and <span class="math inline">\(1.4\)</span>.</p>
+<div id="fig-radar-analysis" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-radar-analysis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-radar-analysis" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-11" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/fig_11_entropy_radar.png" class="img-fluid figure-img" style="width:80.0%" data-ref-parent="fig-radar-analysis">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Figure 11: Radar plot of entropy: 100 values.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-radar-analysis" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-12" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/fig_12_ds_radar.png" class="img-fluid figure-img" style="width:80.0%" data-ref-parent="fig-radar-analysis">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Figure 12: Radar plot of DS: 100 values.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-radar-analysis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: Statistical randomness and disorder across 100 ciphered signals.
+</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+</section>
+<section id="comparison-with-state-of-the-art-methods" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Comparison with State-of-the-Art Methods</h1>
+<p>Table <a href="#tbl-comparison" class="quarto-xref">Table&nbsp;1</a> summarizes the comparison between the proposed Collatz-based encryption scheme and other recent image encryption methods from the literature.</p>
+<div id="tbl-comparison" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Performance comparison of some methods of image encryption.
+</figcaption>
+<div aria-describedby="tbl-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Reference</th>
+<th style="text-align: left;">Method</th>
+<th style="text-align: center;">Size of the Key Space</th>
+<th style="text-align: center;">Key Sensitivity</th>
+<th style="text-align: center;">Relative Entropy</th>
+<th style="text-align: center;">UACI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">[34]</td>
+<td style="text-align: left;">Chaotic maps</td>
+<td style="text-align: center;"><span class="math inline">\(10^{56}\)</span></td>
+<td style="text-align: center;">Very high</td>
+<td style="text-align: center;">99.8%</td>
+<td style="text-align: center;">0.5 (binary) / 0.33 (gray-scale)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[35]</td>
+<td style="text-align: left;">Chaotic maps</td>
+<td style="text-align: center;"><span class="math inline">\(2^{256} \approx 1.1 \times 10^{77}\)</span></td>
+<td style="text-align: center;">Very high</td>
+<td style="text-align: center;">99.7%</td>
+<td style="text-align: center;">0.33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[36]</td>
+<td style="text-align: left;">DNA encoding + chaos</td>
+<td style="text-align: center;"><span class="math inline">\(10^{93}\)</span></td>
+<td style="text-align: center;">Very high</td>
+<td style="text-align: center;">99.8%</td>
+<td style="text-align: center;">0.33</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[37]</td>
+<td style="text-align: left;">Chaotic maps</td>
+<td style="text-align: center;"><span class="math inline">\(10^{210}\)</span></td>
+<td style="text-align: center;">Very high</td>
+<td style="text-align: center;">99.8%</td>
+<td style="text-align: center;">0.33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[38]</td>
+<td style="text-align: left;">DNA encoding + chaos</td>
+<td style="text-align: center;"><span class="math inline">\(3.4 \times 10^{38}\)</span></td>
+<td style="text-align: center;">Very high</td>
+<td style="text-align: center;">99.9%</td>
+<td style="text-align: center;">0.33</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Ours</strong></td>
+<td style="text-align: left;"><strong>Collatz encoding</strong></td>
+<td style="text-align: center;"><strong><span class="math inline">\(8.57 \times 10^{506}\)</span></strong></td>
+<td style="text-align: center;"><strong>Very high</strong></td>
+<td style="text-align: center;"><strong>87.5%</strong></td>
+<td style="text-align: center;"><strong>0.44</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<hr>
+</section>
+<section id="conclusion" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Conclusion</h1>
+<p>Most of the state-of-the-art image encryption methods have reached the quasi-maximal value of entropy in the encrypted data, which is an excellent characteristic of this kind of systems. However, as far as we know, none of those methods have satisfied the principle of perfect secrecy of Shannon, which claims that a system is unconditionally secure if the size of the key space is equal to the size of the message space; for this reason, it is expected that in the near future those methods can be broken.</p>
+<p>In this paper, we have proposed an image encryption scheme that differs from recent state-of-the-art methods in the way to obtain the encrypted data; we have combined the diffusion and confusion tasks by means of a variable length coding of the pixels based on the Collatz conjecture, and not by chaotic sequences. Our proposal satisfies the principle of secure secrecy of Shannon’s theory, which means our system is the most robust scheme against brute force and differential attacks of the state-of-the-art methods. One aspect to improve in our method lies in the entropy value of the encrypted data. However, the behavior of the original data is completely modified in its encrypted version, which can be verified, for instance, by looking at the histograms and the plots of adjacent data. Regarding this last point, fractal behavior has been found in the encrypted data, which is a distinctive pattern of our method.</p>
+<p>According to the above analysis, we propose the following themes for future work:</p>
+<ul>
+<li>Identify weaknesses of our proposal in terms of the probability of the available space (theoretical it is equally likely) and what can affect the robustness against brute force attack and differential attack. This is related to the way to randomize the Collatz codes. For that purpose, three pairs of original images and encrypted data are available at <a href="https://data.mendeley.com/datasets/y8kn5mx4d2/draft?a=384e6a23-062e-401b-bdcd-621be1f952da">https://data.mendeley.com/datasets/y8kn5mx4d2/draft</a>.</li>
+<li>Apply bit scrambling to the binary sequence, <span class="math inline">\(bs\)</span>, of Figure <a href="#fig-02" class="quarto-xref">Figure&nbsp;2</a> with the purpose of increasing the entropy of the encrypted data.</li>
+<li>Explore other choices of image coding based on the Collatz conjecture. For example, applying the Collatz code not for the pixel value but for the pixel position. Analyze the performance of the system in terms of security.</li>
+</ul>
+<hr>
+<p><strong>Author Contributions:</strong> Conceptualization, D.R.; Formal analysis, D.M.B.; Investigation, D.M.B.; Methodology, D.R.; Software, J.P.; Validation, J.P.; Writing—original draft, D.M.B. and J.P.; Writing—review &amp; editing, D.R.</p>
+<p><strong>Funding:</strong> This work was supported by the “Universidad Militar Nueva Granada-Vicerrectoría de Investigaciones” under the grant IMP-ING-2136 of 2016.</p>
+<p><strong>Conflicts of Interest:</strong> The authors declare no conflict of interest.</p>
+<hr>
+</section>
+<section id="references" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> References</h1>
+<ol type="1">
+<li>Faragallah, O.S.; El-Samie, F.E.A.; Ahmed, H.E.H.; Elashry, I.F.; Shahieen, M.H.; El-Rabaie, E.S.M.; Alshebeili, S.A. <em>Image Encryption: A Communication Perspective</em>; CRC Press: Boca Raton, FL, USA, 2013.</li>
+<li>Pareek, N.K.; Patidar, V.; Sud, K.K. Diffusion–substitution based gray image encryption scheme. <em>Digit. Signal Process.</em> <strong>2013</strong>, <em>23</em>, 894–901.</li>
+<li>Zhang, X.; Wang, X. Multiple-image encryption algorithm based on mixed image element and permutation. <em>Opt. Lasers Eng.</em> <strong>2017</strong>, <em>92</em>, 6–16.</li>
+<li>Zhu, H.; Zhang, X.; Yu, H.; Zhao, C.; Zhu, Z. A Novel Image Encryption Scheme Using the Composite Discrete Chaotic System. <em>Entropy</em> <strong>2016</strong>, <em>18</em>, 276.</li>
+<li>Silva-García, V.; Flores-Carapia, R.; Rentería-Márquez, C.; Luna-Benoso, B.; Aldape-Pérez, M. Substitution box generation using Chaos: An image encryption application. <em>Appl. Math. Comput.</em> <strong>2018</strong>, <em>332</em>, 123–135.</li>
+<li>Wang, X.Y.; Zhang, Y.Q.; Bao, X.M. A Colour Image Encryption Scheme Using Permutation-Substitution Based on Chaos. <em>Entropy</em> <strong>2015</strong>, <em>17</em>, 3877–3897.</li>
+<li>Ye, G. Image scrambling encryption algorithm of pixel bit based on chaos map. <em>Pattern Recognit. Lett.</em> <strong>2010</strong>, <em>31</em>, 347–354.</li>
+<li>Huang, X. Image encryption algorithm using chaotic Chebyshev generator. <em>Nonlinear Dynam.</em> <strong>2011</strong>, <em>67</em>, 2411–2417.</li>
+<li>Wang, X.; Teng, L.; Qin, X. A novel colour image encryption algorithm based on chaos. <em>Signal Process.</em> <strong>2012</strong>, <em>92</em>, 1101–1108.</li>
+<li>Zhou, Y.; Bao, L.; Chen, C.P. A new 1D chaotic system for image encryption. <em>Signal Process.</em> <strong>2014</strong>, <em>97</em>, 172–182.</li>
+<li>Ye, G.; Huang, X. An Image Encryption Algorithm Based on Autoblocking and Electrocardiography. <em>IEEE MultiMedia</em> <strong>2016</strong>, <em>23</em>, 64–71.</li>
+<li>Pak, C.; Huang, L. A new color image encryption using combination of the 1D chaotic map. <em>Signal Process.</em> <strong>2017</strong>, <em>138</em>, 129–137.</li>
+<li>Tu, G.; Liao, X.; Xiang, T. Cryptanalysis of a color image encryption algorithm based on chaos. <em>Optik</em> <strong>2013</strong>, <em>124</em>, 5411–5415.</li>
+<li>Wang, X.; Luan, D.; Bao, X. Cryptanalysis of an image encryption algorithm using Chebyshev generator. <em>Digit. Signal Process.</em> <strong>2014</strong>, <em>25</em>, 244–247.</li>
+<li>Dhall, S.; Pal, S.K.; Sharma, K. Cryptanalysis of image encryption scheme based on a new 1D chaotic system. <em>Signal Process.</em> <strong>2018</strong>, <em>146</em>, 22–32.</li>
+<li>Wang, H.; Xiao, D.; Chen, X.; Huang, H. Cryptanalysis and enhancements of image encryption using combination of the 1D chaotic map. <em>Signal Process.</em> <strong>2018</strong>, <em>144</em>, 444–452.</li>
+<li>Li, C.; Lin, D.; Lu, J. Cryptanalyzing an Image-Scrambling Encryption Algorithm of Pixel Bits. <em>IEEE MultiMedia</em> <strong>2017</strong>, <em>24</em>, 64–71.</li>
+<li>Li, C.; Lin, D.; Lu, J.; Hao, F. Cryptanalyzing an image encryption algorithm based on autoblocking and electrocardiography. <em>IEEE MultiMedia</em> <strong>2018</strong>, <em>25</em>, 108–112.</li>
+<li>Xie, E.Y.; Li, C.; Yu, S.; Lu, J. On the cryptanalysis of Fridrich’s chaotic image encryption scheme. <em>Signal Process.</em> <strong>2017</strong>, <em>132</em>, 150–154.</li>
+<li>Chai, X.; Chen, Y.; Broyde, L. A novel chaos-based image encryption algorithm using DNA sequence operations. <em>Opt. Lasers Eng.</em> <strong>2017</strong>, <em>88</em>, 197–213.</li>
+<li>Jain, A.; Rajpal, N. A robust image encryption algorithm resistant to attacks using DNA and chaotic logistic maps. <em>Multimed. Tools Appl.</em> <strong>2015</strong>, <em>75</em>, 5455–5472.</li>
+<li>Hermassi, H.; Rhouma, R.; Belghith, S. Cryptanalysis of an image cipher with permutation-diffusion rounds based on chaos and DNA operations. <em>Multimed. Tools Appl.</em> <strong>2016</strong>, <em>75</em>, 3871–3883.</li>
+<li>Wang, X.; Luan, D. A novel image encryption algorithm using chaos and reversible cellular automata. <em>Commun. Nonlinear Sci. Numer. Simul.</em> <strong>2013</strong>, <em>18</em>, 3075–3085.</li>
+<li>Sui, L.; Gao, B. Single-channel color image encryption based on iterative fractional Fourier transform and 3D Lorenz chaotic system. <em>Opt. Lasers Eng.</em> <strong>2013</strong>, <em>51</em>, 1297–1309.</li>
+<li>Fu, C.; Lin, B.B.; Yusof, Y.S.M.; Liang, P. An image encryption scheme based on simultaneous permutation and diffusion. <em>Nonlinear Dynam.</em> <strong>2018</strong>, <em>94</em>, 1923–1936.</li>
+<li>Chamberland, M. A continuous extension of the 3x + 1 problem to the real line. <em>Dyn. Contin. Discrete Impuls. Syst.</em> <strong>2003</strong>, <em>10</em>, 431–440.</li>
+<li>Lagarias, J.C. The 3x + 1 problem and its generalizations. <em>Am. Math. Mon.</em> <strong>1985</strong>, <em>92</em>, 3–23.</li>
+<li>Ballesteros, D.M.; Renza, D. Speech Scrambling in the Audio Spectrum by Using Shift-Inversion Operations. <em>Ing. Invest.</em> <strong>2017</strong>, <em>37</em>, 86–94.</li>
+<li>Wang, Z.; Bovik, A.C.; Sheikh, H.R.; Simoncelli, E.P. Image quality assessment: From error visibility to structural similarity. <em>IEEE Trans. Image Process.</em> <strong>2004</strong>, <em>13</em>, 600–612.</li>
+<li>Dosselmann, R.; Yang, X.D. A comprehensive assessment of the structural similarity index. <em>Signal Image Video Process.</em> <strong>2011</strong>, <em>5</em>, 81–91.</li>
+<li>Renza, D.; Ballesteros, D.M. Chaos-based Speech Scrambling via 1D Chaotic Maps. <em>Rev.&nbsp;Fac. Ing. Univ. Antioquia</em> <strong>2018</strong>, <em>87</em>, 58–66.</li>
+<li>Sadkhan, S.B.; Abbas, N.A. Proposed modification of voice scrambling system using chaotic map. <em>Al-Mansour J.</em> <strong>2009</strong>, <em>12</em>, 1–14.</li>
+<li>Shannon, C.E. Communication theory of secrecy systems. <em>Bell Syst. Tech. J.</em> <strong>1949</strong>, <em>28</em>, 656–715.</li>
+<li>Hua, Z.; Zhou, Y.; Pun, C.M.; Chen, C.P. 2D Sine Logistic modulation map for image encryption. <em>Inf. Sci.</em> <strong>2014</strong>, <em>297</em>, 80–94.</li>
+<li>Wu, X.; Wang, K.; Wang, X.; Kan, H.; Kurths, J. Color image DNA encryption using NCA map-based CML and one-time keys. <em>Signal Process.</em> <strong>2018</strong>, <em>148</em>, 272–287.</li>
+<li>Enayatifar, R.; Abdullah, A.H.; Isnin, I.F.; Altameem, A.; Lee, M. Image encryption using a novel Sous-le-bois map and DNA approach. <em>Inf. Sci.</em> <strong>2017</strong>, <em>418</em>, 421–444.</li>
+<li>Xu, L.; Gou, X.; Li, Z.; Li, J. A novel chaotic image encryption scheme using combined linear-nonlinear coupled map lattices. <em>J. Comput. Appl. Math.</em> <strong>2017</strong>, <em>318</em>, 462–478.</li>
+<li>Zhen, P.; Zhao, G.; Min, L.; Jin, X. Chaos-based image encryption scheme combining DNA coding and entropy. <em>Multimed. Tools Appl.</em> <strong>2016</strong>, <em>75</em>, 6303–6319.</li>
+</ol>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

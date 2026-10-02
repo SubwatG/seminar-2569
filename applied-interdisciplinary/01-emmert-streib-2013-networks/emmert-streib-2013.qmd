@@ -1,0 +1,113 @@
+---
+title: "Structural Properties and Complexity of a New Network Class: Collatz Step Graphs"
+subtitle: "Annotated Quarto Edition of Frank Emmert-Streib (PLoS ONE, 2013) for Seminar & Senior Projects"
+author:
+  - name: "Frank Emmert-Streib"
+    affiliation: "Computational Biology and Machine Learning Laboratory, Queen's University Belfast"
+  - name: "เรียบเรียงและเสริมบทวิเคราะห์: อาจารย์ ดร.กิตติพงศ์ ทรัพย์วัฒนาชัย"
+    affiliation: "ภาควิชาวิทยาการคำนวณและเทคโนโลยีดิจิทัล คณะศิลปศาสตร์และวิทยาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์ กำแพงแสน"
+date: "2013-02-28"
+description: "PLoS ONE 8(2): e56461 (2013); DOI: 10.1371/journal.pone.0056461"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    theme: cosmo
+    code-fold: true
+    fig-cap-location: bottom
+  typst:
+    toc: true
+    number-sections: true
+    columns: 1
+---
+
+::: {.callout-note title="จุดเด่นของเปเปอร์นี้ในวิชาสัมมนาคณิตศาสตร์ประยุกต์"}
+เปเปอร์นี้ของ **Frank Emmert-Streib (2013)** ตีพิมพ์ในวารสารระดับโลก *PLoS ONE* เป็นงานวิจัยที่เปิดมิติใหม่ในการเชื่อมโยง **ทฤษฎีจำนวน (Number Theory)** เข้ากับ **วิทยาการเครือข่ายซับซ้อน (Network Science & Complex Networks)**
+
+เปเปอร์นี้นำลำดับการลดรูปของคอลลัทซ์มาสร้างเป็นกราฟคลาสใหม่ เรียกว่า **Collatz Step (CS) Graphs** ซึ่งมีพฤติกรรมแปลกใหม่ตรงกันข้ามกับโมเดล Small-World ของ Watts & Strogatz คือ *เมื่อขนาดของเครือข่ายใหญ่ขึ้น ระยะทางเฉลี่ยระหว่างโหนดกลับหดสั้นลงอย่างรวดเร็ว!*
+:::
+
+---
+
+# 1. บทนำและลำดับก้าวคอลลัทซ์ (Collatz Step Sequences)
+
+สำหรับจำนวนเต็มบวก $n$ ลำดับวงโคจรของคอลลัทซ์ $x_0, x_1, x_2, \dots, x_L = 1$ ถูกสร้างขึ้นจาก:
+
+$$
+x_{i+1} = \begin{cases} x_i / 2 & \text{ถ้า } x_i \text{ เป็นจำนวนคู่} \\ 3x_i + 1 & \text{ถ้า } x_i \text{ เป็นจำนวนคี่} \end{cases}
+$$
+
+ผู้เขียนได้นิยาม **ลำดับก้าว (Step Sequence: $S(n)$)** โดยแปลงตัวเลขในวงโคจรให้เป็นชนิดของการแปลงบิต:
+
+$$
+S(n) = (s_1, s_2, \dots, s_L) \quad \text{เมื่อ } s_i \in \{E, O\}
+$$
+
+โดยที่ $E$ หมายถึงก้าวที่เป็นเลขคู่ (Even) และ $O$ หมายถึงก้าวที่เป็นเลขคี่ (Odd)
+
+---
+
+# 2. การสร้างกราฟ Collatz Step Graphs (CS Graphs)
+
+ให้โหนดในกราฟแทนรูปแบบของก้าว หรือตัวเลขเฉพาะ และเชื่อมเส้นเชื่อม (Edge) ระหว่างโหนด $u$ และ $v$ เมื่อมีการเปลี่ยนผ่านในลำดับก้าว
+
+น้ำหนักของเส้นเชื่อม (Edge Weight $w_{uv}$) หมายถึงความถี่ของการปรากฏคู่ลำดับ $(u, v)$ เมื่อรันจากจำนวนเริ่มต้น $n = 1, 2, \dots, N$
+
+## ตัวชี้วัดสำคัญของเครือข่ายที่นิสิตต้องศึกษา
+
+1. **การแจกแจงระดับขั้น (Degree Distribution $P(k)$):**  
+   ในขณะที่เครือข่ายทางอินเทอร์เน็ตมักเป็น Scale-Free ($P(k) \propto k^{-\gamma}$) แต่ CS Graphs ไม่ได้เป็นสเกลฟรีใน Degree ทว่า **Edge Weight Distribution กลับเป็นไปตาม Power Law** อย่างชัดเจน
+
+2. **สัมประสิทธิ์การรวมกลุ่ม (Clustering Coefficient $C$):**  
+   วัดความเป็นกลุ่มก้อนของโหนดเพื่อนบ้าน
+
+3. **ระยะทางสั้นสุดเฉลี่ย (Average Shortest Path Length $L$):**  
+   ระยะทางระหว่างโหนดคู่ใด ๆ ในเครือข่าย
+
+---
+
+# 3. โค้ดตัวอย่าง Python สำหรับสร้างและพล็อตกราฟ NetworkX
+
+```python
+import networkx as nx
+import matplotlib.pyplot as plt
+
+
+def collatz_step_sequence(n: int) -> list[int]:
+    seq = []
+    curr = n
+    while curr > 1:
+        if curr % 2 == 0:
+            seq.append(curr)
+            curr = curr // 2
+        else:
+            seq.append(curr)
+            curr = 3 * curr + 1
+    seq.append(1)
+    return seq
+
+
+def build_collatz_graph(max_n: int = 50) -> nx.DiGraph:
+    G = nx.DiGraph()
+    for n in range(2, max_n + 1):
+        seq = collatz_step_sequence(n)
+        for u, v in zip(seq[:-1], seq[1:]):
+            if G.has_edge(u, v):
+                G[u][v]["weight"] += 1
+            else:
+                G.add_edge(u, v, weight=1)
+    return G
+
+
+G = build_collatz_graph(50)
+print(f"Nodes: {G.number_of_nodes()}, Edges: {G.number_of_edges()}")
+```
+
+---
+
+# เอกสารอ้างอิง (References)
+
+1. **Emmert-Streib, F.** (2013). *Structural properties and complexity of a new network class: Collatz step graphs.* PLoS ONE, 8(2), e56461.
+2. **Watts, D. J., & Strogatz, S. H.** (1998). *Collective dynamics of 'small-world' networks.* Nature, 393(6684), 440–442.
+3. **Barabási, A. L., & Albert, R.** (1999). *Emergence of scaling in random networks.* Science, 286(5439), 509–512.

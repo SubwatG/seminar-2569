@@ -1,0 +1,79 @@
+---
+title: "Robust Speech Hashing for Digital Audio Forensics via Collatz Transformations"
+subtitle: "Annotated Quarto Edition of Diego Renza, Jaisson Vargas & Dora Ballesteros (Applied Sciences, 2020)"
+author:
+  - name: "Diego Renza, Jaisson Vargas, Dora M. Ballesteros"
+    affiliation: "Faculty of Engineering, Universidad Militar Nueva Granada, Bogotá, Colombia"
+  - name: "เรียบเรียงและเสริมบทวิเคราะห์: อาจารย์ ดร.กิตติพงศ์ ทรัพย์วัฒนาชัย"
+    affiliation: "ภาควิชาวิทยาการคำนวณและเทคโนโลยีดิจิทัล คณะศิลปศาสตร์และวิทยาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์ กำแพงแสน"
+date: "2020-01-01"
+description: "Applied Sciences, Vol. 10, No. 1, p. 118 (2020); DOI: 10.3390/app10010118"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    theme: cosmo
+    code-fold: true
+    fig-cap-location: bottom
+  typst:
+    toc: true
+    number-sections: true
+    columns: 1
+---
+
+::: {.callout-note title="จุดเด่นของเปเปอร์นี้ในวิชาสัมมนา"}
+เปเปอร์ของ **Diego Renza และคณะ (2020)** ตีพิมพ์ใน *Applied Sciences* นำเสนอการประยุกต์ใช้ลำดับคอลลัทซ์ในงาน **นิติวิทยาศาสตร์ดิจิทัล (Digital Audio Forensics)** เพื่อสร้าง **รหัสแฮชเสียงที่มีความทนทาน (Robust Speech Hash)**
+
+ต่างจากงานเข้ารหัสทั้งไฟล์ เปเปอร์นี้ออกแบบระบบเพื่อตรวจสอบว่าไฟล์เสียงบันทึกคำให้การหรือหลักฐานในคดีความถูกตัดต่อ ดัดแปลง หรือปลอมแปลงเสียงหรือไม่ โดยมีความแม่นยำสูงกว่า $99.8\%$
+:::
+
+---
+
+# 1. ปัญหาการพิสูจน์หลักฐานเสียงดิจิทัล (Audio Forensics Problem)
+
+ในคดีความทางกฎหมาย คลิปเสียงหลักฐานมักถูกนำไปผ่านการลดเสียงรบกวน การบีบอัดไฟล์ (เช่น ส่งผ่าน Line หรือ WhatsApp เป็น MP3/AAC) หรือการปรับระดับเสียง:
+
+- **การดัดแปลงที่ยอมรับได้ (Perceptual / Benign Operations):** การบีบอัด MP3, การปรับความดังเล็กน้อย ซึ่งเนื้อหาคำพูดยังคงเดิม $\implies$ รหัสแฮชจะต้อง **ไม่เปลี่ยนหรือเปลี่ยนน้อยมาก ($BER \approx 0\%$)**
+- **การโจมตีปลอมแปลงหลักฐาน (Malicious Tampering):** การตัดคำพูดบางคำออก, การแทรกเสียงปืน หรือการสลับประโยค $\implies$ รหัสแฮชจะต้อง **เปลี่ยนไปอย่างสิ้นเชิง ($BER > 25\%$)**
+
+---
+
+# 2. สถาปัตยกรรมการสกัดคุณลักษณะและการใช้ Collatz Binarization
+
+ระบบทำงานผ่าน 3 บล็อกหลัก:
+
+1. **การสกัดคุณลักษณะเสียงด้วย MFCC:** ดึงค่า Mel-Frequency Cepstrum Coefficients เพื่อจำแนกลักษณะเสียงพูดของมนุษย์
+2. **การลดมิติข้อมูลด้วย PCA:** Principal Component Analysis ยุบรวมเวกเตอร์คุณลักษณะให้กระชับ
+3. **การแปลงข้อมูลด้วย Collatz Binarization:**  
+   นำสัมประสิทธิ์เด่นมาผ่านฟังก์ชันคอลลัทซ์เพื่อสร้างรหัสไบนารีขนาด 96 บิตที่มีความไวสูงต่อการตัดต่อเสียง แต่ทนทานต่อการบีบอัดไฟล์
+
+---
+
+# 3. โค้ดตัวอย่าง Python สำหรับจำลอง Collatz Binarization
+
+```python
+import numpy as np
+
+
+def collatz_binarize(value: float, bits: int = 16) -> str:
+    # สเกลค่าทศนิยมเป็นจำนวนเต็มบวก
+    int_val = int(abs(value) * 1000) % 256 + 1
+    code = []
+    curr = int_val
+    for _ in range(bits):
+        code.append(str(curr % 2))
+        curr = curr // 2 if curr % 2 == 0 else 3 * curr + 1
+    return "".join(code)
+
+
+print("Collatz 16-bit fingerprint for 0.4285:", collatz_binarize(0.4285))
+print("Collatz 16-bit fingerprint for 0.4289:", collatz_binarize(0.4289))
+```
+
+---
+
+# เอกสารอ้างอิง (References)
+
+1. **Renza, D., Vargas, J., & Ballesteros, D. M.** (2020). *Robust speech hashing for digital audio forensics.* Applied Sciences, 10(1), 118.
+2. **Renza, D., Lemus, C., & Ballesteros, D. M.** (2018). *Authenticity verification of audio signals based on fragile watermarking for audio forensics.* Expert Systems with Applications, 91, 211–222.

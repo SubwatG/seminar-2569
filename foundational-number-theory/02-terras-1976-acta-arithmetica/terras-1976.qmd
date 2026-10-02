@@ -1,0 +1,182 @@
+---
+title: "A Stopping Time Problem on the Positive Integers"
+subtitle: "Annotated Quarto Edition of Riho Terras (Acta Arithmetica, 1976) for Number Theory Seminars"
+author:
+  - name: "Riho Terras"
+    affiliation: "University of California, San Diego (Original Author)"
+  - name: "เรียบเรียงและเสริมบทวิเคราะห์: อาจารย์ ดร.กิตติพงศ์ ทรัพย์วัฒนาชัย"
+    affiliation: "ภาควิชาวิทยาการคำนวณและเทคโนโลยีดิจิทัล คณะศิลปศาสตร์และวิทยาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์ กำแพงแสน"
+date: "1976-01-01"
+description: "Acta Arithmetica, Vol. 30, No. 3 (1976), pp. 241–252; DOI: 10.4064/aa-30-3-241-252"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    theme: cosmo
+    code-fold: true
+    fig-cap-location: bottom
+  typst:
+    toc: true
+    number-sections: true
+    columns: 1
+---
+
+::: {.callout-note title="ความสำคัญทางประวัติศาสตร์ของเปเปอร์ฉบับนี้"}
+เปเปอร์ของ **Riho Terras (1976)** ตีพิมพ์ในวารสารระดับตำนาน *Acta Arithmetica* ถือเป็น **"เปเปอร์วิจัยฉบับแรกของโลกที่สร้างทฤษฎีบททางคณิตศาสตร์แท้จริงให้กับปัญหาคอลลัทซ์"** (ก่อนหน้านั้นมีเพียงรายงานการทดลองด้วยคอมพิวเตอร์และการคาดเดา)
+
+จุดเด่นที่สุดสำหรับนิสิตสัมมนาคือ: **บทพิสูจน์หลักใช้เพียงความรู้คณิตศาสตร์ระดับปี 2 (ทฤษฎีจำนวนเบื้องต้น: การหารลงตัว มอดุโล $2^k$ และการอุปนัยเชิงคณิตศาสตร์)** นิสิตทุกคนสามารถอ่านเข้าใจและแกะบทพิสูจน์ได้จนจบ 100%
+:::
+
+---
+
+# 1. บทนำและนิยามฟังก์ชัน (Introduction & Definitions)
+
+ให้ $\mathbb{Z}^+$ แทนเซตของจำนวนเต็มบวก สำหรับ $n \in \mathbb{Z}^+$ กำหนดฟังก์ชัน $T: \mathbb{Z}^+ \to \mathbb{Z}^+$:
+
+$$
+T(n) = \begin{cases} \frac{n}{2} & \text{ถ้า } n \text{ เป็นจำนวนคู่} \\ \frac{3n+1}{2} & \text{ถ้า } n \text{ เป็นจำนวนคี่} \end{cases}
+$$ {#eq-terras-map}
+
+## 1.1 นิยามเวลาหยุด (Stopping Time)
+
+- **เวลาหยุด (Stopping Time) $\sigma(n)$:**
+  $$
+  \sigma(n) = \inf \{ k \ge 1 : T^k(n) < n \}
+  $$
+  ถ้าไม่มี $k$ ดังกล่าว ให้ $\sigma(n) = \infty$
+
+- **เวลาหยุดสมบูรณ์ (Total Stopping Time) $\sigma_\infty(n)$:**
+  $$
+  \sigma_\infty(n) = \inf \{ k \ge 1 : T^k(n) = 1 \}
+  $$
+
+เป้าหมายสูงสุดของสมมติฐานคอลลัทซ์คือการพิสูจน์ว่า $\sigma_\infty(n) < \infty$ สำหรับทุก $n \ge 2$ แต่ Terras ได้พิสูจน์ในระดับที่อ่อนลงมาแต่น่าทึ่งยิ่ง คือการพิสูจน์ว่า **เกือบทุกจำนวนเต็มมีค่า $\sigma(n)$ ที่จำกัด**
+
+---
+
+# 2. เวกเตอร์ภาวะคู่คี่และบทตั้งการสมนัยหนึ่งต่อหนึ่ง (The Parity Vector Bijection Lemma)
+
+สำหรับจำนวนเต็มบวก $k$ กำหนด **เวกเตอร์ภาวะคู่คี่ (Parity Vector)** ความยาว $k$:
+
+$$
+v_k(n) = (x_0, x_1, \dots, x_{k-1}) \in \{0, 1\}^k
+$$ {#eq-parity-vector}
+
+โดยที่ $x_j = T^j(n) \bmod 2$ สำหรับ $j = 0, 1, \dots, k-1$
+
+## 2.1 สูตรการแทนค่าพีชคณิตของ $T^k(n)$
+
+กำหนดค่าน้ำหนัก (Weight) $w(v_k(n)) = \sum_{j=0}^{k-1} x_j$ ซึ่งนับจำนวนก้าวที่เป็นคี่ จากการกระจายการวนซ้ำ จะได้เอกลักษณ์ทางพีชคณิตที่สำคัญยิ่ง:
+
+$$
+T^k(n) = \frac{3^{w(v_k(n))}}{2^k} n + \rho_k(v_k(n))
+$$ {#eq-algebraic-form}
+
+โดยที่เศษตกค้าง $\rho_k(v)$ ถูกกำหนดโดยเวกเตอร์ $v = (x_0, \dots, x_{k-1})$ เพียงอย่างเดียวตามสูตร:
+
+$$
+\rho_k(v) = \sum_{j=0}^{k-1} x_j \frac{3^{\sum_{i=j+1}^{k-1} x_i}}{2^{k-j}}
+$$
+
+::: {.callout-important title="บทตั้งหลัก 1.1 (The Parity Vector Bijection Lemma)"}
+ฟังก์ชัน $v_k: \mathbb{Z} / 2^k \mathbb{Z} \to \{0, 1\}^k$ เป็น **ฟังก์ชันหนึ่งต่อหนึ่งและทั่วถึง (Bijection)**  
+นั่นคือ: สำหรับเวกเตอร์บิตความยาว $k$ ใด ๆ จะมีเศษเหลือมอดุโล $2^k$ เพียงค่าเดียวเท่านั้นที่ให้เวกเตอร์ภาวะคู่คี่ตรงกับเวกเตอร์นั้น
+:::
+
+### บทพิสูจน์อย่างย่อด้วยการอุปนัยเชิงคณิตศาสตร์ (Proof by Mathematical Induction):
+
+1. **ขั้นฐาน ($k = 1$):**  
+   สำหรับ $n \pmod 2$ เศษเหลือ $0$ ให้เวกเตอร์ $(0)$ และเศษเหลือ $1$ ให้เวกเตอร์ $(1)$ เป็นการสมนัยหนึ่งต่อหนึ่งและทั่วถึงอย่างชัดเจน
+
+2. **ขั้นอุปนัย:**  
+   สมมติว่า $v_k$ เป็นการสมนัยหนึ่งต่อหนึ่งและทั่วถึงบน $\mathbb{Z} / 2^k \mathbb{Z}$  
+   พิจารณาเศษเหลือบน $\mathbb{Z} / 2^{k+1} \mathbb{Z}$ ซึ่งประกอบด้วย $n$ และ $n + 2^k$ (โดยที่ $0 \le n < 2^k$)  
+   จากสูตร @eq-algebraic-form:
+   $$
+   T^k(n + 2^k) = T^k(n) + \frac{3^{w(v_k(n))}}{2^k} (2^k) = T^k(n) + 3^{w(v_k(n))}
+   $$
+   เนื่องจาก $3^w$ เป็นจำนวนคี่เสมอ (เลข $3$ ยกกำลังจำนวนเต็มบวกย่อมเป็นเลขคี่) ดังนั้น:
+   $$
+   T^k(n + 2^k) \equiv T^k(n) + 1 \pmod 2
+   $$
+   ทำให้บิตที่ $k$ (คือค่า $T^k \bmod 2$) ของ $n$ และ $n + 2^k$ **มีค่าตรงข้ามกันเสมอ (หนึ่งตัวเป็น 0 อีกตัวเป็น 1)**  
+   ดังนั้นเวกเตอร์ $v_{k+1}$ จึงขยายไปครอบคลุม $\{0, 1\}^{k+1}$ ครบทุกรูปแบบแบบหนึ่งต่อหนึ่งและทั่วถึง $\blacksquare$
+
+---
+
+# 3. ทฤษฎีบทความหนาแน่นของเวลาหยุด (Natural Density Theorem)
+
+Terras นิยาม **เวลาหยุดเชิงสัมประสิทธิ์ (Coefficient Stopping Time)**:
+
+$$
+\kappa(n) = \inf \left\{ k \ge 1 : \frac{3^{w(v_k(n))}}{2^k} < 1 \right\}
+$$ {#eq-coeff-stopping}
+
+เนื่องจากเงื่อนไข $\frac{3^w}{2^k} < 1$ เทียบเท่ากับ:
+
+$$
+w < k \frac{\log 2}{\log 3} \approx 0.6309 k
+$$
+
+จากบทตั้งหลัก 1.1 เวกเตอร์ $v_k(n)$ แต่ละรูปแบบมีความน่าจะเป็นเท่ากับ $2^{-k}$ ในเซตเศษเหลือ $\mathbb{Z} / 2^k \mathbb{Z}$ เสมือนการโยนเหรียญเที่ยงตรง $k$ ครั้ง!
+
+ตาม **กฎว่าด้วยจำนวนมาก (Law of Large Numbers)** สัดส่วนของจำนวนก้าวคี่จะลู่เข้าสู่ค่าเฉลี่ย $1/2 = 0.50$ เมื่อ $k$ มีขนาดใหญ่:
+
+$$
+\lim_{k \to \infty} P\left( \frac{w}{k} < 0.6309 \right) = 1
+$$
+
+นำไปสู่ทฤษฎีบทประวัติศาสตร์ของ Terras:
+
+::: {.callout-important title="ทฤษฎีบทหลัก 2.1 (Terras' Asymptotic Density Theorem, 1976)"}
+เซตของจำนวนเต็มบวกที่มีเวลาหยุดจำกัด $\{n \in \mathbb{Z}^+ : \sigma(n) < \infty\}$ มี **ความหนาแน่นเชิงเส้นกำกับตามธรรมชาติ (Natural Asymptotic Density) เท่ากับ 1**:
+
+$$
+\lim_{x \to \infty} \frac{1}{x} \#\{ n \le x : \sigma(n) < \infty \} = 1
+$$
+:::
+
+---
+
+# 4. โค้ดทดลองภาษา Python สำหรับนิสิตสัมมนา
+
+นิสิตสามารถนำบทตั้ง Parity Vector Bijection ไปเขียนโปรแกรมตรวจสอบความสมนัยหนึ่งต่อหนึ่งได้ด้วยตนเอง:
+
+```python
+def collatz_step(n: int) -> int:
+    return n // 2 if n % 2 == 0 else (3 * n + 1) // 2
+
+
+def parity_vector(n: int, k: int) -> tuple[int, ...]:
+    vec = []
+    curr = n
+    for _ in range(k):
+        vec.append(curr % 2)
+        curr = collatz_step(curr)
+    return tuple(vec)
+
+
+def verify_bijection(k: int):
+    # ตรวจสอบว่าเศษเหลือ 0 ถึง 2^k - 1 ให้เวกเตอร์ไม่ซ้ำกันเลย
+    mod = 1 << k
+    vectors = set()
+    for n in range(mod):
+        v = parity_vector(n, k)
+        vectors.add(v)
+    assert len(vectors) == mod
+    print(f"k = {k}: Bijection verified! 2^{k} = {mod} distinct vectors.")
+
+
+# ทดสอบสำหรับ k = 1 ถึง 10
+for k in range(1, 11):
+    verify_bijection(k)
+```
+
+---
+
+# เอกสารอ้างอิง (References)
+
+1. **Terras, R.** (1976). *A stopping time problem on the positive integers.* Acta Arithmetica, 30(3), 241–252.
+2. **Everett, C. J.** (1977). *Iteration of the number-theoretic function $f(2n) = n, f(2n+1) = 3n+2$.* Advances in Mathematics, 25(1), 42–45.
+3. **Lagarias, J. C.** (1985). *The $3x + 1$ problem and its generalizations.* The American Mathematical Monthly, 92(1), 3–23.

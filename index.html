@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="อาจารย์ ดร.กิตติพงศ์ ทรัพย์วัฒนาชัย">
+<meta name="dcterms.date" content="2026-09-30">
+
+<title>ศูนย์รวมเปเปอร์และคู่มือนำทางสัมมนาคณิตศาสตร์ประยุกต์</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap-7fca231f0f6bfd3bec1af756033c583c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#ตารางรวมลงกดวนสหนาเวบ-html-ทกเปเปอร-quick-access-dashboard" id="toc-ตารางรวมลงกดวนสหนาเวบ-html-ทกเปเปอร-quick-access-dashboard" class="nav-link active" data-scroll-target="#ตารางรวมลงกดวนสหนาเวบ-html-ทกเปเปอร-quick-access-dashboard"><span class="header-section-number">1</span> 1. ตารางรวมลิงก์ด่วนสู่หน้าเว็บ HTML ทุกเปเปอร์ (Quick Access Dashboard)</a></li>
+  <li><a href="#แผนทการเลอกหวขอตามความถนดของนสต-advising-matrix" id="toc-แผนทการเลอกหวขอตามความถนดของนสต-advising-matrix" class="nav-link" data-scroll-target="#แผนทการเลอกหวขอตามความถนดของนสต-advising-matrix"><span class="header-section-number">2</span> 2. แผนที่การเลือกหัวข้อตามความถนัดของนิสิต (Advising Matrix)</a></li>
+  <li><a href="#หมวดท-1-ทฤษฎจำนวนบรสทธและระบบพลวตแมบท-foundational-number-theory" id="toc-หมวดท-1-ทฤษฎจำนวนบรสทธและระบบพลวตแมบท-foundational-number-theory" class="nav-link" data-scroll-target="#หมวดท-1-ทฤษฎจำนวนบรสทธและระบบพลวตแมบท-foundational-number-theory"><span class="header-section-number">3</span> 3. หมวดที่ 1: ทฤษฎีจำนวนบริสุทธิ์และระบบพลวัตแม่บท (Foundational Number Theory)</a>
+  <ul class="collapse">
+  <li><a href="#คมภรแมบทปญหา-3x1-jeffrey-c.-lagarias-amm-1985" id="toc-คมภรแมบทปญหา-3x1-jeffrey-c.-lagarias-amm-1985" class="nav-link" data-scroll-target="#คมภรแมบทปญหา-3x1-jeffrey-c.-lagarias-amm-1985"><span class="header-section-number">3.1</span> 3.1 คัมภีร์แม่บทปัญหา <span class="math inline">\(3x+1\)</span> (Jeffrey C. Lagarias, AMM 1985)</a></li>
+  <li><a href="#บทตงความสมนยของเวกเตอรคค-riho-terras-acta-arithmetica-1976" id="toc-บทตงความสมนยของเวกเตอรคค-riho-terras-acta-arithmetica-1976" class="nav-link" data-scroll-target="#บทตงความสมนยของเวกเตอรคค-riho-terras-acta-arithmetica-1976"><span class="header-section-number">3.2</span> 3.2 บทตั้งความสมนัยของเวกเตอร์คู่คี่ (Riho Terras, Acta Arithmetica 1976)</a></li>
+  <li><a href="#กราฟตนไมยอนกลบและวฏจกรบนจำนวนเตมลบ-marc-chamberland-2003" id="toc-กราฟตนไมยอนกลบและวฏจกรบนจำนวนเตมลบ-marc-chamberland-2003" class="nav-link" data-scroll-target="#กราฟตนไมยอนกลบและวฏจกรบนจำนวนเตมลบ-marc-chamberland-2003"><span class="header-section-number">3.3</span> 3.3 กราฟต้นไม้ย้อนกลับและวัฏจักรบนจำนวนเต็มลบ (Marc Chamberland, 2003)</a></li>
+  <li><a href="#ขอบเขตวฏจกรและสมการไดโอแฟนไทน-john-simons-benne-de-weger-2005" id="toc-ขอบเขตวฏจกรและสมการไดโอแฟนไทน-john-simons-benne-de-weger-2005" class="nav-link" data-scroll-target="#ขอบเขตวฏจกรและสมการไดโอแฟนไทน-john-simons-benne-de-weger-2005"><span class="header-section-number">3.4</span> 3.4 ขอบเขตวัฏจักรและสมการไดโอแฟนไทน์ (John Simons &amp; Benne de Weger, 2005)</a></li>
+  </ul></li>
+  <li><a href="#หมวดท-2-การประยกตใชเชงสหวทยาการทเขาถงงาย-applied-interdisciplinary" id="toc-หมวดท-2-การประยกตใชเชงสหวทยาการทเขาถงงาย-applied-interdisciplinary" class="nav-link" data-scroll-target="#หมวดท-2-การประยกตใชเชงสหวทยาการทเขาถงงาย-applied-interdisciplinary"><span class="header-section-number">4</span> 4. หมวดที่ 2: การประยุกต์ใช้เชิงสหวิทยาการที่เข้าถึงง่าย (Applied &amp; Interdisciplinary)</a>
+  <ul class="collapse">
+  <li><a href="#ทฤษฎกราฟและเครอขายซบซอน-frank-emmert-streib-plos-one-2013" id="toc-ทฤษฎกราฟและเครอขายซบซอน-frank-emmert-streib-plos-one-2013" class="nav-link" data-scroll-target="#ทฤษฎกราฟและเครอขายซบซอน-frank-emmert-streib-plos-one-2013"><span class="header-section-number">4.1</span> 4.1 ทฤษฎีกราฟและเครือข่ายซับซ้อน (Frank Emmert-Streib, PLoS ONE 2013)</a></li>
+  <li><a href="#กฎของเบนฟอรดในคอลลทซ-alex-kontorovich-steven-j.-miller-2005" id="toc-กฎของเบนฟอรดในคอลลทซ-alex-kontorovich-steven-j.-miller-2005" class="nav-link" data-scroll-target="#กฎของเบนฟอรดในคอลลทซ-alex-kontorovich-steven-j.-miller-2005"><span class="header-section-number">4.2</span> 4.2 กฎของเบนฟอร์ดในคอลลัทซ์ (Alex Kontorovich &amp; Steven J. Miller, 2005)</a></li>
+  <li><a href="#ดนตรอลกอรทมและการสงเคราะหเสยง-oliver-k.-clay-jhm-2023" id="toc-ดนตรอลกอรทมและการสงเคราะหเสยง-oliver-k.-clay-jhm-2023" class="nav-link" data-scroll-target="#ดนตรอลกอรทมและการสงเคราะหเสยง-oliver-k.-clay-jhm-2023"><span class="header-section-number">4.3</span> 4.3 ดนตรีอัลกอริทึมและการสังเคราะห์เสียง (Oliver K. Clay, JHM 2023)</a></li>
+  <li><a href="#ตวสรางเลขสมเทยมและการทดสอบ-nist-tomasz-r.-dziala-2023" id="toc-ตวสรางเลขสมเทยมและการทดสอบ-nist-tomasz-r.-dziala-2023" class="nav-link" data-scroll-target="#ตวสรางเลขสมเทยมและการทดสอบ-nist-tomasz-r.-dziala-2023"><span class="header-section-number">4.4</span> 4.4 ตัวสร้างเลขสุ่มเทียมและการทดสอบ NIST (Tomasz R. Dziala, 2023)</a></li>
+  <li><a href="#นตวทยาศาสตรดจทลและการตรวจจบการปลอมแปลงเสยง-diego-renza-et-al.-2020" id="toc-นตวทยาศาสตรดจทลและการตรวจจบการปลอมแปลงเสยง-diego-renza-et-al.-2020" class="nav-link" data-scroll-target="#นตวทยาศาสตรดจทลและการตรวจจบการปลอมแปลงเสยง-diego-renza-et-al.-2020"><span class="header-section-number">4.5</span> 4.5 นิติวิทยาศาสตร์ดิจิทัลและการตรวจจับการปลอมแปลงเสียง (Diego Renza et al., 2020)</a></li>
+  </ul></li>
+  <li><a href="#หมวดท-3-กรณศกษาระบบเขารหสภาพดจทล-case-study-from-build-to-break" id="toc-หมวดท-3-กรณศกษาระบบเขารหสภาพดจทล-case-study-from-build-to-break" class="nav-link" data-scroll-target="#หมวดท-3-กรณศกษาระบบเขารหสภาพดจทล-case-study-from-build-to-break"><span class="header-section-number">5</span> 5. หมวดที่ 3: กรณีศึกษาระบบเข้ารหัสภาพดิจิทัล (Case Study: From Build to Break)</a></li>
+  <li><a href="#แผนการดำเนนงาน-12-สปดาหสำหรบนสตสมมนา-12-week-roadmap" id="toc-แผนการดำเนนงาน-12-สปดาหสำหรบนสตสมมนา-12-week-roadmap" class="nav-link" data-scroll-target="#แผนการดำเนนงาน-12-สปดาหสำหรบนสตสมมนา-12-week-roadmap"><span class="header-section-number">6</span> 6. แผนการดำเนินงาน 12 สัปดาห์สำหรับนิสิตสัมมนา (12-Week Roadmap)</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">ศูนย์รวมเปเปอร์และคู่มือนำทางสัมมนาคณิตศาสตร์ประยุกต์</h1>
+<p class="subtitle lead">Applied Mathematics Seminar Hub &amp; Research Navigator (ภาคการศึกษา 2569)</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">อาจารย์ ดร.กิตติพงศ์ ทรัพย์วัฒนาชัย </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            ภาควิชาวิทยาการคำนวณและเทคโนโลยีดิจิทัล คณะศิลปศาสตร์และวิทยาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์ กำแพงแสน
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 30, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="เป้าหมายของศูนย์รวมเอกสารสัมมนา (Seminar Portal)">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>เป้าหมายของศูนย์รวมเอกสารสัมมนา (Seminar Portal)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หน้าสารบัญหลักฉบับนี้ (Master Index) รวบรวมเปเปอร์วิจัยระดับนานาชาติ เอกสารถอดรหัสคณิตศาสตร์ฉบับสมบูรณ์ โค้ดทดลองจำลองผลภาษา Python และ <strong>คู่มือนำอ่านรายเปเปอร์ (Study Guides)</strong> สำหรับรายวิชาสัมมนาคณิตศาสตร์ (01417497) และเตรียมความพร้อมสู่การจัดทำเล่มโครงงานวิจัยระดับปริญญาตรี 5 บท (01417499)</p>
+<p>นิสิตสามารถคลิกเข้าสู่ <strong>หน้าเว็บ HTML</strong> เพื่ออ่านและพรีวิวสูตรคณิตศาสตร์ หรือเปิดไฟล์ <strong>PDF</strong> และ <strong>ไฟล์ต้นฉบับ QMD</strong> ได้โดยตรงจากหน้านี้</p>
+</div>
+</div>
+<hr>
+<section id="ตารางรวมลงกดวนสหนาเวบ-html-ทกเปเปอร-quick-access-dashboard" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 1. ตารางรวมลิงก์ด่วนสู่หน้าเว็บ HTML ทุกเปเปอร์ (Quick Access Dashboard)</h1>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>หัวข้อเปเปอร์ &amp; วารสาร</th>
+<th style="text-align: center;">หมวดหมู่</th>
+<th style="text-align: center;">🧭 คู่มือนำอ่าน (Study Guide)</th>
+<th style="text-align: center;">📖 บทความวิจัย (Paper)</th>
+<th style="text-align: center;">📄 ต้นฉบับวารสาร</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1. Lagarias (1985)</strong><br><em>Amer. Math. Monthly</em></td>
+<td style="text-align: center;">ทฤษฎีจำนวนบริสุทธิ์</td>
+<td style="text-align: center;"><a href="./foundational-number-theory/01-lagarias-1985-amm/paper-introduction-and-study-guide.html">🌐 เปิดอ่าน HTML</a><br><a href="./foundational-number-theory/01-lagarias-1985-amm/paper-introduction-and-study-guide.pdf">📕 PDF</a> · <a href="./foundational-number-theory/01-lagarias-1985-amm/paper-introduction-and-study-guide.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./foundational-number-theory/01-lagarias-1985-amm/lagarias-1985.html">🌐 เปิดอ่าน HTML</a><br><a href="./foundational-number-theory/01-lagarias-1985-amm/lagarias-1985.pdf">📕 PDF</a> · <a href="./foundational-number-theory/01-lagarias-1985-amm/lagarias-1985.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./foundational-number-theory/01-lagarias-1985-amm/paper.pdf">📄 Original PDF</a></td>
+</tr>
+<tr class="even">
+<td><strong>2. Terras (1976)</strong><br><em>Acta Arithmetica</em></td>
+<td style="text-align: center;">ทฤษฎีจำนวนบริสุทธิ์</td>
+<td style="text-align: center;"><a href="./foundational-number-theory/02-terras-1976-acta-arithmetica/paper-introduction-and-study-guide.html">🌐 เปิดอ่าน HTML</a><br><a href="./foundational-number-theory/02-terras-1976-acta-arithmetica/paper-introduction-and-study-guide.pdf">📕 PDF</a> · <a href="./foundational-number-theory/02-terras-1976-acta-arithmetica/paper-introduction-and-study-guide.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./foundational-number-theory/02-terras-1976-acta-arithmetica/terras-1976.html">🌐 เปิดอ่าน HTML</a><br><a href="./foundational-number-theory/02-terras-1976-acta-arithmetica/terras-1976.pdf">📕 PDF</a> · <a href="./foundational-number-theory/02-terras-1976-acta-arithmetica/terras-1976.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./foundational-number-theory/02-terras-1976-acta-arithmetica/paper.pdf">📄 Original PDF</a></td>
+</tr>
+<tr class="odd">
+<td><strong>3. Chamberland (2003)</strong><br><em>AMS Lectures</em></td>
+<td style="text-align: center;">ทฤษฎีจำนวนและกราฟ</td>
+<td style="text-align: center;"><a href="./foundational-number-theory/03-chamberland-2003-survey/paper-introduction-and-study-guide.html">🌐 เปิดอ่าน HTML</a><br><a href="./foundational-number-theory/03-chamberland-2003-survey/paper-introduction-and-study-guide.pdf">📕 PDF</a> · <a href="./foundational-number-theory/03-chamberland-2003-survey/paper-introduction-and-study-guide.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./foundational-number-theory/03-chamberland-2003-survey/chamberland-2003.html">🌐 เปิดอ่าน HTML</a><br><a href="./foundational-number-theory/03-chamberland-2003-survey/chamberland-2003.pdf">📕 PDF</a> · <a href="./foundational-number-theory/03-chamberland-2003-survey/chamberland-2003.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./foundational-number-theory/03-chamberland-2003-survey/paper.pdf">📄 Original PDF</a></td>
+</tr>
+<tr class="even">
+<td><strong>4. Simons &amp; de Weger (2005)</strong><br><em>Acta Arithmetica</em></td>
+<td style="text-align: center;">ทฤษฎีจำนวนไดโอแฟนไทน์</td>
+<td style="text-align: center;"><a href="./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/paper-introduction-and-study-guide.html">🌐 เปิดอ่าน HTML</a><br><a href="./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/paper-introduction-and-study-guide.pdf">📕 PDF</a> · <a href="./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/paper-introduction-and-study-guide.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/simons-deweger-2005.html">🌐 เปิดอ่าน HTML</a><br><a href="./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/simons-deweger-2005.pdf">📕 PDF</a> · <a href="./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/simons-deweger-2005.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/paper.pdf">📄 Original PDF</a></td>
+</tr>
+<tr class="odd">
+<td><strong>5. Emmert-Streib (2013)</strong><br><em>PLoS ONE</em></td>
+<td style="text-align: center;">ทฤษฎีกราฟและเครือข่าย</td>
+<td style="text-align: center;"><a href="./applied-interdisciplinary/01-emmert-streib-2013-networks/paper-introduction-and-study-guide.html">🌐 เปิดอ่าน HTML</a><br><a href="./applied-interdisciplinary/01-emmert-streib-2013-networks/paper-introduction-and-study-guide.pdf">📕 PDF</a> · <a href="./applied-interdisciplinary/01-emmert-streib-2013-networks/paper-introduction-and-study-guide.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./applied-interdisciplinary/01-emmert-streib-2013-networks/emmert-streib-2013.html">🌐 เปิดอ่าน HTML</a><br><a href="./applied-interdisciplinary/01-emmert-streib-2013-networks/emmert-streib-2013.pdf">📕 PDF</a> · <a href="./applied-interdisciplinary/01-emmert-streib-2013-networks/emmert-streib-2013.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./applied-interdisciplinary/01-emmert-streib-2013-networks/paper.pdf">📄 Original PDF</a></td>
+</tr>
+<tr class="even">
+<td><strong>6. Kontorovich &amp; Miller (2005)</strong><br><em>Acta Arithmetica</em></td>
+<td style="text-align: center;">สถิติประยุกต์และเบนฟอร์ด</td>
+<td style="text-align: center;"><a href="./applied-interdisciplinary/02-kontorovich-miller-2005-benford/paper-introduction-and-study-guide.html">🌐 เปิดอ่าน HTML</a><br><a href="./applied-interdisciplinary/02-kontorovich-miller-2005-benford/paper-introduction-and-study-guide.pdf">📕 PDF</a> · <a href="./applied-interdisciplinary/02-kontorovich-miller-2005-benford/paper-introduction-and-study-guide.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./applied-interdisciplinary/02-kontorovich-miller-2005-benford/kontorovich-miller-2005.html">🌐 เปิดอ่าน HTML</a><br><a href="./applied-interdisciplinary/02-kontorovich-miller-2005-benford/kontorovich-miller-2005.pdf">📕 PDF</a> · <a href="./applied-interdisciplinary/02-kontorovich-miller-2005-benford/kontorovich-miller-2005.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./applied-interdisciplinary/02-kontorovich-miller-2005-benford/paper.pdf">📄 Original PDF</a></td>
+</tr>
+<tr class="odd">
+<td><strong>7. Oliver K. Clay (2023)</strong><br><em>J. Humanistic Math</em></td>
+<td style="text-align: center;">ดนตรีและฟิสิกส์คลื่นเสียง</td>
+<td style="text-align: center;"><a href="./applied-interdisciplinary/03-clay-2023-music-acoustics/paper-introduction-and-study-guide.html">🌐 เปิดอ่าน HTML</a><br><a href="./applied-interdisciplinary/03-clay-2023-music-acoustics/paper-introduction-and-study-guide.pdf">📕 PDF</a> · <a href="./applied-interdisciplinary/03-clay-2023-music-acoustics/paper-introduction-and-study-guide.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./applied-interdisciplinary/03-clay-2023-music-acoustics/clay-2023.html">🌐 เปิดอ่าน HTML</a><br><a href="./applied-interdisciplinary/03-clay-2023-music-acoustics/clay-2023.pdf">📕 PDF</a> · <a href="./applied-interdisciplinary/03-clay-2023-music-acoustics/clay-2023.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./applied-interdisciplinary/03-clay-2023-music-acoustics/paper.pdf">📄 Original PDF</a></td>
+</tr>
+<tr class="even">
+<td><strong>8. Tomasz R. Dziala (2023)</strong><br><em>arXiv / CPC</em></td>
+<td style="text-align: center;">ความปลอดภัยและ PRNG</td>
+<td style="text-align: center;"><a href="./applied-interdisciplinary/04-dziala-2023-prng-nist/paper-introduction-and-study-guide.html">🌐 เปิดอ่าน HTML</a><br><a href="./applied-interdisciplinary/04-dziala-2023-prng-nist/paper-introduction-and-study-guide.pdf">📕 PDF</a> · <a href="./applied-interdisciplinary/04-dziala-2023-prng-nist/paper-introduction-and-study-guide.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./applied-interdisciplinary/04-dziala-2023-prng-nist/dziala-2023.html">🌐 เปิดอ่าน HTML</a><br><a href="./applied-interdisciplinary/04-dziala-2023-prng-nist/dziala-2023.pdf">📕 PDF</a> · <a href="./applied-interdisciplinary/04-dziala-2023-prng-nist/dziala-2023.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./applied-interdisciplinary/04-dziala-2023-prng-nist/paper.pdf">📄 Original PDF</a></td>
+</tr>
+<tr class="odd">
+<td><strong>9. Diego Renza et al.&nbsp;(2020)</strong><br><em>Applied Sciences</em></td>
+<td style="text-align: center;">นิติวิทยาศาสตร์เสียง</td>
+<td style="text-align: center;"><a href="./applied-interdisciplinary/05-renza-2020-audio-forensics/paper-introduction-and-study-guide.html">🌐 เปิดอ่าน HTML</a><br><a href="./applied-interdisciplinary/05-renza-2020-audio-forensics/paper-introduction-and-study-guide.pdf">📕 PDF</a> · <a href="./applied-interdisciplinary/05-renza-2020-audio-forensics/paper-introduction-and-study-guide.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./applied-interdisciplinary/05-renza-2020-audio-forensics/renza-2020.html">🌐 เปิดอ่าน HTML</a><br><a href="./applied-interdisciplinary/05-renza-2020-audio-forensics/renza-2020.pdf">📕 PDF</a> · <a href="./applied-interdisciplinary/05-renza-2020-audio-forensics/renza-2020.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./applied-interdisciplinary/05-renza-2020-audio-forensics/paper.pdf">📄 Original PDF</a></td>
+</tr>
+<tr class="even">
+<td><strong>10. Ballesteros et al.&nbsp;(2018)</strong><br><em>Entropy</em></td>
+<td style="text-align: center;">ถอดรหัสลับภาพดิจิทัล</td>
+<td style="text-align: center;"><a href="./04-collatz-image-encryption/paper-introduction-and-study-guide.html">🌐 เปิดอ่าน HTML (Break-It)</a><br><a href="./04-collatz-image-encryption/paper-introduction-and-study-guide.pdf">📕 PDF</a> · <a href="./04-collatz-image-encryption/paper-introduction-and-study-guide.qmd">📝 QMD</a></td>
+<td style="text-align: center;"><a href="./04-collatz-image-encryption/ballesteros-2018-verbatim.html">🌐 เปิดอ่าน Verbatim HTML</a><br><a href="./04-collatz-image-encryption/ballesteros-2018-reconstructed.html">🌐 เปิดอ่าน Annotated HTML</a></td>
+<td style="text-align: center;"><a href="./04-collatz-image-encryption/paper.pdf">📄 Original PDF</a></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="แผนทการเลอกหวขอตามความถนดของนสต-advising-matrix" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 2. แผนที่การเลือกหัวข้อตามความถนัดของนิสิต (Advising Matrix)</h1>
+<pre><code>+----------------------------------------------------------------------------------------------------+
+|                                    STUDENT SPECIALIZATION ROADMAP                                  |
++------------------------------+----------------------------------+----------------------------------+
+| สายที่ 1: ทฤษฎีจำนวนบริสุทธิ์  | สายที่ 2: กราฟและวิทยาการข้อมูล   | สายที่ 3: ดนตรีและฟิสิกส์คลื่นเสียง|
+| (Pure Math &amp; Proof Rigor)    | (Graph Theory &amp; Network Science) | (Acoustics &amp; Algorithmic Music)  |
+| 🎯 Lagarias (1985)           | 🎯 Emmert-Streib (2013)          | 🎯 Oliver K. Clay (2023)         |
+| 🎯 Terras (1976)             | 🎯 Kontorovich &amp; Miller (2005)   | 🛠️ สังเคราะห์ไฟล์เสียง `.wav`     |
+| 🎯 Simons &amp; de Weger (2005)  | 🛠️ Python NetworkX / SciPy       |                                  |
++------------------------------+----------------------------------+----------------------------------+
+|                                    สายที่ 4: ความปลอดภัยและการคำนวณสมรรถนะสูง                       |
+|                                    (Cybersecurity, PRNG &amp; Forensics)                               |
+|                                    🎯 Tomasz R. Dziala (2023) - Collatz-Weyl PRNG &amp; NIST           |
+|                                    🎯 Diego Renza et al. (2020) - Audio Tampering Detection        |
+|                                    🎯 Ballesteros et al. (2018) - Image Encryption Cryptanalysis    |
++----------------------------------------------------------------------------------------------------+</code></pre>
+<hr>
+</section>
+<section id="หมวดท-1-ทฤษฎจำนวนบรสทธและระบบพลวตแมบท-foundational-number-theory" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 3. หมวดที่ 1: ทฤษฎีจำนวนบริสุทธิ์และระบบพลวัตแม่บท (Foundational Number Theory)</h1>
+<p>หมวดนี้เหมาะสำหรับนิสิตที่ต้องการฝึกฝน <strong>ตรรกะการพิสูจน์บทตั้งและทฤษฎีบททางคณิตศาสตร์อย่างเคร่งครัด (Rigorous Mathematical Proofs)</strong> โดยมุ่งเน้นการวิเคราะห์โครงสร้างพีชคณิตของฟังก์ชันคอลลัทซ์ <span class="math inline">\(T(n)\)</span>:</p>
+<section id="คมภรแมบทปญหา-3x1-jeffrey-c.-lagarias-amm-1985" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="คมภรแมบทปญหา-3x1-jeffrey-c.-lagarias-amm-1985"><span class="header-section-number">3.1</span> 3.1 คัมภีร์แม่บทปัญหา <span class="math inline">\(3x+1\)</span> (Jeffrey C. Lagarias, AMM 1985)</h2>
+<ul>
+<li><strong>ชื่อเปเปอร์:</strong> The <span class="math inline">\(3x + 1\)</span> Problem and Its Generalizations</li>
+<li><strong>วารสาร:</strong> <em>The American Mathematical Monthly (MAA)</em>, Vol. 92, No.&nbsp;1, pp.&nbsp;3–23 (ได้รับรางวัล Lester R. Ford Award)</li>
+<li><strong>แกนคณิตศาสตร์:</strong> แบบจำลองความน่าจะเป็น Geometric Brownian Motion (Drift <span class="math inline">\(\frac{3}{4} &lt; 1\)</span>), โครงสร้าง Parity Vectors, ทฤษฎีบทการตัดสินไม่ได้ของ Conway (Turing Undecidability), และการกระจายตัวของเวลาหยุด</li>
+<li><strong>เอกสารและลิงก์ศึกษา:</strong>
+<ul>
+<li>🧭 <strong>คู่มือนำอ่าน Study Guide:</strong> <a href="./foundational-number-theory/01-lagarias-1985-amm/paper-introduction-and-study-guide.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./foundational-number-theory/01-lagarias-1985-amm/paper-introduction-and-study-guide.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./foundational-number-theory/01-lagarias-1985-amm/paper-introduction-and-study-guide.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📖 <strong>ตัวบทความวิจัยที่ถอดรหัส:</strong> <a href="./foundational-number-theory/01-lagarias-1985-amm/lagarias-1985.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./foundational-number-theory/01-lagarias-1985-amm/lagarias-1985.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./foundational-number-theory/01-lagarias-1985-amm/lagarias-1985.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📄 <strong>เปเปอร์ต้นฉบับ:</strong> <a href="./foundational-number-theory/01-lagarias-1985-amm/paper.pdf">📄 ดาวน์โหลด Original PDF</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="บทตงความสมนยของเวกเตอรคค-riho-terras-acta-arithmetica-1976" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="บทตงความสมนยของเวกเตอรคค-riho-terras-acta-arithmetica-1976"><span class="header-section-number">3.2</span> 3.2 บทตั้งความสมนัยของเวกเตอร์คู่คี่ (Riho Terras, Acta Arithmetica 1976)</h2>
+<ul>
+<li><strong>ชื่อเปเปอร์:</strong> A Stopping Time Problem on the Positive Integers</li>
+<li><strong>วารสาร:</strong> <em>Acta Arithmetica</em>, Vol. 30, No.&nbsp;3, pp.&nbsp;241–252 (เปเปอร์พิสูจน์แรกของโลก)</li>
+<li><strong>แกนคณิตศาสตร์:</strong> พิสูจน์ <strong>Parity Vector Bijection Lemma</strong> ว่าเวกเตอร์บิต <span class="math inline">\(k\)</span> ก้าวแรกสมนัยหนึ่งต่อหนึ่งกับ <span class="math inline">\(\mathbb{Z} / 2^k \mathbb{Z}\)</span> ด้วยการอุปนัยเชิงคณิตศาสตร์ และพิสูจน์ว่าความหนาแน่นของจำนวนที่มี Stopping Time จำกัดเท่ากับ 1</li>
+<li><strong>เอกสารและลิงก์ศึกษา:</strong>
+<ul>
+<li>🧭 <strong>คู่มือนำอ่าน Study Guide:</strong> <a href="./foundational-number-theory/02-terras-1976-acta-arithmetica/paper-introduction-and-study-guide.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./foundational-number-theory/02-terras-1976-acta-arithmetica/paper-introduction-and-study-guide.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./foundational-number-theory/02-terras-1976-acta-arithmetica/paper-introduction-and-study-guide.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📖 <strong>ตัวบทความวิจัยที่ถอดรหัส:</strong> <a href="./foundational-number-theory/02-terras-1976-acta-arithmetica/terras-1976.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./foundational-number-theory/02-terras-1976-acta-arithmetica/terras-1976.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./foundational-number-theory/02-terras-1976-acta-arithmetica/terras-1976.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📄 <strong>เปเปอร์ต้นฉบับ:</strong> <a href="./foundational-number-theory/02-terras-1976-acta-arithmetica/paper.pdf">📄 ดาวน์โหลด Original PDF สแกน 1976</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="กราฟตนไมยอนกลบและวฏจกรบนจำนวนเตมลบ-marc-chamberland-2003" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="กราฟตนไมยอนกลบและวฏจกรบนจำนวนเตมลบ-marc-chamberland-2003"><span class="header-section-number">3.3</span> 3.3 กราฟต้นไม้ย้อนกลับและวัฏจักรบนจำนวนเต็มลบ (Marc Chamberland, 2003)</h2>
+<ul>
+<li><strong>ชื่อเปเปอร์:</strong> An Update on the <span class="math inline">\(3x + 1\)</span> Problem</li>
+<li><strong>วารสาร:</strong> <em>Lectures in Applied Mathematics</em> (AMS Survey)</li>
+<li><strong>แกนคณิตศาสตร์:</strong> การสร้างต้นไม้ย้อนกลับ (Predecessor Trees: <span class="math inline">\(T^{-1}(y)\)</span>), ปริศนา 3 วัฏจักรที่พิสูจน์ได้จริงบนจำนวนเต็มลบ <span class="math inline">\(\mathbb{Z}^-\)</span> (<span class="math inline">\(-1, -5, -17\)</span>), และฟังก์ชันต่อเนื่อง <span class="math inline">\(f(x)\)</span> บน <span class="math inline">\(\mathbb{R}\)</span></li>
+<li><strong>เอกสารและลิงก์ศึกษา:</strong>
+<ul>
+<li>🧭 <strong>คู่มือนำอ่าน Study Guide:</strong> <a href="./foundational-number-theory/03-chamberland-2003-survey/paper-introduction-and-study-guide.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./foundational-number-theory/03-chamberland-2003-survey/paper-introduction-and-study-guide.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./foundational-number-theory/03-chamberland-2003-survey/paper-introduction-and-study-guide.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📖 <strong>ตัวบทความวิจัยที่ถอดรหัส:</strong> <a href="./foundational-number-theory/03-chamberland-2003-survey/chamberland-2003.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./foundational-number-theory/03-chamberland-2003-survey/chamberland-2003.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./foundational-number-theory/03-chamberland-2003-survey/chamberland-2003.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📄 <strong>เปเปอร์ต้นฉบับ:</strong> <a href="./foundational-number-theory/03-chamberland-2003-survey/paper.pdf">📄 ดาวน์โหลด Original PDF</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="ขอบเขตวฏจกรและสมการไดโอแฟนไทน-john-simons-benne-de-weger-2005" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="ขอบเขตวฏจกรและสมการไดโอแฟนไทน-john-simons-benne-de-weger-2005"><span class="header-section-number">3.4</span> 3.4 ขอบเขตวัฏจักรและสมการไดโอแฟนไทน์ (John Simons &amp; Benne de Weger, 2005)</h2>
+<ul>
+<li><strong>ชื่อเปเปอร์:</strong> Theoretical and Computational Bounds for <span class="math inline">\(m\)</span>-Cycles of the <span class="math inline">\(3n + 1\)</span>-Problem</li>
+<li><strong>วารสาร:</strong> <em>Acta Arithmetica</em>, Vol. 117, No.&nbsp;1, pp.&nbsp;51–70</li>
+<li><strong>แกนคณิตศาสตร์:</strong> การกระจายสมการไดโอแฟนไทน์ของวัฏจักร <span class="math inline">\((2^{K+L} - 3^K) x_{\min} = \sum 3^{K-1-j} 2^{A_j}\)</span>, การประมาณค่า <span class="math inline">\(\log_2 3\)</span> ด้วยเศษส่วนต่อเนื่อง, และทฤษฎีบทของ Baker บีบขอบเขตพิสูจน์ว่าไม่มี <span class="math inline">\(m\)</span>-cycles สำหรับ <span class="math inline">\(m \le 68\)</span></li>
+<li><strong>เอกสารและลิงก์ศึกษา:</strong>
+<ul>
+<li>🧭 <strong>คู่มือนำอ่าน Study Guide:</strong> <a href="./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/paper-introduction-and-study-guide.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/paper-introduction-and-study-guide.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/paper-introduction-and-study-guide.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📖 <strong>ตัวบทความวิจัยที่ถอดรหัส:</strong> <a href="./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/simons-deweger-2005.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/simons-deweger-2005.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/simons-deweger-2005.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📄 <strong>เปเปอร์ต้นฉบับ:</strong> <a href="./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/paper.pdf">📄 ดาวน์โหลด Original PDF</a></li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="หมวดท-2-การประยกตใชเชงสหวทยาการทเขาถงงาย-applied-interdisciplinary" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 4. หมวดที่ 2: การประยุกต์ใช้เชิงสหวิทยาการที่เข้าถึงง่าย (Applied &amp; Interdisciplinary)</h1>
+<p>หมวดนี้ออกแบบมาเพื่อให้นิสิต <strong>เห็นผลการทดลองจริง เขียนโค้ดสั้น เข้าใจง่าย และมีชิ้นงานส่งมอบที่เป็นรูปธรรม</strong>:</p>
+<section id="ทฤษฎกราฟและเครอขายซบซอน-frank-emmert-streib-plos-one-2013" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="ทฤษฎกราฟและเครอขายซบซอน-frank-emmert-streib-plos-one-2013"><span class="header-section-number">4.1</span> 4.1 ทฤษฎีกราฟและเครือข่ายซับซ้อน (Frank Emmert-Streib, PLoS ONE 2013)</h2>
+<ul>
+<li><strong>ชื่อเปเปอร์:</strong> Structural Properties and Complexity of a New Network Class: Collatz Step Graphs</li>
+<li><strong>วารสาร:</strong> <em>PLoS ONE</em>, 8(2): e56461 (Scopus Q1)</li>
+<li><strong>จุดเด่น:</strong> แปลงลำดับก้าวคอลลัทซ์เป็นคลาสใหม่ของเครือข่ายซับซ้อน (CS Graphs) วัด Clustering Coefficient และพิสูจน์ Edge Weight Power Law ด้วย Python NetworkX</li>
+<li><strong>เอกสารและลิงก์ศึกษา:</strong>
+<ul>
+<li>🧭 <strong>คู่มือนำอ่าน Study Guide:</strong> <a href="./applied-interdisciplinary/01-emmert-streib-2013-networks/paper-introduction-and-study-guide.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./applied-interdisciplinary/01-emmert-streib-2013-networks/paper-introduction-and-study-guide.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./applied-interdisciplinary/01-emmert-streib-2013-networks/paper-introduction-and-study-guide.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📖 <strong>ตัวบทความวิจัยที่ถอดรหัส:</strong> <a href="./applied-interdisciplinary/01-emmert-streib-2013-networks/emmert-streib-2013.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./applied-interdisciplinary/01-emmert-streib-2013-networks/emmert-streib-2013.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./applied-interdisciplinary/01-emmert-streib-2013-networks/emmert-streib-2013.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📄 <strong>เปเปอร์ต้นฉบับ:</strong> <a href="./applied-interdisciplinary/01-emmert-streib-2013-networks/paper.pdf">📄 ดาวน์โหลด Original PDF (1.7 MB)</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="กฎของเบนฟอรดในคอลลทซ-alex-kontorovich-steven-j.-miller-2005" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="กฎของเบนฟอรดในคอลลทซ-alex-kontorovich-steven-j.-miller-2005"><span class="header-section-number">4.2</span> 4.2 กฎของเบนฟอร์ดในคอลลัทซ์ (Alex Kontorovich &amp; Steven J. Miller, 2005)</h2>
+<ul>
+<li><strong>ชื่อเปเปอร์:</strong> Benford’s Law, Values of <span class="math inline">\(L\)</span>-Functions and the <span class="math inline">\(3x + 1\)</span> Problem</li>
+<li><strong>วารสาร:</strong> <em>Acta Arithmetica</em>, Vol. 120, No.&nbsp;3, pp.&nbsp;269–297</li>
+<li><strong>จุดเด่น:</strong> พิสูจน์ว่าเลขโดดตัวแรก 1 ถึง 9 ในวงโคจรคอลลัทซ์ลู่เข้าสู่กฎของเบนฟอร์ด <span class="math inline">\(P(d) = \log_{10}(1 + 1/d)\)</span> และให้นิสิตฝึกรันการทดสอบสมมติฐานทางสถิติ <span class="math inline">\(\chi^2\)</span> Goodness-of-Fit Test ใน SciPy</li>
+<li><strong>เอกสารและลิงก์ศึกษา:</strong>
+<ul>
+<li>🧭 <strong>คู่มือนำอ่าน Study Guide:</strong> <a href="./applied-interdisciplinary/02-kontorovich-miller-2005-benford/paper-introduction-and-study-guide.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./applied-interdisciplinary/02-kontorovich-miller-2005-benford/paper-introduction-and-study-guide.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./applied-interdisciplinary/02-kontorovich-miller-2005-benford/paper-introduction-and-study-guide.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📖 <strong>ตัวบทความวิจัยที่ถอดรหัส:</strong> <a href="./applied-interdisciplinary/02-kontorovich-miller-2005-benford/kontorovich-miller-2005.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./applied-interdisciplinary/02-kontorovich-miller-2005-benford/kontorovich-miller-2005.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./applied-interdisciplinary/02-kontorovich-miller-2005-benford/kontorovich-miller-2005.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📄 <strong>เปเปอร์ต้นฉบับ:</strong> <a href="./applied-interdisciplinary/02-kontorovich-miller-2005-benford/paper.pdf">📄 ดาวน์โหลด Original PDF (354 KB)</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="ดนตรอลกอรทมและการสงเคราะหเสยง-oliver-k.-clay-jhm-2023" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="ดนตรอลกอรทมและการสงเคราะหเสยง-oliver-k.-clay-jhm-2023"><span class="header-section-number">4.3</span> 4.3 ดนตรีอัลกอริทึมและการสังเคราะห์เสียง (Oliver K. Clay, JHM 2023)</h2>
+<ul>
+<li><strong>ชื่อเปเปอร์:</strong> The Long Search for Collatz Counterexamples (The Music of a Collatz Run)</li>
+<li><strong>วารสาร:</strong> <em>Journal of Humanistic Mathematics</em>, Vol. 13, Issue 2, pp.&nbsp;199–227</li>
+<li><strong>จุดเด่น:</strong> เปลี่ยนวงโคจรตัวเลขเป็นความถี่เสียงดนตรี (Hz) และโน้ตดนตรี 12 เสียงด้วยเลขคณิตมอดุโล 12 นิสิตสามารถสังเคราะห์ไฟล์เสียงจริง <code>.wav</code> เปิดให้กรรมการและเพื่อนฟังในห้องสัมมนาได้</li>
+<li><strong>เอกสารและลิงก์ศึกษา:</strong>
+<ul>
+<li>🧭 <strong>คู่มือนำอ่าน Study Guide:</strong> <a href="./applied-interdisciplinary/03-clay-2023-music-acoustics/paper-introduction-and-study-guide.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./applied-interdisciplinary/03-clay-2023-music-acoustics/paper-introduction-and-study-guide.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./applied-interdisciplinary/03-clay-2023-music-acoustics/paper-introduction-and-study-guide.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📖 <strong>ตัวบทความวิจัยที่ถอดรหัส:</strong> <a href="./applied-interdisciplinary/03-clay-2023-music-acoustics/clay-2023.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./applied-interdisciplinary/03-clay-2023-music-acoustics/clay-2023.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./applied-interdisciplinary/03-clay-2023-music-acoustics/clay-2023.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📄 <strong>เปเปอร์ต้นฉบับ:</strong> <a href="./applied-interdisciplinary/03-clay-2023-music-acoustics/paper.pdf">📄 ดาวน์โหลด Original PDF (1.1 MB)</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="ตวสรางเลขสมเทยมและการทดสอบ-nist-tomasz-r.-dziala-2023" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="ตวสรางเลขสมเทยมและการทดสอบ-nist-tomasz-r.-dziala-2023"><span class="header-section-number">4.4</span> 4.4 ตัวสร้างเลขสุ่มเทียมและการทดสอบ NIST (Tomasz R. Dziala, 2023)</h2>
+<ul>
+<li><strong>ชื่อเปเปอร์:</strong> Collatz-Weyl PRNG: A High-Performance Pseudorandom Number Generator</li>
+<li><strong>วารสาร:</strong> arXiv:2312.17043 (Elsevier CPC stream)</li>
+<li><strong>จุดเด่น:</strong> ผสาน Generalized Collatz เข้ากับลำดับของไวล์ (Weyl Sequence) เพื่อการันตีคาบ <span class="math inline">\(2^{64}\)</span> ขั้นตอนวิธีระดับบิตเร็วสูง พร้อมชุดทดสอบมาตรฐานความปลอดภัย NIST SP 800-22</li>
+<li><strong>เอกสารและลิงก์ศึกษา:</strong>
+<ul>
+<li>🧭 <strong>คู่มือนำอ่าน Study Guide:</strong> <a href="./applied-interdisciplinary/04-dziala-2023-prng-nist/paper-introduction-and-study-guide.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./applied-interdisciplinary/04-dziala-2023-prng-nist/paper-introduction-and-study-guide.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./applied-interdisciplinary/04-dziala-2023-prng-nist/paper-introduction-and-study-guide.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📖 <strong>ตัวบทความวิจัยที่ถอดรหัส:</strong> <a href="./applied-interdisciplinary/04-dziala-2023-prng-nist/dziala-2023.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./applied-interdisciplinary/04-dziala-2023-prng-nist/dziala-2023.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./applied-interdisciplinary/04-dziala-2023-prng-nist/dziala-2023.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📄 <strong>เปเปอร์ต้นฉบับ:</strong> <a href="./applied-interdisciplinary/04-dziala-2023-prng-nist/paper.pdf">📄 ดาวน์โหลด Original PDF (188 KB)</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="นตวทยาศาสตรดจทลและการตรวจจบการปลอมแปลงเสยง-diego-renza-et-al.-2020" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="นตวทยาศาสตรดจทลและการตรวจจบการปลอมแปลงเสยง-diego-renza-et-al.-2020"><span class="header-section-number">4.5</span> 4.5 นิติวิทยาศาสตร์ดิจิทัลและการตรวจจับการปลอมแปลงเสียง (Diego Renza et al., 2020)</h2>
+<ul>
+<li><strong>ชื่อเปเปอร์:</strong> Robust Speech Hashing for Digital Audio Forensics via Collatz Transformations</li>
+<li><strong>วารสาร:</strong> <em>Applied Sciences (MDPI)</em>, 10(1):118</li>
+<li><strong>จุดเด่น:</strong> ประยุกต์ใช้ Collatz Binarization ในคดีความทางกฎหมาย เพื่อสร้างรหัสแฮชเสียงที่ทนทานต่อการบีบอัด MP3 แต่ไวต่อการตัดต่อคำพูดด้วยความแม่นยำสูงกว่า <span class="math inline">\(99.8\%\)</span></li>
+<li><strong>เอกสารและลิงก์ศึกษา:</strong>
+<ul>
+<li>🧭 <strong>คู่มือนำอ่าน Study Guide:</strong> <a href="./applied-interdisciplinary/05-renza-2020-audio-forensics/paper-introduction-and-study-guide.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./applied-interdisciplinary/05-renza-2020-audio-forensics/paper-introduction-and-study-guide.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./applied-interdisciplinary/05-renza-2020-audio-forensics/paper-introduction-and-study-guide.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📖 <strong>ตัวบทความวิจัยที่ถอดรหัส:</strong> <a href="./applied-interdisciplinary/05-renza-2020-audio-forensics/renza-2020.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./applied-interdisciplinary/05-renza-2020-audio-forensics/renza-2020.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./applied-interdisciplinary/05-renza-2020-audio-forensics/renza-2020.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📄 <strong>เปเปอร์ต้นฉบับ:</strong> <a href="./applied-interdisciplinary/05-renza-2020-audio-forensics/paper.pdf">📄 ดาวน์โหลด Original PDF (2.2 MB)</a></li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="หมวดท-3-กรณศกษาระบบเขารหสภาพดจทล-case-study-from-build-to-break" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 5. หมวดที่ 3: กรณีศึกษาระบบเข้ารหัสภาพดิจิทัล (Case Study: From Build to Break)</h1>
+<ul>
+<li><strong>เปเปอร์อ้างอิง:</strong> D. M. Ballesteros et al.&nbsp;(<em>Entropy</em>, 2018) / C. Obimbo (<em>IEEE Access</em>, 2024)</li>
+<li><strong>แนวทางการศึกษา:</strong> พลิกกรอบจากการ “สร้างระบบตามเปเปอร์” เป็น <strong>“ห้องปฏิบัติการเจาะระบบรหัสลับ (Cryptanalytic Red Team)”</strong> พิสูจน์ช่องโหว่ Known-Plaintext Attack (KPA) และข้อผิดพลาดเรื่อง Shannon’s Perfect Secrecy</li>
+<li><strong>เอกสารและลิงก์ศึกษา:</strong>
+<ul>
+<li>🧭 <strong>คู่มือนำอ่าน Study Guide:</strong> <a href="./04-collatz-image-encryption/paper-introduction-and-study-guide.html">🌐 เปิดอ่านหน้าเว็บ HTML</a> | <a href="./04-collatz-image-encryption/paper-introduction-and-study-guide.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./04-collatz-image-encryption/paper-introduction-and-study-guide.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📖 <strong>เปเปอร์ฉบับภาษาอังกฤษตามต้นฉบับ 100%:</strong> <a href="./04-collatz-image-encryption/ballesteros-2018-verbatim.html">🌐 เปิดอ่าน Verbatim HTML</a> | <a href="./04-collatz-image-encryption/ballesteros-2018-verbatim.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./04-collatz-image-encryption/ballesteros-2018-verbatim.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>🔍 <strong>เปเปอร์ฉบับภาษาไทยพร้อมบทวิเคราะห์วิพากษ์ Red Team:</strong> <a href="./04-collatz-image-encryption/ballesteros-2018-reconstructed.html">🌐 เปิดอ่าน Annotated HTML</a> | <a href="./04-collatz-image-encryption/ballesteros-2018-reconstructed.pdf">📕 ฉบับพิมพ์ PDF</a> | <a href="./04-collatz-image-encryption/ballesteros-2018-reconstructed.qmd">📝 ไฟล์ต้นฉบับ QMD</a></li>
+<li>📄 <strong>เปเปอร์ต้นฉบับ:</strong> <a href="./04-collatz-image-encryption/paper.pdf">📄 ดาวน์โหลด Original PDF (2.2 MB)</a></li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="แผนการดำเนนงาน-12-สปดาหสำหรบนสตสมมนา-12-week-roadmap" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> 6. แผนการดำเนินงาน 12 สัปดาห์สำหรับนิสิตสัมมนา (12-Week Roadmap)</h1>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>สัปดาห์</th>
+<th>กิจกรรมการศึกษาและการค้นคว้า</th>
+<th>ผลงานส่งมอบ (Deliverables)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>สัปดาห์ 1–2</strong></td>
+<td>ศึกษามโนทัศน์เบื้องต้นตามคู่มือนำอ่าน (Three-Pass Approach) และทำความเข้าใจปัญหา</td>
+<td>สรุปมโนทัศน์ 1 หน้ากระดาษ A4</td>
+</tr>
+<tr class="even">
+<td><strong>สัปดาห์ 3–4</strong></td>
+<td>ปฏิบัติภารกิจที่ 1 และ 2 ของบันไดฝึกฝน (เขียนโค้ดจำลองระบบย่อยใน Python)</td>
+<td>โค้ด Python สคริปต์แรกพร้อมผลรัน</td>
+</tr>
+<tr class="odd">
+<td><strong>สัปดาห์ 5–6</strong></td>
+<td>ปฏิบัติภารกิจที่ 3 (แกะรอยบทพิสูจน์ทางคณิตศาสตร์หรือจำลองระบบเต็มรูปแบบ)</td>
+<td>สรุปก้าวพิสูจน์หรือกราฟเปรียบเทียบ</td>
+</tr>
+<tr class="even">
+<td><strong>สัปดาห์ 7–8</strong></td>
+<td>ปฏิบัติภารกิจที่ 4 (วิพากษ์จุดบกพร่อง / ทดสอบกับชุดข้อมูลขนาดใหญ่)</td>
+<td>ผลการทดสอบความแม่นยำหรือช่องโหว่</td>
+</tr>
+<tr class="odd">
+<td><strong>สัปดาห์ 9–10</strong></td>
+<td>วางโครงสร้างเล่มรายงานสัมมนา 5 บท และเตรียมแผนขยายผลสู่โครงงานวิจัย</td>
+<td>ร่างรายงานสัมมนาบทที่ 1–3</td>
+</tr>
+<tr class="even">
+<td><strong>สัปดาห์ 11–12</strong></td>
+<td>ซ้อมนำเสนอในห้องสัมมนา พร้อมเตรียมการสาธิตโปรแกรมจริง</td>
+<td>สไลด์นำเสนอ และเล่มรายงานฉบับสมบูรณ์</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="อาจารย์ ดร.กิตติพงศ์ ทรัพย์วัฒนาชัย">
+<meta name="dcterms.date" content="2026-09-30">
+
+<title>คู่มือนำอ่านเปเปอร์สัมมนาคณิตศาสตร์ประยุกต์: Collatz Image Encryption</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="paper-introduction-and-study-guide_files/libs/clipboard/clipboard.min.js"></script>
+<script src="paper-introduction-and-study-guide_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="paper-introduction-and-study-guide_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="paper-introduction-and-study-guide_files/libs/quarto-html/popper.min.js"></script>
+<script src="paper-introduction-and-study-guide_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="paper-introduction-and-study-guide_files/libs/quarto-html/anchor.min.js"></script>
+<link href="paper-introduction-and-study-guide_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="paper-introduction-and-study-guide_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="paper-introduction-and-study-guide_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="paper-introduction-and-study-guide_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="paper-introduction-and-study-guide_files/libs/bootstrap/bootstrap-7fca231f0f6bfd3bec1af756033c583c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#ทำไมตองเปนเปเปอรน-เปเปอรนมดตรงไหน" id="toc-ทำไมตองเปนเปเปอรน-เปเปอรนมดตรงไหน" class="nav-link active" data-scroll-target="#ทำไมตองเปนเปเปอรน-เปเปอรนมดตรงไหน"><span class="header-section-number">1</span> 1. ทำไมต้องเป็นเปเปอร์นี้? (เปเปอร์นี้มีดีตรงไหน)</a></li>
+  <li><a href="#กาวขาม-สมมนาแบบทองจำ-อานแลวเดกจะไดอะไรจรง-ๆ" id="toc-กาวขาม-สมมนาแบบทองจำ-อานแลวเดกจะไดอะไรจรง-ๆ" class="nav-link" data-scroll-target="#กาวขาม-สมมนาแบบทองจำ-อานแลวเดกจะไดอะไรจรง-ๆ"><span class="header-section-number">2</span> 2. ก้าวข้าม “สัมมนาแบบท่องจำ”: อ่านแล้วเด็กจะได้อะไรจริง ๆ</a>
+  <ul class="collapse">
+  <li><a href="#ปญหาของงานสมมนาแบบเดม" id="toc-ปญหาของงานสมมนาแบบเดม" class="nav-link" data-scroll-target="#ปญหาของงานสมมนาแบบเดม"><span class="header-section-number">2.1</span> 2.1 ปัญหาของงานสัมมนาแบบเดิม</a></li>
+  <li><a href="#สงทนสตจะไดจากเปเปอรน-transformative-learning-outcomes" id="toc-สงทนสตจะไดจากเปเปอรน-transformative-learning-outcomes" class="nav-link" data-scroll-target="#สงทนสตจะไดจากเปเปอรน-transformative-learning-outcomes"><span class="header-section-number">2.2</span> 2.2 สิ่งที่นิสิตจะได้จากเปเปอร์นี้ (Transformative Learning Outcomes)</a></li>
+  </ul></li>
+  <li><a href="#ความเหมาะสมกบคณตศาสตรประยกตและทฤษฎจำนวน" id="toc-ความเหมาะสมกบคณตศาสตรประยกตและทฤษฎจำนวน" class="nav-link" data-scroll-target="#ความเหมาะสมกบคณตศาสตรประยกตและทฤษฎจำนวน"><span class="header-section-number">3</span> 3. ความเหมาะสมกับคณิตศาสตร์ประยุกต์และทฤษฎีจำนวน</a></li>
+  <li><a href="#สำหรบเดกทไมเคยอานเปเปอรมากอนเลย-จะเรมตนอยางไร" id="toc-สำหรบเดกทไมเคยอานเปเปอรมากอนเลย-จะเรมตนอยางไร" class="nav-link" data-scroll-target="#สำหรบเดกทไมเคยอานเปเปอรมากอนเลย-จะเรมตนอยางไร"><span class="header-section-number">4</span> 4. สำหรับเด็กที่ไม่เคยอ่านเปเปอร์มาก่อนเลย: จะเริ่มต้นอย่างไร?</a>
+  <ul class="collapse">
+  <li><a href="#รอบท-1-สแกนภาพรวม-the-birds-eye-view-30-นาท" id="toc-รอบท-1-สแกนภาพรวม-the-birds-eye-view-30-นาท" class="nav-link" data-scroll-target="#รอบท-1-สแกนภาพรวม-the-birds-eye-view-30-นาท"><span class="header-section-number">4.1</span> 4.1 รอบที่ 1: สแกนภาพรวม (The Bird’s-Eye View — 30 นาที)</a></li>
+  <li><a href="#รอบท-2-แกะรอยสถาปตยกรรมระบบ-the-mechanism-pass-2-3-วน" id="toc-รอบท-2-แกะรอยสถาปตยกรรมระบบ-the-mechanism-pass-2-3-วน" class="nav-link" data-scroll-target="#รอบท-2-แกะรอยสถาปตยกรรมระบบ-the-mechanism-pass-2-3-วน"><span class="header-section-number">4.2</span> 4.2 รอบที่ 2: แกะรอยสถาปัตยกรรมระบบ (The Mechanism Pass — 2-3 วัน)</a></li>
+  <li><a href="#รอบท-3-จบผดและตรวจสอบเชงลก-the-critical-review-pass-1-สปดาห" id="toc-รอบท-3-จบผดและตรวจสอบเชงลก-the-critical-review-pass-1-สปดาห" class="nav-link" data-scroll-target="#รอบท-3-จบผดและตรวจสอบเชงลก-the-critical-review-pass-1-สปดาห"><span class="header-section-number">4.3</span> 4.3 รอบที่ 3: จับผิดและตรวจสอบเชิงลึก (The Critical Review Pass — 1 สัปดาห์)</a></li>
+  </ul></li>
+  <li><a href="#จดบกพรองของเปเปอร-โอกาสทองในการสรางสรรคงานวจย" id="toc-จดบกพรองของเปเปอร-โอกาสทองในการสรางสรรคงานวจย" class="nav-link" data-scroll-target="#จดบกพรองของเปเปอร-โอกาสทองในการสรางสรรคงานวจย"><span class="header-section-number">5</span> 5. จุดบกพร่องของเปเปอร์: โอกาสทองในการสร้างสรรค์งานวิจัย</a></li>
+  <li><a href="#การตอยอดสโครงงานวจยปรญญาตร-5-บท-senior-project-01417499" id="toc-การตอยอดสโครงงานวจยปรญญาตร-5-บท-senior-project-01417499" class="nav-link" data-scroll-target="#การตอยอดสโครงงานวจยปรญญาตร-5-บท-senior-project-01417499"><span class="header-section-number">6</span> 6. การต่อยอดสู่โครงงานวิจัยปริญญาตรี 5 บท (Senior Project 01417499)</a>
+  <ul class="collapse">
+  <li><a href="#track-1-ผเจาะระบบรหสลบ-the-cryptanalyst-track" id="toc-track-1-ผเจาะระบบรหสลบ-the-cryptanalyst-track" class="nav-link" data-scroll-target="#track-1-ผเจาะระบบรหสลบ-the-cryptanalyst-track"><span class="header-section-number">6.1</span> Track 1: ผู้เจาะระบบรหัสลับ (The Cryptanalyst Track)</a></li>
+  <li><a href="#track-2-สถาปนกผออกแบบระบบใหม-the-architect-track" id="toc-track-2-สถาปนกผออกแบบระบบใหม-the-architect-track" class="nav-link" data-scroll-target="#track-2-สถาปนกผออกแบบระบบใหม-the-architect-track"><span class="header-section-number">6.2</span> Track 2: สถาปนิกผู้ออกแบบระบบใหม่ (The Architect Track)</a></li>
+  </ul></li>
+  <li><a href="#บนไดฝกฝน-4-ขนสำหรบนสต-step-by-step-practical-exercises" id="toc-บนไดฝกฝน-4-ขนสำหรบนสต-step-by-step-practical-exercises" class="nav-link" data-scroll-target="#บนไดฝกฝน-4-ขนสำหรบนสต-step-by-step-practical-exercises"><span class="header-section-number">7</span> 7. บันไดฝึกฝน 4 ขั้นสำหรับนิสิต (Step-by-Step Practical Exercises)</a>
+  <ul class="collapse">
+  <li><a href="#ภารกจท-1-สรางเครองจกรคอลลทซ-collatz-engine" id="toc-ภารกจท-1-สรางเครองจกรคอลลทซ-collatz-engine" class="nav-link" data-scroll-target="#ภารกจท-1-สรางเครองจกรคอลลทซ-collatz-engine"><span class="header-section-number">7.0.1</span> ภารกิจที่ 1: สร้างเครื่องจักรคอลลัทซ์ (Collatz Engine)</a></li>
+  <li><a href="#ภารกจท-2-ประกอบตารางรหส-256-แถว-codebook-generation" id="toc-ภารกจท-2-ประกอบตารางรหส-256-แถว-codebook-generation" class="nav-link" data-scroll-target="#ภารกจท-2-ประกอบตารางรหส-256-แถว-codebook-generation"><span class="header-section-number">7.0.2</span> ภารกิจที่ 2: ประกอบตารางรหัส 256 แถว (Codebook Generation)</a></li>
+  <li><a href="#ภารกจท-3-เขารหสภาพของเลนขนาด-8-times-8-toy-matrix-simulation" id="toc-ภารกจท-3-เขารหสภาพของเลนขนาด-8-times-8-toy-matrix-simulation" class="nav-link" data-scroll-target="#ภารกจท-3-เขารหสภาพของเลนขนาด-8-times-8-toy-matrix-simulation"><span class="header-section-number">7.0.3</span> ภารกิจที่ 3: เข้ารหัสภาพของเล่นขนาด <span class="math inline">\(8 \times 8\)</span> (Toy Matrix Simulation)</a></li>
+  <li><a href="#ภารกจท-4-การเขารหสภาพจรงและการวดคาความปลอดภย" id="toc-ภารกจท-4-การเขารหสภาพจรงและการวดคาความปลอดภย" class="nav-link" data-scroll-target="#ภารกจท-4-การเขารหสภาพจรงและการวดคาความปลอดภย"><span class="header-section-number">7.0.4</span> ภารกิจที่ 4: การเข้ารหัสภาพจริงและการวัดค่าความปลอดภัย</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="paper-introduction-and-study-guide.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">คู่มือนำอ่านเปเปอร์สัมมนาคณิตศาสตร์ประยุกต์: Collatz Image Encryption</h1>
+<p class="subtitle lead">จากปัญหา <span class="math inline">\(3x+1\)</span> สู่การเข้ารหัสภาพดิจิทัล: บทเรียน ระเบียบวิธี และการต่อยอดวิจัยสำหรับนิสิตปริญญาตรี</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">อาจารย์ ดร.กิตติพงศ์ ทรัพย์วัฒนาชัย </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            ภาควิชาวิทยาการคำนวณและเทคโนโลยีดิจิทัล คณะศิลปศาสตร์และวิทยาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์ กำแพงแสน
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 30, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="เป้าหมายของคู่มือฉบับนี้">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>เป้าหมายของคู่มือฉบับนี้
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>คู่มือฉบับนี้จัดทำขึ้นเพื่อเป็น <strong>เข็มทิศนำทาง (Reader’s Compass)</strong> สำหรับนิสิตระดับปริญญาตรีสาขาคณิตศาสตร์ประยุกต์ ที่กำลังเริ่มต้นศึกษาวิชาสัมมนา (01417497) หรือเตรียมต่อยอดเป็นโครงงานวิจัยปริญญาตรี 5 บท (01417499)</p>
+<p>เปเปอร์ที่ใช้เป็นกรณีศึกษา:<br>
+<strong>D. M. Ballesteros, J. Peña, and D. Renza, “A Novel Image Encryption Scheme Based on Collatz Conjecture,” <em>Entropy</em>, vol.&nbsp;20, no. 12, p.&nbsp;901, 2018. DOI: <a href="https://doi.org/10.3390/e20120901">10.3390/e20120901</a></strong></p>
+</div>
+</div>
+<hr>
+<section id="ทำไมตองเปนเปเปอรน-เปเปอรนมดตรงไหน" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 1. ทำไมต้องเป็นเปเปอร์นี้? (เปเปอร์นี้มีดีตรงไหน)</h1>
+<p>ในการเลือกเปเปอร์สัมมนาสำหรับนิสิตปริญญาตรี ปัญหาที่พบบ่อยที่สุดคือ <strong>เปเปอร์ยากเกินไปจนเด็กอ่านไม่รู้เรื่อง</strong> (ติดทฤษฎีขั้นสูง เช่น Measure Theory, Functional Analysis) หรือไม่ก็ <strong>เปเปอร์ง่ายเกินไปจนไม่มีเนื้อหาวิจัยใหม่</strong> (เช่น นำสูตรแคลคูลัสปี 1 มาพลอตกราฟซ้ำ)</p>
+<p>เปเปอร์ <em>Ballesteros et al.&nbsp;(2018)</em> ถือเป็น <strong>เปเปอร์ในจุดสมดุลที่ยอดเยี่ยม (Sweet Spot)</strong> ด้วยเหตุผล 4 ประการ:</p>
+<ol type="1">
+<li><p><strong>ความประจักษ์ชัดเจนทางสายตาและการได้ยิน (High Sensory &amp; Visual Impact):</strong><br>
+ผลลัพธ์ของงานวิจัยไม่ใช่แค่ตารางตัวเลขแห้ง ๆ แต่นิสิตจะได้เห็นรูปภาพต้นฉบับ (เช่น Lena, เครื่องบิน, ภาพถ่ายของตัวเอง) ถูกสับเปลี่ยนเม็ดสีและแปลงกลายเป็น <strong>สัญญาณเสียงที่ไม่สามารถฟังรู้เรื่อง (Audio Noise)</strong> และเมื่อป้อนกุญแจถูกต้อง ภาพจะถูกถอดรหัสกลับคืนมาสมบูรณ์แบบ <span class="math inline">\(100\%\)</span> โดยไม่มีจุดผิดเพี้ยนแม้แต่พิกเซลเดียว</p></li>
+<li><p><strong>คณิตศาสตร์เรียบง่ายแต่งดงาม (Accessible Mathematics):</strong><br>
+แก่นของเปเปอร์ใช้เพียง <strong>สมมติฐานคอลลัทซ์ (Collatz Conjecture)</strong> หรือกฎ <span class="math inline">\(3x+1\)</span> ซึ่งเป็นปัญหาทางทฤษฎีจำนวนที่เด็กมัธยมปลายก็เข้าใจกฎได้ใน 1 นาที แต่นำมาสร้างเป็นกลไกทางวิศวกรรมรหัสลับที่มีความซับซ้อนสูง</p></li>
+<li><p><strong>สะพานเชื่อม 4 ศาสตร์ของคณิตศาสตร์ประยุกต์:</strong><br>
+เปเปอร์นี้รวมองค์ความรู้ที่นิสิตได้เรียนมาตลอด 3 ปีเข้าด้วยกันอย่างลงตัว:</p>
+<ul>
+<li><strong>ทฤษฎีจำนวน (Number Theory):</strong> พลวัตของจำนวนเต็ม, ภาวะคู่คี่ (Parity Bits), ลำดับการวนซ้ำ</li>
+<li><strong>พีชคณิตเชิงเส้น (Linear Algebra):</strong> การแทนภาพถ่ายด้วยเมทริกซ์ 2 มิติ, การเรียงสับเปลี่ยนพิกัด (Permutation)</li>
+<li><strong>สถิติและทฤษฎีสารสนเทศ (Applied Statistics &amp; Information Theory):</strong> เอนโทรปีของแชนนอน, สหสัมพันธ์พิกเซลข้างเคียง, ฮิสโตแกรม</li>
+<li><strong>การเขียนโปรแกรมวิทยาศาสตร์ (Scientific Computing):</strong> การจัดการอาเรย์ด้วย Python/NumPy, การประมวลผลสัญญาณเสียงและภาพ</li>
+</ul></li>
+<li><p><strong>มี “ช่องโหว่ทางคณิตศาสตร์” ให้จับผิด (Fascinating Flaws to Unpack):</strong><br>
+สิ่งที่ทำให้เปเปอร์นี้ทรงคุณค่าที่สุด ไม่ใช่เพราะมันสมบูรณ์แบบไร้ที่ติ แต่เป็นเพราะ <strong>มันมีข้อผิดพลาดทางคณิตศาสตร์และจุดบอดเชิงรหัสลับที่ซ่อนอยู่</strong> ซึ่งเป็นโอกาสทองให้นิสิตได้ฝึกคิดแบบนักวิจัยจริง ๆ</p></li>
+</ol>
+<hr>
+</section>
+<section id="กาวขาม-สมมนาแบบทองจำ-อานแลวเดกจะไดอะไรจรง-ๆ" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 2. ก้าวข้าม “สัมมนาแบบท่องจำ”: อ่านแล้วเด็กจะได้อะไรจริง ๆ</h1>
+<section id="ปญหาของงานสมมนาแบบเดม" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="ปญหาของงานสมมนาแบบเดม"><span class="header-section-number">2.1</span> 2.1 ปัญหาของงานสัมมนาแบบเดิม</h2>
+<p>งานสัมมนาของนิสิตปริญญาตรีจำนวนมากมักตกอยู่ในหลุมพรางเดิม ๆ คือ:</p>
+<p><span class="math display">\[\text{ดาวน์โหลดเปเปอร์} \longrightarrow \text{แปลภาษาอังกฤษเป็นไทย} \longrightarrow \text{ทำสไลด์ตามหัวข้อ} \longrightarrow \text{ท่องจำไปตอบคำถามกรรมการ}\]</span></p>
+<p>ผลลัพธ์คือนิสิตไม่ได้ทักษะการวิจัย นิสิตตอบคำถามตามที่ผู้เขียนเปเปอร์อ้างไว้โดยไม่รู้ว่าข้ออ้างนั้นจริงหรือไม่ เมื่อกรรมการถามว่า <em>“ทำไมสูตรนี้ถึงใช้ได้?”</em> หรือ <em>“ค่านี้พิสูจน์มาอย่างไร?”</em> นิสิตก็ตอบได้เพียงว่า <em>“เปเปอร์บอกไว้แบบนี้ครับ”</em></p>
+</section>
+<section id="สงทนสตจะไดจากเปเปอรน-transformative-learning-outcomes" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="สงทนสตจะไดจากเปเปอรน-transformative-learning-outcomes"><span class="header-section-number">2.2</span> 2.2 สิ่งที่นิสิตจะได้จากเปเปอร์นี้ (Transformative Learning Outcomes)</h2>
+<p>เมื่อเรานำเปเปอร์นี้มาศึกษาด้วยระเบียบวิธีวิจัยเชิงรุก นิสิตจะได้รับการยกระดับทักษะ 3 ด้านหลัก:</p>
+<ol type="1">
+<li><p><strong>เปลี่ยนจาก “ผู้อ่านที่เชื่อฟัง” เป็น “นักสืบคณิตศาสตร์” (Critical Mathematical Thinking):</strong><br>
+นิสิตจะได้ฝึกตั้งคำถามกับงานที่ตีพิมพ์ในวารสารระดับนานาชาติ:</p>
+<ul>
+<li>ที่ผู้เขียนอ้างว่ามีขนาดกุญแจ <span class="math inline">\(8.57 \times 10^{506}\)</span> นั้น เป็นขนาดกุญแจจริง หรือเป็นเพียงภาพลวงตาทางคณิตศาสตร์?</li>
+<li>ที่อ้างว่าสอดคล้องกับ “Shannon’s Perfect Secrecy” นั้น จริงตามทฤษฎีบทของแชนนอนหรือไม่?</li>
+<li>ตัวชี้วัดสถิติที่สวยงาม (NPCR, UACI, Entropy) รับประกันความปลอดภัยได้จริงหรือ?</li>
+</ul></li>
+<li><p><strong>ทักษะการจำลองผลและตรวจสอบซ้ำ (Reproducibility &amp; Coding Mastery):</strong><br>
+นิสิตจะได้ลงมือเขียนโค้ด Python ขึ้นมาใหม่ตั้งแต่บรรทัดแรก เพื่อทดสอบว่าสิ่งที่เปเปอร์เขียนไว้ทำงานได้จริงตามนั้นหรือไม่</p></li>
+<li><p><strong>ความภาคภูมิใจจากการสร้าง “อาวุธเจาะระบบ” (The Thrill of Breaking a Cipher):</strong><br>
+นิสิตจะได้เขียนสคริปต์ <strong>Known-Plaintext Attack (KPA)</strong> เพื่อแฮกถอดรหัสระบบของเปเปอร์นี้ และพิสูจน์ให้กรรมการในห้องสัมมนาเห็นสด ๆ ว่าสามารถขโมยภาพความลับได้ภายในเวลาไม่ถึง 0.1 วินาที!</p></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="ความเหมาะสมกบคณตศาสตรประยกตและทฤษฎจำนวน" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 3. ความเหมาะสมกับคณิตศาสตร์ประยุกต์และทฤษฎีจำนวน</h1>
+<p>เปเปอร์นี้สะท้อนนิยามของ <strong>คณิตศาสตร์ประยุกต์ (Applied Mathematics)</strong> ยุคใหม่อย่างแท้จริง:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">มิติทางคณิตศาสตร์</th>
+<th style="text-align: left;">เนื้อหาในเปเปอร์</th>
+<th style="text-align: left;">ประเด็นที่นิสิตได้ประยุกต์ใช้จริง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>ทฤษฎีจำนวน (Number Theory)</strong></td>
+<td style="text-align: left;">พลวัตของฟังก์ชัน <span class="math inline">\(3x+1\)</span> บน <span class="math inline">\(\mathbb{N}\)</span></td>
+<td style="text-align: left;">การเปลี่ยนวิถีจำนวนเต็มให้เป็นเวกเตอร์บิตภาวะคู่คี่ (Parity Vector) และการวิเคราะห์ความยาวรหัส (Stopping Time)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>พีชคณิตเชิงนามธรรม (Algebra)</strong></td>
+<td style="text-align: left;">กรุปสมมาตรและการเรียงสับเปลี่ยน (<span class="math inline">\(S_n\)</span>)</td>
+<td style="text-align: left;">การสับเปลี่ยนโครงสร้างรหัสด้วย Permutation Matrix <span class="math inline">\(P \in S_{256}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>สถิติประยุกต์ (Applied Statistics)</strong></td>
+<td style="text-align: left;">การแจกแจงความน่าจะเป็นและสหสัมพันธ์</td>
+<td style="text-align: left;">การวัดค่า Covariance ของพิกเซลข้างเคียงในแนวตั้ง/แนวนอน และการทดสอบความสม่ำเสมอของฮิสโตแกรม</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>ทฤษฎีสารสนเทศ (Information Theory)</strong></td>
+<td style="text-align: left;">เอนโทรปีของแชนนอน (Shannon Entropy)</td>
+<td style="text-align: left;">การวัดปริมาณข้อมูลเฉลี่ย <span class="math inline">\(H(S) = -\sum P(s_i) \log_2 P(s_i)\)</span> ในสัญญาณเสียงและภาพ</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>วิทยาการคอมพิวเตอร์ (Computer Science)</strong></td>
+<td style="text-align: left;">การดำเนินการระดับบิตและสตรีมมิง</td>
+<td style="text-align: left;">การจัดกลุ่ม 16 บิต, การเข้ารหัสแบบความยาวแปรผัน, และการวิเคราะห์ความซับซ้อน <span class="math inline">\(O(MN)\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="สำหรบเดกทไมเคยอานเปเปอรมากอนเลย-จะเรมตนอยางไร" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 4. สำหรับเด็กที่ไม่เคยอ่านเปเปอร์มาก่อนเลย: จะเริ่มต้นอย่างไร?</h1>
+<p>หากนี่เป็นเปเปอร์วิจัยภาษาอังกฤษฉบับแรกในชีวิตของนิสิต ขอแนะนำให้ปฏิบัติตาม <strong>ยุทธศาสตร์การอ่าน 3 รอบ (The Three-Pass Approach)</strong> ดังนี้:</p>
+<section id="รอบท-1-สแกนภาพรวม-the-birds-eye-view-30-นาท" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="รอบท-1-สแกนภาพรวม-the-birds-eye-view-30-นาท"><span class="header-section-number">4.1</span> 4.1 รอบที่ 1: สแกนภาพรวม (The Bird’s-Eye View — 30 นาที)</h2>
+<ul>
+<li><strong>สิ่งที่ต้องอ่าน:</strong> ชื่อเรื่อง, Abstract, หัวข้อใหญ่ 1 ถึง 7, และดูรูปภาพทั้งหมด (Figure 1 ถึง Figure 12)</li>
+<li><strong>คำถามที่ต้องตอบให้ได้:</strong>
+<ol type="1">
+<li>ปัญหาที่เปเปอร์นี้ต้องการแก้คืออะไร? (ต้องการซ่อนภาพถ่ายให้อยู่ในรูปสัญญาณเสียง)</li>
+<li>เขาใช้เครื่องมือคณิตศาสตร์อะไรมาช่วย? (ฟังก์ชัน Collatz <span class="math inline">\(3x+1\)</span>)</li>
+<li>ผลลัพธ์สุดท้ายหน้าตาเป็นอย่างไร? (ได้ไฟล์เสียง WAV ที่ไม่มีเสียงพูด และถอดกลับมาเป็นรูปเดิมได้)</li>
+</ol></li>
+</ul>
+</section>
+<section id="รอบท-2-แกะรอยสถาปตยกรรมระบบ-the-mechanism-pass-2-3-วน" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="รอบท-2-แกะรอยสถาปตยกรรมระบบ-the-mechanism-pass-2-3-วน"><span class="header-section-number">4.2</span> 4.2 รอบที่ 2: แกะรอยสถาปัตยกรรมระบบ (The Mechanism Pass — 2-3 วัน)</h2>
+<ul>
+<li><strong>สิ่งที่ต้องอ่าน:</strong> Section 2 (ทฤษฎีพื้นฐาน) และ Section 3 (ขั้นตอนวิธีอย่างละเอียด)</li>
+<li><strong>กิจกรรมที่ต้องทำ:</strong><br>
+หยิบกระดาษและดินสอขึ้นมา ลองรันฟังก์ชัน Collatz ด้วยมือสำหรับเลขเล็ก ๆ เช่น <span class="math inline">\(x = 3\)</span> และ <span class="math inline">\(x = 4\)</span> ดูว่าได้บิต <code>11-101000</code> ตาม Figure 3 จริงหรือไม่ จากนั้นลองวาดตารางเมทริกซ์ภาพจำลองขนาดเล็ก <span class="math inline">\(2 \times 2\)</span> แล้วไล่ตามขั้นตอนใน Figure 2</li>
+</ul>
+</section>
+<section id="รอบท-3-จบผดและตรวจสอบเชงลก-the-critical-review-pass-1-สปดาห" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="รอบท-3-จบผดและตรวจสอบเชงลก-the-critical-review-pass-1-สปดาห"><span class="header-section-number">4.3</span> 4.3 รอบที่ 3: จับผิดและตรวจสอบเชิงลึก (The Critical Review Pass — 1 สัปดาห์)</h2>
+<ul>
+<li><strong>สิ่งที่ต้องอ่าน:</strong> Section 5 (การวิเคราะห์ความปลอดภัย) และ Section 6 (การเปรียบเทียบ)</li>
+<li><strong>คำถามที่ต้องตรวจสอบ:</strong><br>
+ตัวเลขใน Table 1 ที่ผู้เขียนอ้างว่า Key Space เท่ากับ <span class="math inline">\(8.57 \times 10^{506}\)</span> นั้น มาจากไหน? มาจาก <span class="math inline">\(256!\)</span> ใช่หรือไม่? แล้วตอนที่เขียนโปรแกรมจริง เราสุ่ม <span class="math inline">\(256!\)</span> แบบได้จริงหรือ หรือเราแค่ใส่ Seed ตัวเลขจำนวนเต็มตัวเดียว?</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="จดบกพรองของเปเปอร-โอกาสทองในการสรางสรรคงานวจย" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 5. จุดบกพร่องของเปเปอร์: โอกาสทองในการสร้างสรรค์งานวิจัย</h1>
+<div class="callout callout-style-default callout-warning callout-titled" title="ความจริงเชิงรหัสลับที่ซ่อนอยู่เบื้องหลังเปเปอร์">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>ความจริงเชิงรหัสลับที่ซ่อนอยู่เบื้องหลังเปเปอร์
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>เปเปอร์ที่ผ่านการตรวจประเมิน (Peer-reviewed) ไม่ได้หมายความว่าจะไม่มีข้อผิดพลาดทางวิชาการ เปเปอร์นี้มีจุดอ่อนสำคัญ 3 ประการที่นิสิตสามารถนำไปใช้เป็นแกนหลักของงานสัมมนาได้:</p>
+<ol type="1">
+<li><p><strong>ภาพลวงตาเรื่อง Key Space:</strong><br>
+เปเปอร์อ้างว่า Key Space คือ <span class="math inline">\(256! \approx 8.57 \times 10^{506}\)</span> แต่ในทางปฏิบัติ ผู้ใช้สุ่มลำดับแถวด้วยฟังก์ชันสุ่มเทียม (PRNG) โดยป้อน Seed เช่น <span class="math inline">\(32\)</span> บิต หรือ <span class="math inline">\(64\)</span> บิต ดังนั้นกุญแจที่แท้จริงจึงมีขนาดเพียง <span class="math inline">\(2^{32}\)</span> หรือ <span class="math inline">\(2^{64}\)</span> เท่านั้น!</p></li>
+<li><p><strong>การอ้างความลับสมบูรณ์ (Shannon’s Perfect Secrecy) ผิดทฤษฎี:</strong><br>
+ทฤษฎีบทของแชนนอนระบุไว้ชัดเจนว่า ระบบจะมีความลับสมบูรณ์ได้ กุญแจจะต้องมีความยาวเท่ากับขนาดของข้อความและใช้เพียงครั้งเดียว (One-Time Pad) แต่ระบบนี้ใช้กุญแจสั้นและส่งข้อมูลภาพที่มีความยาวหลายแสนบิต จึงไม่มีทางเป็น Perfect Secrecy ได้</p></li>
+<li><p><strong>พ่ายแพ้ต่อ Known-Plaintext Attack (KPA) อย่างสิ้นเชิง:</strong><br>
+โครงสร้างรหัสของเปเปอร์เป็น <strong>Monoalphabetic Substitution (รหัสแทนที่เชิงเดี่ยว)</strong> โดยจับคู่ระดับสี <span class="math inline">\(0\)</span>–<span class="math inline">\(255\)</span> กับรหัส Collatz อย่างตายตัว หากผู้โจมตีรู้ภาพต้นฉบับเพียงภาพเดียวที่มีระดับสีครบ 256 ค่า ผู้โจมตีจะรู้ตารางรหัสลับทั้งหมดทันที และสามารถถอดรหัสภาพความลับอื่น ๆ ได้ทุกภาพในเสี้ยววินาที!</p></li>
+</ol>
+</div>
+</div>
+<hr>
+</section>
+<section id="การตอยอดสโครงงานวจยปรญญาตร-5-บท-senior-project-01417499" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> 6. การต่อยอดสู่โครงงานวิจัยปริญญาตรี 5 บท (Senior Project 01417499)</h1>
+<p>เมื่อจบการนำเสนอสัมมนาแล้ว นิสิตสามารถนำหัวข้อนี้ไปขยายผลเป็น <strong>เล่มโครงงานวิจัยปริญญาตรี 5 บท</strong> ได้อย่างมีเกียรติและมีเนื้อหาทางวิชาการที่เข้มข้น โดยเลือกทำใน 3 ทิศทาง (Tracks):</p>
+<pre><code>+-----------------------------------------------------------------------------------+
+|               3 ROADMAPS FOR EXTENDING INTO A 5-CHAPTER SENIOR THESIS             |
++-----------------------------------+-----------------------------------------------+
+| Track 1: "The Cryptanalyst"       | เจาะระบบและทำลายความเชื่อมั่น (Cryptanalysis) |
+| (เน้นทฤษฎีรหัสลับ + โค้ดโจมตีจริง) | เขียนโค้ด KPA กู้ภาพความลับ และจำลองการโจมตี  |
++-----------------------------------+-----------------------------------------------+
+| Track 2: "The Architect"          | ซ่อมแซมและออกแบบสถาปัตยกรรมใหม่ (Redesign)    |
+| (เน้นการสร้างระบบที่ปลอดภัยจริง)  | ผสาน 2D Arnold Cat Map + Collatz Nonce Stream |
++-----------------------------------+-----------------------------------------------+
+| Track 3: "The Auditor"            | วิพากษ์มาตรฐานตัวชี้วัดสากล (Metric Audit)   |
+| (เน้นคณิตศาสตร์สถิติประยุกต์)     | พิสูจน์ว่าทำไม Cipher ที่พังแล้วยังผ่าน NPCR  |
++-----------------------------------+-----------------------------------------------+</code></pre>
+<section id="track-1-ผเจาะระบบรหสลบ-the-cryptanalyst-track" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="track-1-ผเจาะระบบรหสลบ-the-cryptanalyst-track"><span class="header-section-number">6.1</span> Track 1: ผู้เจาะระบบรหัสลับ (The Cryptanalyst Track)</h2>
+<ul>
+<li><strong>บทที่ 1:</strong> ปัญหาความปลอดภัยของระบบรหัสลับภาพดิจิทัลที่พึ่งพาการแทนที่เชิงเดี่ยว</li>
+<li><strong>บทที่ 2:</strong> ทฤษฎีระบบรหัสลับแชนนอน และระเบียบวิธี Known-Plaintext Cryptanalysis</li>
+<li><strong>บทที่ 3:</strong> การออกแบบขั้นตอนวิธีโจมตีเพื่อกู้คืนตารางรหัส Collatz แบบไม่พึ่งพากุญแจ</li>
+<li><strong>บทที่ 4:</strong> ผลการทดลองเจาะระบบภาพมาตรฐาน (Lena, Cameraman) และการวัดเวลาโจมตี (<span class="math inline">\(&lt;0.1\)</span> วินาที)</li>
+<li><strong>บทที่ 5:</strong> สรุปช่องโหว่และข้อเสนอแนะเชิงนโยบายความปลอดภัย</li>
+</ul>
+</section>
+<section id="track-2-สถาปนกผออกแบบระบบใหม-the-architect-track" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="track-2-สถาปนกผออกแบบระบบใหม-the-architect-track"><span class="header-section-number">6.2</span> Track 2: สถาปนิกผู้ออกแบบระบบใหม่ (The Architect Track)</h2>
+<ul>
+<li>พัฒนาระบบเข้ารหัส Collatz รุ่นใหม่ที่แก้จุดบอดเดิม:
+<ul>
+<li>เพิ่ม <strong>Ciphertext Feedback (CBC Mode)</strong> เพื่อให้การแปลงค่าพิกเซลปัจจุบันขึ้นกับพิกเซลก่อนหน้า</li>
+<li>เพิ่ม <strong>Nonce (Number used once)</strong> ต่อภาพ เพื่อป้องกันการใช้กุญแจซ้ำ</li>
+<li>เพิ่มการสับเปลี่ยนตำแหน่ง 2 มิติด้วย <strong>2D Chaotic Map</strong></li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="บนไดฝกฝน-4-ขนสำหรบนสต-step-by-step-practical-exercises" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> 7. บันไดฝึกฝน 4 ขั้นสำหรับนิสิต (Step-by-Step Practical Exercises)</h1>
+<p>เพื่อให้นิสิตเริ่มต้นได้อย่างมั่นใจ ไม่กลัวการเขียนโค้ด ให้อาจารย์มอบหมายภารกิจทีละขั้นดังนี้:</p>
+<section id="ภารกจท-1-สรางเครองจกรคอลลทซ-collatz-engine" class="level3" data-number="7.0.1">
+<h3 data-number="7.0.1" class="anchored" data-anchor-id="ภารกจท-1-สรางเครองจกรคอลลทซ-collatz-engine"><span class="header-section-number">7.0.1</span> ภารกิจที่ 1: สร้างเครื่องจักรคอลลัทซ์ (Collatz Engine)</h3>
+<p>เขียนฟังก์ชันภาษา Python สั้น ๆ ไม่เกิน 15 บรรทัด เพื่อรับจำนวนเต็ม <span class="math inline">\(x\)</span> แล้วส่งคืนลิสต์ของบิตภาวะคู่คี่ <code>[1, 0, 1, 0, ...]</code> ตรวจสอบว่าสำหรับ <span class="math inline">\(x = 3\)</span> ได้ผลลัพธ์ตรงกับในเปเปอร์หรือไม่</p>
+</section>
+<section id="ภารกจท-2-ประกอบตารางรหส-256-แถว-codebook-generation" class="level3" data-number="7.0.2">
+<h3 data-number="7.0.2" class="anchored" data-anchor-id="ภารกจท-2-ประกอบตารางรหส-256-แถว-codebook-generation"><span class="header-section-number">7.0.2</span> ภารกิจที่ 2: ประกอบตารางรหัส 256 แถว (Codebook Generation)</h3>
+<p>วนลูปสร้างรหัสสำหรับค่า <span class="math inline">\(x \in \{1, 2, \dots, 256\}\)</span> วัดความยาวของรหัสแต่ละตัว พลอตกราฟดูว่าค่า <span class="math inline">\(x\)</span> ใดให้รหัสสั้นที่สุด (3 บิต) และค่าใดให้รหัสยาวที่สุด (130 บิต)</p>
+</section>
+<section id="ภารกจท-3-เขารหสภาพของเลนขนาด-8-times-8-toy-matrix-simulation" class="level3" data-number="7.0.3">
+<h3 data-number="7.0.3" class="anchored" data-anchor-id="ภารกจท-3-เขารหสภาพของเลนขนาด-8-times-8-toy-matrix-simulation"><span class="header-section-number">7.0.3</span> ภารกิจที่ 3: เข้ารหัสภาพของเล่นขนาด <span class="math inline">\(8 \times 8\)</span> (Toy Matrix Simulation)</h3>
+<p>สร้างอาเรย์จำลองขนาด <span class="math inline">\(8 \times 8\)</span> พิกเซล ลองทำตามขั้นตอนใน Figure 2 เพื่อแปลงเป็นสายบิต และถอดรหัสกลับคืนมาด้วยขั้นตอนใน Figure 5 ตรวจสอบว่าข้อมูลตรงกันทุกประการ</p>
+</section>
+<section id="ภารกจท-4-การเขารหสภาพจรงและการวดคาความปลอดภย" class="level3" data-number="7.0.4">
+<h3 data-number="7.0.4" class="anchored" data-anchor-id="ภารกจท-4-การเขารหสภาพจรงและการวดคาความปลอดภย"><span class="header-section-number">7.0.4</span> ภารกิจที่ 4: การเข้ารหัสภาพจริงและการวัดค่าความปลอดภัย</h3>
+<p>นำภาพจริง เช่น Lena ขนาด <span class="math inline">\(256 \times 256\)</span> มาเข้ารหัส พล็อตฮิสโตแกรมเปรียบเทียบ และคำนวณค่า Information Entropy (<span class="math inline">\(H\)</span>) กับสหสัมพันธ์พิกเซลข้างเคียง (<span class="math inline">\(r\)</span>)</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

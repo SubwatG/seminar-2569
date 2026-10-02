@@ -1,0 +1,183 @@
+---
+title: "ศูนย์รวมเปเปอร์และคู่มือนำทางสัมมนาคณิตศาสตร์ประยุกต์"
+subtitle: "Applied Mathematics Seminar Hub & Research Navigator (ภาคการศึกษา 2569)"
+author:
+  - name: "อาจารย์ ดร.กิตติพงศ์ ทรัพย์วัฒนาชัย"
+    affiliation: "ภาควิชาวิทยาการคำนวณและเทคโนโลยีดิจิทัล คณะศิลปศาสตร์และวิทยาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์ กำแพงแสน"
+date: "2026-09-30"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    theme: cosmo
+    code-fold: false
+    fig-cap-location: bottom
+  typst:
+    toc: true
+    number-sections: true
+    columns: 1
+---
+
+::: {.callout-note title="เป้าหมายของศูนย์รวมเอกสารสัมมนา (Seminar Portal)"}
+หน้าสารบัญหลักฉบับนี้ (Master Index) รวบรวมเปเปอร์วิจัยระดับนานาชาติ เอกสารถอดรหัสคณิตศาสตร์ฉบับสมบูรณ์ โค้ดทดลองจำลองผลภาษา Python และ **คู่มือนำอ่านรายเปเปอร์ (Study Guides)** สำหรับรายวิชาสัมมนาคณิตศาสตร์ (01417497) และเตรียมความพร้อมสู่การจัดทำเล่มโครงงานวิจัยระดับปริญญาตรี 5 บท (01417499)
+
+นิสิตสามารถคลิกเข้าสู่ **หน้าเว็บ HTML** เพื่ออ่านและพรีวิวสูตรคณิตศาสตร์ หรือเปิดไฟล์ **PDF** และ **ไฟล์ต้นฉบับ QMD** ได้โดยตรงจากหน้านี้
+:::
+
+---
+
+# 1. ตารางรวมลิงก์ด่วนสู่หน้าเว็บ HTML ทุกเปเปอร์ (Quick Access Dashboard)
+
+| หัวข้อเปเปอร์ & วารสาร | หมวดหมู่ | 🧭 คู่มือนำอ่าน (Study Guide) | 📖 บทความวิจัย (Paper) | 📄 ต้นฉบับวารสาร |
+|---|:---:|:---:|:---:|:---:|
+| **1. Lagarias (1985)**<br>*Amer. Math. Monthly* | ทฤษฎีจำนวนบริสุทธิ์ | [🌐 เปิดอ่าน HTML](./foundational-number-theory/01-lagarias-1985-amm/paper-introduction-and-study-guide.html)<br>[📕 PDF](./foundational-number-theory/01-lagarias-1985-amm/paper-introduction-and-study-guide.pdf) · [📝 QMD](./foundational-number-theory/01-lagarias-1985-amm/paper-introduction-and-study-guide.qmd) | [🌐 เปิดอ่าน HTML](./foundational-number-theory/01-lagarias-1985-amm/lagarias-1985.html)<br>[📕 PDF](./foundational-number-theory/01-lagarias-1985-amm/lagarias-1985.pdf) · [📝 QMD](./foundational-number-theory/01-lagarias-1985-amm/lagarias-1985.qmd) | [📄 Original PDF](./foundational-number-theory/01-lagarias-1985-amm/paper.pdf) |
+| **2. Terras (1976)**<br>*Acta Arithmetica* | ทฤษฎีจำนวนบริสุทธิ์ | [🌐 เปิดอ่าน HTML](./foundational-number-theory/02-terras-1976-acta-arithmetica/paper-introduction-and-study-guide.html)<br>[📕 PDF](./foundational-number-theory/02-terras-1976-acta-arithmetica/paper-introduction-and-study-guide.pdf) · [📝 QMD](./foundational-number-theory/02-terras-1976-acta-arithmetica/paper-introduction-and-study-guide.qmd) | [🌐 เปิดอ่าน HTML](./foundational-number-theory/02-terras-1976-acta-arithmetica/terras-1976.html)<br>[📕 PDF](./foundational-number-theory/02-terras-1976-acta-arithmetica/terras-1976.pdf) · [📝 QMD](./foundational-number-theory/02-terras-1976-acta-arithmetica/terras-1976.qmd) | [📄 Original PDF](./foundational-number-theory/02-terras-1976-acta-arithmetica/paper.pdf) |
+| **3. Chamberland (2003)**<br>*AMS Lectures* | ทฤษฎีจำนวนและกราฟ | [🌐 เปิดอ่าน HTML](./foundational-number-theory/03-chamberland-2003-survey/paper-introduction-and-study-guide.html)<br>[📕 PDF](./foundational-number-theory/03-chamberland-2003-survey/paper-introduction-and-study-guide.pdf) · [📝 QMD](./foundational-number-theory/03-chamberland-2003-survey/paper-introduction-and-study-guide.qmd) | [🌐 เปิดอ่าน HTML](./foundational-number-theory/03-chamberland-2003-survey/chamberland-2003.html)<br>[📕 PDF](./foundational-number-theory/03-chamberland-2003-survey/chamberland-2003.pdf) · [📝 QMD](./foundational-number-theory/03-chamberland-2003-survey/chamberland-2003.qmd) | [📄 Original PDF](./foundational-number-theory/03-chamberland-2003-survey/paper.pdf) |
+| **4. Simons & de Weger (2005)**<br>*Acta Arithmetica* | ทฤษฎีจำนวนไดโอแฟนไทน์ | [🌐 เปิดอ่าน HTML](./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/paper-introduction-and-study-guide.html)<br>[📕 PDF](./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/paper-introduction-and-study-guide.pdf) · [📝 QMD](./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/paper-introduction-and-study-guide.qmd) | [🌐 เปิดอ่าน HTML](./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/simons-deweger-2005.html)<br>[📕 PDF](./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/simons-deweger-2005.pdf) · [📝 QMD](./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/simons-deweger-2005.qmd) | [📄 Original PDF](./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/paper.pdf) |
+| **5. Emmert-Streib (2013)**<br>*PLoS ONE* | ทฤษฎีกราฟและเครือข่าย | [🌐 เปิดอ่าน HTML](./applied-interdisciplinary/01-emmert-streib-2013-networks/paper-introduction-and-study-guide.html)<br>[📕 PDF](./applied-interdisciplinary/01-emmert-streib-2013-networks/paper-introduction-and-study-guide.pdf) · [📝 QMD](./applied-interdisciplinary/01-emmert-streib-2013-networks/paper-introduction-and-study-guide.qmd) | [🌐 เปิดอ่าน HTML](./applied-interdisciplinary/01-emmert-streib-2013-networks/emmert-streib-2013.html)<br>[📕 PDF](./applied-interdisciplinary/01-emmert-streib-2013-networks/emmert-streib-2013.pdf) · [📝 QMD](./applied-interdisciplinary/01-emmert-streib-2013-networks/emmert-streib-2013.qmd) | [📄 Original PDF](./applied-interdisciplinary/01-emmert-streib-2013-networks/paper.pdf) |
+| **6. Kontorovich & Miller (2005)**<br>*Acta Arithmetica* | สถิติประยุกต์และเบนฟอร์ด | [🌐 เปิดอ่าน HTML](./applied-interdisciplinary/02-kontorovich-miller-2005-benford/paper-introduction-and-study-guide.html)<br>[📕 PDF](./applied-interdisciplinary/02-kontorovich-miller-2005-benford/paper-introduction-and-study-guide.pdf) · [📝 QMD](./applied-interdisciplinary/02-kontorovich-miller-2005-benford/paper-introduction-and-study-guide.qmd) | [🌐 เปิดอ่าน HTML](./applied-interdisciplinary/02-kontorovich-miller-2005-benford/kontorovich-miller-2005.html)<br>[📕 PDF](./applied-interdisciplinary/02-kontorovich-miller-2005-benford/kontorovich-miller-2005.pdf) · [📝 QMD](./applied-interdisciplinary/02-kontorovich-miller-2005-benford/kontorovich-miller-2005.qmd) | [📄 Original PDF](./applied-interdisciplinary/02-kontorovich-miller-2005-benford/paper.pdf) |
+| **7. Oliver K. Clay (2023)**<br>*J. Humanistic Math* | ดนตรีและฟิสิกส์คลื่นเสียง | [🌐 เปิดอ่าน HTML](./applied-interdisciplinary/03-clay-2023-music-acoustics/paper-introduction-and-study-guide.html)<br>[📕 PDF](./applied-interdisciplinary/03-clay-2023-music-acoustics/paper-introduction-and-study-guide.pdf) · [📝 QMD](./applied-interdisciplinary/03-clay-2023-music-acoustics/paper-introduction-and-study-guide.qmd) | [🌐 เปิดอ่าน HTML](./applied-interdisciplinary/03-clay-2023-music-acoustics/clay-2023.html)<br>[📕 PDF](./applied-interdisciplinary/03-clay-2023-music-acoustics/clay-2023.pdf) · [📝 QMD](./applied-interdisciplinary/03-clay-2023-music-acoustics/clay-2023.qmd) | [📄 Original PDF](./applied-interdisciplinary/03-clay-2023-music-acoustics/paper.pdf) |
+| **8. Tomasz R. Dziala (2023)**<br>*arXiv / CPC* | ความปลอดภัยและ PRNG | [🌐 เปิดอ่าน HTML](./applied-interdisciplinary/04-dziala-2023-prng-nist/paper-introduction-and-study-guide.html)<br>[📕 PDF](./applied-interdisciplinary/04-dziala-2023-prng-nist/paper-introduction-and-study-guide.pdf) · [📝 QMD](./applied-interdisciplinary/04-dziala-2023-prng-nist/paper-introduction-and-study-guide.qmd) | [🌐 เปิดอ่าน HTML](./applied-interdisciplinary/04-dziala-2023-prng-nist/dziala-2023.html)<br>[📕 PDF](./applied-interdisciplinary/04-dziala-2023-prng-nist/dziala-2023.pdf) · [📝 QMD](./applied-interdisciplinary/04-dziala-2023-prng-nist/dziala-2023.qmd) | [📄 Original PDF](./applied-interdisciplinary/04-dziala-2023-prng-nist/paper.pdf) |
+| **9. Diego Renza et al. (2020)**<br>*Applied Sciences* | นิติวิทยาศาสตร์เสียง | [🌐 เปิดอ่าน HTML](./applied-interdisciplinary/05-renza-2020-audio-forensics/paper-introduction-and-study-guide.html)<br>[📕 PDF](./applied-interdisciplinary/05-renza-2020-audio-forensics/paper-introduction-and-study-guide.pdf) · [📝 QMD](./applied-interdisciplinary/05-renza-2020-audio-forensics/paper-introduction-and-study-guide.qmd) | [🌐 เปิดอ่าน HTML](./applied-interdisciplinary/05-renza-2020-audio-forensics/renza-2020.html)<br>[📕 PDF](./applied-interdisciplinary/05-renza-2020-audio-forensics/renza-2020.pdf) · [📝 QMD](./applied-interdisciplinary/05-renza-2020-audio-forensics/renza-2020.qmd) | [📄 Original PDF](./applied-interdisciplinary/05-renza-2020-audio-forensics/paper.pdf) |
+| **10. Ballesteros et al. (2018)**<br>*Entropy* | ถอดรหัสลับภาพดิจิทัล | [🌐 เปิดอ่าน HTML (Break-It)](./04-collatz-image-encryption/paper-introduction-and-study-guide.html)<br>[📕 PDF](./04-collatz-image-encryption/paper-introduction-and-study-guide.pdf) · [📝 QMD](./04-collatz-image-encryption/paper-introduction-and-study-guide.qmd) | [🌐 เปิดอ่าน Verbatim HTML](./04-collatz-image-encryption/ballesteros-2018-verbatim.html)<br>[🌐 เปิดอ่าน Annotated HTML](./04-collatz-image-encryption/ballesteros-2018-reconstructed.html) | [📄 Original PDF](./04-collatz-image-encryption/paper.pdf) |
+
+---
+
+# 2. แผนที่การเลือกหัวข้อตามความถนัดของนิสิต (Advising Matrix)
+
+```
++----------------------------------------------------------------------------------------------------+
+|                                    STUDENT SPECIALIZATION ROADMAP                                  |
++------------------------------+----------------------------------+----------------------------------+
+| สายที่ 1: ทฤษฎีจำนวนบริสุทธิ์  | สายที่ 2: กราฟและวิทยาการข้อมูล   | สายที่ 3: ดนตรีและฟิสิกส์คลื่นเสียง|
+| (Pure Math & Proof Rigor)    | (Graph Theory & Network Science) | (Acoustics & Algorithmic Music)  |
+| 🎯 Lagarias (1985)           | 🎯 Emmert-Streib (2013)          | 🎯 Oliver K. Clay (2023)         |
+| 🎯 Terras (1976)             | 🎯 Kontorovich & Miller (2005)   | 🛠️ สังเคราะห์ไฟล์เสียง `.wav`     |
+| 🎯 Simons & de Weger (2005)  | 🛠️ Python NetworkX / SciPy       |                                  |
++------------------------------+----------------------------------+----------------------------------+
+|                                    สายที่ 4: ความปลอดภัยและการคำนวณสมรรถนะสูง                       |
+|                                    (Cybersecurity, PRNG & Forensics)                               |
+|                                    🎯 Tomasz R. Dziala (2023) - Collatz-Weyl PRNG & NIST           |
+|                                    🎯 Diego Renza et al. (2020) - Audio Tampering Detection        |
+|                                    🎯 Ballesteros et al. (2018) - Image Encryption Cryptanalysis    |
++----------------------------------------------------------------------------------------------------+
+```
+
+---
+
+# 3. หมวดที่ 1: ทฤษฎีจำนวนบริสุทธิ์และระบบพลวัตแม่บท (Foundational Number Theory)
+
+หมวดนี้เหมาะสำหรับนิสิตที่ต้องการฝึกฝน **ตรรกะการพิสูจน์บทตั้งและทฤษฎีบททางคณิตศาสตร์อย่างเคร่งครัด (Rigorous Mathematical Proofs)** โดยมุ่งเน้นการวิเคราะห์โครงสร้างพีชคณิตของฟังก์ชันคอลลัทซ์ $T(n)$:
+
+## 3.1 คัมภีร์แม่บทปัญหา $3x+1$ (Jeffrey C. Lagarias, AMM 1985)
+* **ชื่อเปเปอร์:** The $3x + 1$ Problem and Its Generalizations
+* **วารสาร:** *The American Mathematical Monthly (MAA)*, Vol. 92, No. 1, pp. 3–23 (ได้รับรางวัล Lester R. Ford Award)
+* **แกนคณิตศาสตร์:** แบบจำลองความน่าจะเป็น Geometric Brownian Motion (Drift $\frac{3}{4} < 1$), โครงสร้าง Parity Vectors, ทฤษฎีบทการตัดสินไม่ได้ของ Conway (Turing Undecidability), และการกระจายตัวของเวลาหยุด
+* **เอกสารและลิงก์ศึกษา:**
+  - 🧭 **คู่มือนำอ่าน Study Guide:** [🌐 เปิดอ่านหน้าเว็บ HTML](./foundational-number-theory/01-lagarias-1985-amm/paper-introduction-and-study-guide.html) | [📕 ฉบับพิมพ์ PDF](./foundational-number-theory/01-lagarias-1985-amm/paper-introduction-and-study-guide.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./foundational-number-theory/01-lagarias-1985-amm/paper-introduction-and-study-guide.qmd)
+  - 📖 **ตัวบทความวิจัยที่ถอดรหัส:** [🌐 เปิดอ่านหน้าเว็บ HTML](./foundational-number-theory/01-lagarias-1985-amm/lagarias-1985.html) | [📕 ฉบับพิมพ์ PDF](./foundational-number-theory/01-lagarias-1985-amm/lagarias-1985.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./foundational-number-theory/01-lagarias-1985-amm/lagarias-1985.qmd)
+  - 📄 **เปเปอร์ต้นฉบับ:** [📄 ดาวน์โหลด Original PDF](./foundational-number-theory/01-lagarias-1985-amm/paper.pdf)
+
+## 3.2 บทตั้งความสมนัยของเวกเตอร์คู่คี่ (Riho Terras, Acta Arithmetica 1976)
+* **ชื่อเปเปอร์:** A Stopping Time Problem on the Positive Integers
+* **วารสาร:** *Acta Arithmetica*, Vol. 30, No. 3, pp. 241–252 (เปเปอร์พิสูจน์แรกของโลก)
+* **แกนคณิตศาสตร์:** พิสูจน์ **Parity Vector Bijection Lemma** ว่าเวกเตอร์บิต $k$ ก้าวแรกสมนัยหนึ่งต่อหนึ่งกับ $\mathbb{Z} / 2^k \mathbb{Z}$ ด้วยการอุปนัยเชิงคณิตศาสตร์ และพิสูจน์ว่าความหนาแน่นของจำนวนที่มี Stopping Time จำกัดเท่ากับ 1
+* **เอกสารและลิงก์ศึกษา:**
+  - 🧭 **คู่มือนำอ่าน Study Guide:** [🌐 เปิดอ่านหน้าเว็บ HTML](./foundational-number-theory/02-terras-1976-acta-arithmetica/paper-introduction-and-study-guide.html) | [📕 ฉบับพิมพ์ PDF](./foundational-number-theory/02-terras-1976-acta-arithmetica/paper-introduction-and-study-guide.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./foundational-number-theory/02-terras-1976-acta-arithmetica/paper-introduction-and-study-guide.qmd)
+  - 📖 **ตัวบทความวิจัยที่ถอดรหัส:** [🌐 เปิดอ่านหน้าเว็บ HTML](./foundational-number-theory/02-terras-1976-acta-arithmetica/terras-1976.html) | [📕 ฉบับพิมพ์ PDF](./foundational-number-theory/02-terras-1976-acta-arithmetica/terras-1976.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./foundational-number-theory/02-terras-1976-acta-arithmetica/terras-1976.qmd)
+  - 📄 **เปเปอร์ต้นฉบับ:** [📄 ดาวน์โหลด Original PDF สแกน 1976](./foundational-number-theory/02-terras-1976-acta-arithmetica/paper.pdf)
+
+## 3.3 กราฟต้นไม้ย้อนกลับและวัฏจักรบนจำนวนเต็มลบ (Marc Chamberland, 2003)
+* **ชื่อเปเปอร์:** An Update on the $3x + 1$ Problem
+* **วารสาร:** *Lectures in Applied Mathematics* (AMS Survey)
+* **แกนคณิตศาสตร์:** การสร้างต้นไม้ย้อนกลับ (Predecessor Trees: $T^{-1}(y)$), ปริศนา 3 วัฏจักรที่พิสูจน์ได้จริงบนจำนวนเต็มลบ $\mathbb{Z}^-$ ($-1, -5, -17$), และฟังก์ชันต่อเนื่อง $f(x)$ บน $\mathbb{R}$
+* **เอกสารและลิงก์ศึกษา:**
+  - 🧭 **คู่มือนำอ่าน Study Guide:** [🌐 เปิดอ่านหน้าเว็บ HTML](./foundational-number-theory/03-chamberland-2003-survey/paper-introduction-and-study-guide.html) | [📕 ฉบับพิมพ์ PDF](./foundational-number-theory/03-chamberland-2003-survey/paper-introduction-and-study-guide.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./foundational-number-theory/03-chamberland-2003-survey/paper-introduction-and-study-guide.qmd)
+  - 📖 **ตัวบทความวิจัยที่ถอดรหัส:** [🌐 เปิดอ่านหน้าเว็บ HTML](./foundational-number-theory/03-chamberland-2003-survey/chamberland-2003.html) | [📕 ฉบับพิมพ์ PDF](./foundational-number-theory/03-chamberland-2003-survey/chamberland-2003.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./foundational-number-theory/03-chamberland-2003-survey/chamberland-2003.qmd)
+  - 📄 **เปเปอร์ต้นฉบับ:** [📄 ดาวน์โหลด Original PDF](./foundational-number-theory/03-chamberland-2003-survey/paper.pdf)
+
+## 3.4 ขอบเขตวัฏจักรและสมการไดโอแฟนไทน์ (John Simons & Benne de Weger, 2005)
+* **ชื่อเปเปอร์:** Theoretical and Computational Bounds for $m$-Cycles of the $3n + 1$-Problem
+* **วารสาร:** *Acta Arithmetica*, Vol. 117, No. 1, pp. 51–70
+* **แกนคณิตศาสตร์:** การกระจายสมการไดโอแฟนไทน์ของวัฏจักร $(2^{K+L} - 3^K) x_{\min} = \sum 3^{K-1-j} 2^{A_j}$, การประมาณค่า $\log_2 3$ ด้วยเศษส่วนต่อเนื่อง, และทฤษฎีบทของ Baker บีบขอบเขตพิสูจน์ว่าไม่มี $m$-cycles สำหรับ $m \le 68$
+* **เอกสารและลิงก์ศึกษา:**
+  - 🧭 **คู่มือนำอ่าน Study Guide:** [🌐 เปิดอ่านหน้าเว็บ HTML](./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/paper-introduction-and-study-guide.html) | [📕 ฉบับพิมพ์ PDF](./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/paper-introduction-and-study-guide.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/paper-introduction-and-study-guide.qmd)
+  - 📖 **ตัวบทความวิจัยที่ถอดรหัส:** [🌐 เปิดอ่านหน้าเว็บ HTML](./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/simons-deweger-2005.html) | [📕 ฉบับพิมพ์ PDF](./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/simons-deweger-2005.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/simons-deweger-2005.qmd)
+  - 📄 **เปเปอร์ต้นฉบับ:** [📄 ดาวน์โหลด Original PDF](./foundational-number-theory/04-simons-deweger-2005-acta-arithmetica/paper.pdf)
+
+---
+
+# 4. หมวดที่ 2: การประยุกต์ใช้เชิงสหวิทยาการที่เข้าถึงง่าย (Applied & Interdisciplinary)
+
+หมวดนี้ออกแบบมาเพื่อให้นิสิต **เห็นผลการทดลองจริง เขียนโค้ดสั้น เข้าใจง่าย และมีชิ้นงานส่งมอบที่เป็นรูปธรรม**:
+
+## 4.1 ทฤษฎีกราฟและเครือข่ายซับซ้อน (Frank Emmert-Streib, PLoS ONE 2013)
+* **ชื่อเปเปอร์:** Structural Properties and Complexity of a New Network Class: Collatz Step Graphs
+* **วารสาร:** *PLoS ONE*, 8(2): e56461 (Scopus Q1)
+* **จุดเด่น:** แปลงลำดับก้าวคอลลัทซ์เป็นคลาสใหม่ของเครือข่ายซับซ้อน (CS Graphs) วัด Clustering Coefficient และพิสูจน์ Edge Weight Power Law ด้วย Python NetworkX
+* **เอกสารและลิงก์ศึกษา:**
+  - 🧭 **คู่มือนำอ่าน Study Guide:** [🌐 เปิดอ่านหน้าเว็บ HTML](./applied-interdisciplinary/01-emmert-streib-2013-networks/paper-introduction-and-study-guide.html) | [📕 ฉบับพิมพ์ PDF](./applied-interdisciplinary/01-emmert-streib-2013-networks/paper-introduction-and-study-guide.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./applied-interdisciplinary/01-emmert-streib-2013-networks/paper-introduction-and-study-guide.qmd)
+  - 📖 **ตัวบทความวิจัยที่ถอดรหัส:** [🌐 เปิดอ่านหน้าเว็บ HTML](./applied-interdisciplinary/01-emmert-streib-2013-networks/emmert-streib-2013.html) | [📕 ฉบับพิมพ์ PDF](./applied-interdisciplinary/01-emmert-streib-2013-networks/emmert-streib-2013.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./applied-interdisciplinary/01-emmert-streib-2013-networks/emmert-streib-2013.qmd)
+  - 📄 **เปเปอร์ต้นฉบับ:** [📄 ดาวน์โหลด Original PDF (1.7 MB)](./applied-interdisciplinary/01-emmert-streib-2013-networks/paper.pdf)
+
+## 4.2 กฎของเบนฟอร์ดในคอลลัทซ์ (Alex Kontorovich & Steven J. Miller, 2005)
+* **ชื่อเปเปอร์:** Benford's Law, Values of $L$-Functions and the $3x + 1$ Problem
+* **วารสาร:** *Acta Arithmetica*, Vol. 120, No. 3, pp. 269–297
+* **จุดเด่น:** พิสูจน์ว่าเลขโดดตัวแรก 1 ถึง 9 ในวงโคจรคอลลัทซ์ลู่เข้าสู่กฎของเบนฟอร์ด $P(d) = \log_{10}(1 + 1/d)$ และให้นิสิตฝึกรันการทดสอบสมมติฐานทางสถิติ $\chi^2$ Goodness-of-Fit Test ใน SciPy
+* **เอกสารและลิงก์ศึกษา:**
+  - 🧭 **คู่มือนำอ่าน Study Guide:** [🌐 เปิดอ่านหน้าเว็บ HTML](./applied-interdisciplinary/02-kontorovich-miller-2005-benford/paper-introduction-and-study-guide.html) | [📕 ฉบับพิมพ์ PDF](./applied-interdisciplinary/02-kontorovich-miller-2005-benford/paper-introduction-and-study-guide.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./applied-interdisciplinary/02-kontorovich-miller-2005-benford/paper-introduction-and-study-guide.qmd)
+  - 📖 **ตัวบทความวิจัยที่ถอดรหัส:** [🌐 เปิดอ่านหน้าเว็บ HTML](./applied-interdisciplinary/02-kontorovich-miller-2005-benford/kontorovich-miller-2005.html) | [📕 ฉบับพิมพ์ PDF](./applied-interdisciplinary/02-kontorovich-miller-2005-benford/kontorovich-miller-2005.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./applied-interdisciplinary/02-kontorovich-miller-2005-benford/kontorovich-miller-2005.qmd)
+  - 📄 **เปเปอร์ต้นฉบับ:** [📄 ดาวน์โหลด Original PDF (354 KB)](./applied-interdisciplinary/02-kontorovich-miller-2005-benford/paper.pdf)
+
+## 4.3 ดนตรีอัลกอริทึมและการสังเคราะห์เสียง (Oliver K. Clay, JHM 2023)
+* **ชื่อเปเปอร์:** The Long Search for Collatz Counterexamples (The Music of a Collatz Run)
+* **วารสาร:** *Journal of Humanistic Mathematics*, Vol. 13, Issue 2, pp. 199–227
+* **จุดเด่น:** เปลี่ยนวงโคจรตัวเลขเป็นความถี่เสียงดนตรี (Hz) และโน้ตดนตรี 12 เสียงด้วยเลขคณิตมอดุโล 12 นิสิตสามารถสังเคราะห์ไฟล์เสียงจริง `.wav` เปิดให้กรรมการและเพื่อนฟังในห้องสัมมนาได้
+* **เอกสารและลิงก์ศึกษา:**
+  - 🧭 **คู่มือนำอ่าน Study Guide:** [🌐 เปิดอ่านหน้าเว็บ HTML](./applied-interdisciplinary/03-clay-2023-music-acoustics/paper-introduction-and-study-guide.html) | [📕 ฉบับพิมพ์ PDF](./applied-interdisciplinary/03-clay-2023-music-acoustics/paper-introduction-and-study-guide.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./applied-interdisciplinary/03-clay-2023-music-acoustics/paper-introduction-and-study-guide.qmd)
+  - 📖 **ตัวบทความวิจัยที่ถอดรหัส:** [🌐 เปิดอ่านหน้าเว็บ HTML](./applied-interdisciplinary/03-clay-2023-music-acoustics/clay-2023.html) | [📕 ฉบับพิมพ์ PDF](./applied-interdisciplinary/03-clay-2023-music-acoustics/clay-2023.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./applied-interdisciplinary/03-clay-2023-music-acoustics/clay-2023.qmd)
+  - 📄 **เปเปอร์ต้นฉบับ:** [📄 ดาวน์โหลด Original PDF (1.1 MB)](./applied-interdisciplinary/03-clay-2023-music-acoustics/paper.pdf)
+
+## 4.4 ตัวสร้างเลขสุ่มเทียมและการทดสอบ NIST (Tomasz R. Dziala, 2023)
+* **ชื่อเปเปอร์:** Collatz-Weyl PRNG: A High-Performance Pseudorandom Number Generator
+* **วารสาร:** arXiv:2312.17043 (Elsevier CPC stream)
+* **จุดเด่น:** ผสาน Generalized Collatz เข้ากับลำดับของไวล์ (Weyl Sequence) เพื่อการันตีคาบ $2^{64}$ ขั้นตอนวิธีระดับบิตเร็วสูง พร้อมชุดทดสอบมาตรฐานความปลอดภัย NIST SP 800-22
+* **เอกสารและลิงก์ศึกษา:**
+  - 🧭 **คู่มือนำอ่าน Study Guide:** [🌐 เปิดอ่านหน้าเว็บ HTML](./applied-interdisciplinary/04-dziala-2023-prng-nist/paper-introduction-and-study-guide.html) | [📕 ฉบับพิมพ์ PDF](./applied-interdisciplinary/04-dziala-2023-prng-nist/paper-introduction-and-study-guide.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./applied-interdisciplinary/04-dziala-2023-prng-nist/paper-introduction-and-study-guide.qmd)
+  - 📖 **ตัวบทความวิจัยที่ถอดรหัส:** [🌐 เปิดอ่านหน้าเว็บ HTML](./applied-interdisciplinary/04-dziala-2023-prng-nist/dziala-2023.html) | [📕 ฉบับพิมพ์ PDF](./applied-interdisciplinary/04-dziala-2023-prng-nist/dziala-2023.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./applied-interdisciplinary/04-dziala-2023-prng-nist/dziala-2023.qmd)
+  - 📄 **เปเปอร์ต้นฉบับ:** [📄 ดาวน์โหลด Original PDF (188 KB)](./applied-interdisciplinary/04-dziala-2023-prng-nist/paper.pdf)
+
+## 4.5 นิติวิทยาศาสตร์ดิจิทัลและการตรวจจับการปลอมแปลงเสียง (Diego Renza et al., 2020)
+* **ชื่อเปเปอร์:** Robust Speech Hashing for Digital Audio Forensics via Collatz Transformations
+* **วารสาร:** *Applied Sciences (MDPI)*, 10(1):118
+* **จุดเด่น:** ประยุกต์ใช้ Collatz Binarization ในคดีความทางกฎหมาย เพื่อสร้างรหัสแฮชเสียงที่ทนทานต่อการบีบอัด MP3 แต่ไวต่อการตัดต่อคำพูดด้วยความแม่นยำสูงกว่า $99.8\%$
+* **เอกสารและลิงก์ศึกษา:**
+  - 🧭 **คู่มือนำอ่าน Study Guide:** [🌐 เปิดอ่านหน้าเว็บ HTML](./applied-interdisciplinary/05-renza-2020-audio-forensics/paper-introduction-and-study-guide.html) | [📕 ฉบับพิมพ์ PDF](./applied-interdisciplinary/05-renza-2020-audio-forensics/paper-introduction-and-study-guide.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./applied-interdisciplinary/05-renza-2020-audio-forensics/paper-introduction-and-study-guide.qmd)
+  - 📖 **ตัวบทความวิจัยที่ถอดรหัส:** [🌐 เปิดอ่านหน้าเว็บ HTML](./applied-interdisciplinary/05-renza-2020-audio-forensics/renza-2020.html) | [📕 ฉบับพิมพ์ PDF](./applied-interdisciplinary/05-renza-2020-audio-forensics/renza-2020.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./applied-interdisciplinary/05-renza-2020-audio-forensics/renza-2020.qmd)
+  - 📄 **เปเปอร์ต้นฉบับ:** [📄 ดาวน์โหลด Original PDF (2.2 MB)](./applied-interdisciplinary/05-renza-2020-audio-forensics/paper.pdf)
+
+---
+
+# 5. หมวดที่ 3: กรณีศึกษาระบบเข้ารหัสภาพดิจิทัล (Case Study: From Build to Break)
+
+* **เปเปอร์อ้างอิง:** D. M. Ballesteros et al. (*Entropy*, 2018) / C. Obimbo (*IEEE Access*, 2024)
+* **แนวทางการศึกษา:** พลิกกรอบจากการ "สร้างระบบตามเปเปอร์" เป็น **"ห้องปฏิบัติการเจาะระบบรหัสลับ (Cryptanalytic Red Team)"** พิสูจน์ช่องโหว่ Known-Plaintext Attack (KPA) และข้อผิดพลาดเรื่อง Shannon's Perfect Secrecy
+* **เอกสารและลิงก์ศึกษา:**
+  - 🧭 **คู่มือนำอ่าน Study Guide:** [🌐 เปิดอ่านหน้าเว็บ HTML](./04-collatz-image-encryption/paper-introduction-and-study-guide.html) | [📕 ฉบับพิมพ์ PDF](./04-collatz-image-encryption/paper-introduction-and-study-guide.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./04-collatz-image-encryption/paper-introduction-and-study-guide.qmd)
+  - 📖 **เปเปอร์ฉบับภาษาอังกฤษตามต้นฉบับ 100%:** [🌐 เปิดอ่าน Verbatim HTML](./04-collatz-image-encryption/ballesteros-2018-verbatim.html) | [📕 ฉบับพิมพ์ PDF](./04-collatz-image-encryption/ballesteros-2018-verbatim.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./04-collatz-image-encryption/ballesteros-2018-verbatim.qmd)
+  - 🔍 **เปเปอร์ฉบับภาษาไทยพร้อมบทวิเคราะห์วิพากษ์ Red Team:** [🌐 เปิดอ่าน Annotated HTML](./04-collatz-image-encryption/ballesteros-2018-reconstructed.html) | [📕 ฉบับพิมพ์ PDF](./04-collatz-image-encryption/ballesteros-2018-reconstructed.pdf) | [📝 ไฟล์ต้นฉบับ QMD](./04-collatz-image-encryption/ballesteros-2018-reconstructed.qmd)
+  - 📄 **เปเปอร์ต้นฉบับ:** [📄 ดาวน์โหลด Original PDF (2.2 MB)](./04-collatz-image-encryption/paper.pdf)
+
+---
+
+# 6. แผนการดำเนินงาน 12 สัปดาห์สำหรับนิสิตสัมมนา (12-Week Roadmap)
+
+| สัปดาห์ | กิจกรรมการศึกษาและการค้นคว้า | ผลงานส่งมอบ (Deliverables) |
+|---|---|---|
+| **สัปดาห์ 1–2** | ศึกษามโนทัศน์เบื้องต้นตามคู่มือนำอ่าน (Three-Pass Approach) และทำความเข้าใจปัญหา | สรุปมโนทัศน์ 1 หน้ากระดาษ A4 |
+| **สัปดาห์ 3–4** | ปฏิบัติภารกิจที่ 1 และ 2 ของบันไดฝึกฝน (เขียนโค้ดจำลองระบบย่อยใน Python) | โค้ด Python สคริปต์แรกพร้อมผลรัน |
+| **สัปดาห์ 5–6** | ปฏิบัติภารกิจที่ 3 (แกะรอยบทพิสูจน์ทางคณิตศาสตร์หรือจำลองระบบเต็มรูปแบบ) | สรุปก้าวพิสูจน์หรือกราฟเปรียบเทียบ |
+| **สัปดาห์ 7–8** | ปฏิบัติภารกิจที่ 4 (วิพากษ์จุดบกพร่อง / ทดสอบกับชุดข้อมูลขนาดใหญ่) | ผลการทดสอบความแม่นยำหรือช่องโหว่ |
+| **สัปดาห์ 9–10** | วางโครงสร้างเล่มรายงานสัมมนา 5 บท และเตรียมแผนขยายผลสู่โครงงานวิจัย | ร่างรายงานสัมมนาบทที่ 1–3 |
+| **สัปดาห์ 11–12** | ซ้อมนำเสนอในห้องสัมมนา พร้อมเตรียมการสาธิตโปรแกรมจริง | สไลด์นำเสนอ และเล่มรายงานฉบับสมบูรณ์ |
