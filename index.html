@@ -102,6 +102,12 @@ window.Quarto = {
   </ul></li>
   <li><a href="#หมวดท-3-กรณศกษาระบบเขารหสภาพดจทล-case-study-from-build-to-break" id="toc-หมวดท-3-กรณศกษาระบบเขารหสภาพดจทล-case-study-from-build-to-break" class="nav-link" data-scroll-target="#หมวดท-3-กรณศกษาระบบเขารหสภาพดจทล-case-study-from-build-to-break"><span class="header-section-number">5</span> 5. หมวดที่ 3: กรณีศึกษาระบบเข้ารหัสภาพดิจิทัล (Case Study: From Build to Break)</a></li>
   <li><a href="#แผนการดำเนนงาน-12-สปดาหสำหรบนสตสมมนา-12-week-roadmap" id="toc-แผนการดำเนนงาน-12-สปดาหสำหรบนสตสมมนา-12-week-roadmap" class="nav-link" data-scroll-target="#แผนการดำเนนงาน-12-สปดาหสำหรบนสตสมมนา-12-week-roadmap"><span class="header-section-number">6</span> 6. แผนการดำเนินงาน 12 สัปดาห์สำหรับนิสิตสัมมนา (12-Week Roadmap)</a></li>
+  <li><a href="#collatz-nt-review-2026" id="toc-collatz-nt-review-2026" class="nav-link" data-scroll-target="#collatz-nt-review-2026"><span class="header-section-number">7</span> 7. อัปเดตการคัดเลือก Collatz Paper สาย Number Theory</a>
+  <ul class="collapse">
+    <li><a href="#collatz-nt-review-comparison" id="toc-collatz-nt-review-comparison" class="nav-link" data-scroll-target="#collatz-nt-review-comparison"><span class="header-section-number">7.1</span> 7.1 ตารางเปรียบเทียบ</a></li>
+    <li><a href="#collatz-nt-review-proof" id="toc-collatz-nt-review-proof" class="nav-link" data-scroll-target="#collatz-nt-review-proof"><span class="header-section-number">7.2</span> 7.2 Elementary Proof</a></li>
+    <li><a href="#collatz-nt-review-scope" id="toc-collatz-nt-review-scope" class="nav-link" data-scroll-target="#collatz-nt-review-scope"><span class="header-section-number">7.3</span> 7.3 ขอบเขตสัมมนา</a></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
 </div>
@@ -467,6 +473,46 @@ window.Quarto = {
 </tbody>
 </table>
 </section>
+
+<!-- BEGIN 2026-11-18 ADDITIVE COLLATZ NUMBER THEORY REVIEW -->
+<section id="collatz-nt-review-2026" class="level1" data-number="7">
+<h1 data-number="7" class="anchored" data-anchor-id="collatz-nt-review-2026"><span class="header-section-number">7</span> 7. อัปเดตการคัดเลือกบทความ Collatz สาย Number Theory (18 พฤศจิกายน 2569)</h1>
+<div class="alert alert-info" role="note">
+<p><strong>เกณฑ์ใหม่ตามความถนัดของที่ปรึกษา:</strong> วิชาสัมมนาไม่บังคับให้นิสิตค้นพบทฤษฎีบทใหม่ เน้นอ่าน Paper จริง พิสูจน์กรณีที่เหมาะสมด้วย Number Theory และใช้ Python ตรวจตัวอย่าง ความเหมาะสมของบทพิสูจน์กับผู้สอนสำคัญกว่าความยาวหรือภาพสาธิตของ Paper</p>
+<p><strong>เอกสารหลัก:</strong> <a href="./collatz-number-theory-paper-review-2026/report.html">รายงานคัดเลือกฉบับละเอียด (HTML)</a></p>
+</div>
+<section id="collatz-nt-review-comparison" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="collatz-nt-review-comparison"><span class="header-section-number">7.1</span> เปรียบเทียบ Paper ทาง Number Theory</h2>
+<div class="table-responsive"><table class="caption-top table table-striped">
+<thead><tr><th>บทความ / PDF</th><th>ความยาว</th><th>ผลลัพธ์หลัก</th><th>ข้อเสนอ</th></tr></thead><tbody>
+<tr><td><a href="./collatz-number-theory-paper-review-2026/papers/shaw-2006-pure-numbers.pdf"><strong>Shaw (2006): Pure Numbers</strong></a></td><td>8 หน้า</td><td>Pure/Impure Numbers, Congruences, Parity Patterns, Density</td><td><strong>แนะนำเป็นตัวเลือกหลัก</strong> โดยเริ่ม §§1–2</td></tr>
+<tr><td><a href="https://scholarexchange.furman.edu/fuejum/vol17/iss1/1/"><strong>Wiltrout &amp; Landquist: Special Forms</strong></a></td><td>5 หน้า</td><td>จำนวนรูป 2<sup>k</sup>b−m, 3<sup>k</sup>b−1 และ Total Stopping Time</td><td>น่าสนใจมาก แต่ <strong>ยังไม่ได้ตรวจ PDF เต็ม</strong> (HTTP 403)</td></tr>
+<tr><td><a href="./applied-interdisciplinary/03-clay-2023-music-acoustics/paper.pdf"><strong>Clay (2023): Counterexamples</strong></a></td><td>29 หน้า</td><td>Residue Classes, Parity Coding, ข้อจำกัดในการลดพื้นที่ค้นหา</td><td>เหมาะเมื่อเลือกอ่าน §§1–3, 7, 9</td></tr>
+<tr><td><a href="./foundational-number-theory/02-terras-1976-acta-arithmetica/paper.pdf"><strong>Terras (1976): Stopping Time</strong></a></td><td>12 หน้า</td><td>Parity Vector Bijection, Finite Stopping Time Density 1</td><td>ตรงสาย แต่ Proof ค่อนข้างเข้มข้น</td></tr>
+<tr><td><a href="./collatz-number-theory-paper-review-2026/papers/albert-gudmundsson-ulfarsson-2015-collatz-fibonacci-preprint.pdf"><strong>Albert et al.: Collatz Meets Fibonacci</strong></a></td><td>7 หน้า Preprint</td><td>Permutation Patterns, Fibonacci Numbers</td><td>สำหรับกลุ่มชอบ Combinatorics</td></tr>
+<tr><td><a href="./foundational-number-theory/01-lagarias-1985-amm/paper.pdf"><strong>Lagarias (1985): 3x+1 Survey</strong></a></td><td>21 หน้า</td><td>ภาพรวมทฤษฎีจำนวนใน Collatz Problem</td><td>เหมาะเป็น Background Reading</td></tr>
+</tbody></table></div>
+<p class="small text-muted">สถานะไฟล์: ดาวน์โหลด Shaw และ Albert et al. เข้า Vault แล้วและตรวจ SHA-256; Wiltrout–Landquist ยังไม่มี PDF เพราะเว็บไซต์วารสารจำกัดการดาวน์โหลด ส่วน Clay, Terras และ Lagarias มีต้นฉบับอยู่แล้ว</p>
+</section>
+<section id="collatz-nt-review-proof" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="collatz-nt-review-proof"><span class="header-section-number">7.2</span> ตัวอย่าง Elementary Proof จาก Shaw (2006)</h2>
+<p>จำนวน <span class="math inline">\(n\)</span> เป็น <em>Impure</em> หาก Collatz Orbit ของจำนวนเต็มบวก <span class="math inline">\(r&lt;n\)</span> ผ่าน <span class="math inline">\(n\)</span> เมื่อ <span class="math inline">\(n=3k+2\)</span> ให้ <span class="math inline">\(r=2k+1&lt;n\)</span> จึงมี</p>
+<p class="text-center"><span class="math display">\[2k+1\longrightarrow6k+4=2n\longrightarrow n.\]</span></p>
+<p>ดังนั้นทุก <span class="math inline">\(n\equiv2\pmod3\)</span> เป็น Impure; เป็นตัวอย่างที่นิสิตใช้ Congruences และการแทนค่าได้โดยไม่ต้องมีทฤษฎีจำนวนขั้นสูง ส่วน Theorem-Generating Algorithm และ Density ท้าย Paper เหมาะกับการอ่านแบบมีคำแนะนำ</p>
+</section>
+<section id="collatz-nt-review-scope" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="collatz-nt-review-scope"><span class="header-section-number">7.3</span> ขอบเขตสัมมนาและโครงงานต่อยอด</h2>
+<ol>
+<li><strong>สัมมนา:</strong> เข้าใจ Definitions/Main Results เลือก Proof หนึ่งกรณี เขียน Python ตรวจผล และอธิบาย Limitations; <strong>ไม่บังคับ Novelty</strong></li>
+<li><strong>Shaw:</strong> เริ่ม §§1–2 และอ่าน §§3–5 เป็น Guided Reading บางส่วน</li>
+<li><strong>Clay:</strong> เริ่ม §§1–3 และส่วนที่เหมาะใน §§7,9; ดนตรีใน §8 ใช้เป็นส่วนเสริม Presentation ไม่ใช่ผลวิจัยหลัก</li>
+<li><strong>โครงงานภายหลัง:</strong> สำรวจ Pure/Impure Witness, First-Descent Residue Classes หรือ Generalized Collatz Cases ที่ควบคุมขอบเขต Proof ได้</li>
+</ol>
+<div class="alert alert-warning" role="note"><strong>หมายเหตุความถูกต้อง:</strong> Python ตรวจจำนวนจำกัดไม่ใช่การพิสูจน์ Collatz Conjecture; Natural Density 1 ไม่เท่ากับจริงสำหรับทุกจำนวน ชื่อ Paper ของ Clay จริงคือ <em>The Long Search for Collatz Counterexamples</em> ไม่ใช่บทความดนตรีโดยตรง หมวดดนตรีในเว็บเดิมหมายถึงกิจกรรมเสริม</div>
+<p><a href="./collatz-number-theory-paper-review-2026/report.html"><strong>อ่านรายงานฉบับละเอียดพร้อมบรรณานุกรมและแผนการศึกษา</strong></a> · <a href="./collatz-number-theory-paper-review-2026/papers/README.md">บัญชี PDF ต้นฉบับ</a></p>
+</section>
+</section>
+<!-- END 2026-11-18 ADDITIVE COLLATZ NUMBER THEORY REVIEW -->
 
 </main>
 <!-- /main column -->

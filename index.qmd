@@ -181,3 +181,50 @@ format:
 | **สัปดาห์ 7–8** | ปฏิบัติภารกิจที่ 4 (วิพากษ์จุดบกพร่อง / ทดสอบกับชุดข้อมูลขนาดใหญ่) | ผลการทดสอบความแม่นยำหรือช่องโหว่ |
 | **สัปดาห์ 9–10** | วางโครงสร้างเล่มรายงานสัมมนา 5 บท และเตรียมแผนขยายผลสู่โครงงานวิจัย | ร่างรายงานสัมมนาบทที่ 1–3 |
 | **สัปดาห์ 11–12** | ซ้อมนำเสนอในห้องสัมมนา พร้อมเตรียมการสาธิตโปรแกรมจริง | สไลด์นำเสนอ และเล่มรายงานฉบับสมบูรณ์ |
+
+---
+
+# 7. อัปเดตการคัดเลือกบทความ Collatz สาย Number Theory (18 พฤศจิกายน 2569) {#collatz-nt-review-2026}
+
+::: {.callout-tip title="แนวทางใหม่ตามความถนัดของอาจารย์ที่ปรึกษา"}
+ในรายวิชาสัมมนา **ไม่บังคับให้นิสิตสร้างผลวิจัยใหม่** เป้าหมายคืออ่าน Paper จริง เข้าใจนิยาม พิสูจน์ผลหลักอย่างน้อยหนึ่งกรณีด้วยตนเอง และใช้ Python ตรวจตัวอย่าง ความถนัดของที่ปรึกษาคือ **Elementary Number Theory, Congruences และ Python** จึงให้น้ำหนักกับความสามารถกำกับ *Mathematical Proof* มากกว่างาน Network Science / Cryptography
+
+**เอกสารหลัก:** [เปิดรายงานฉบับละเอียดในเว็บ](./collatz-number-theory-paper-review-2026/report.html) และ [บัญชีไฟล์ PDF ต้นฉบับ](./collatz-number-theory-paper-review-2026/papers/README.md)
+:::
+
+## 7.1 ตารางเปรียบเทียบ Paper ที่เข้ากับ Number Theory
+
+| บทความ | ความยาว | สิ่งที่ศึกษา/ผลลัพธ์ | ความเหมาะสมกับสัมมนา |
+|---|:---:|---|---|
+| **[Shaw (2006): Pure Numbers](./collatz-number-theory-paper-review-2026/papers/shaw-2006-pure-numbers.pdf)** | 8 หน้า | จำแนก Pure/Impure Numbers ด้วย Congruences, ใช้ Parity Patterns และ Density | **ตัวเลือกหลักที่แนะนำ** โดยให้ §§1–2 เป็นภาคพิสูจน์หลัก |
+| **[Wiltrout & Landquist: Special Forms](https://scholarexchange.furman.edu/fuejum/vol17/iss1/1/)** | 5 หน้า | จำนวนเต็มรูป $2^k b-m$ และ $3^k b-1$ กับ Total Stopping Time; เกิดจาก Undergraduate Seminar | **น่าสนใจมาก แต่ยังต้องตรวจ PDF เต็ม** (Publisher ตอบ HTTP 403) |
+| **[Clay (2023): Counterexamples](./applied-interdisciplinary/03-clay-2023-music-acoustics/paper.pdf)** | 29 หน้าบทความ | ลดกรณีด้วย Residue Classes, Parity Coding และอภิปรายข้อจำกัดของวิธี | ยังเหมาะเมื่อใช้ **Selective Reading** §§1–3, 7, 9 |
+| **[Terras (1976): Stopping Time](./foundational-number-theory/02-terras-1976-acta-arithmetica/paper.pdf)** | 12 หน้า | Parity Vector Bijection และ Natural Density 1 ของ Finite Stopping Time | ตรง Number Theory มาก แต่ Proof มีความเข้มข้นสูง |
+| **[Albert et al.: Collatz Meets Fibonacci](./collatz-number-theory-paper-review-2026/papers/albert-gudmundsson-ulfarsson-2015-collatz-fibonacci-preprint.pdf)** | 7 หน้า (Preprint) | รูปแบบของ Collatz Permutations และความสัมพันธ์กับ Fibonacci Numbers | เหมาะกลุ่มชอบ Combinatorics/Patterns |
+| **[Lagarias (1985): 3x+1 Survey](./foundational-number-theory/01-lagarias-1985-amm/paper.pdf)** | 21 หน้า | ภาพรวมผลและแนวทางสำคัญใน Collatz Problem | เหมาะเป็น Background Reading |
+
+> **สถานะเอกสาร:** PDF ของ **Shaw** และ **Albert et al.** ดาวน์โหลดเข้า Vault แล้วและตรวจจำนวนหน้า/ขนาด/SHA-256; PDF **Wiltrout & Landquist** ยังไม่ได้ไฟล์เนื่องจากระบบ Publisher ปฏิเสธอัตโนมัติ จึงยังไม่อ้างว่าอ่าน Proof ฉบับเต็มแล้ว ส่วน Clay, Terras และ Lagarias มีไฟล์เดิมใน Vault อยู่แล้ว
+
+## 7.2 ตัวอย่างบทพิสูจน์ที่ทำได้ด้วย Congruences
+
+ใน **Shaw (2006)** นิยาม $n$ เป็น *Impure* ถ้ามีจำนวนเต็มบวก $r<n$ ที่ Collatz Orbit ของ $r$ ผ่าน $n$ ตัวอย่าง ถ้า $n=3k+2$ และ $k\ge0$ ให้ $r=2k+1<n$ จะได้
+
+$$
+2k+1 \longrightarrow 6k+4=2n \longrightarrow n.
+$$
+
+จึงสรุปได้ว่า **ทุก $n\equiv2\pmod3$ เป็น Impure** โดยพิสูจน์ด้วย Divisibility และการแทนค่า ไม่ต้องใช้ Advanced Number Theory; ส่วน Proof เรื่อง Algorithm/Parity และ Density ท้ายบทความควรอ่านแบบมีอาจารย์ช่วยกำกับ
+
+## 7.3 ขอบเขตที่แนะนำสำหรับสัมมนาและโครงงานในอนาคต
+
+1. **สัมมนา:** อ่านบทความหลักให้ถูกต้อง, แยกนิยาม Collatz Map ดั้งเดิมกับ Accelerated Map, พิสูจน์กรณี Elementary, ใช้ Python ตรวจตัวอย่าง และอธิบาย Limitations; **ไม่บังคับ Novelty**
+2. **หากเลือก Shaw:** เน้น Definitions และ Congruence Proof ใน §§1–2; ใช้ §§3–5 เป็น Guided Reading บางส่วน
+3. **หากเลือก Clay:** เน้น §§1–3 กับส่วน Residue Tree/Parity Coding ใน §§7,9; ผล Terras/Tao/KAM ให้อ่านความหมายก่อน ไม่บังคับพิสูจน์; **§8 เรื่องดนตรีเป็นส่วนประกอบ Presentation ไม่ใช่ผลวิจัยหลักของ Paper**
+4. **หากต่อยอดเป็นโครงงาน:** ค่อยกำหนดโจทย์แคบ เช่น Pure/Impure Witness Certificates, First-Descent Residue Classes, หรือ Generalized Collatz บางพารามิเตอร์ โดยแยกผลทดลองออกจาก Proof
+
+::: {.callout-warning title="ข้อควรระวังด้านความถูกต้อง"}
+การตรวจตัวเลขด้วย Python ไม่ใช่ข้อพิสูจน์ Collatz Conjecture และการพิสูจน์ว่าเป็นจริงสำหรับเซตที่มี Density 1 ไม่ได้หมายความว่าเป็นจริงสำหรับทุกจำนวน การตั้งชื่อหมวด Clay ในเว็บเวอร์ชันเดิมว่า 'ดนตรี' เป็นการจัดหมวดตามกิจกรรมประกอบ; **ชื่อ Paper ต้นฉบับจริงคือ *The Long Search for Collatz Counterexamples*** และ §8 มีเพียงการฟัง Trajectories เป็นส่วนเสริม
+:::
+
+**รายงานพร้อมบรรณานุกรมและแผน 10 สัปดาห์:** [Collatz Number Theory Paper Selection Report (HTML)](./collatz-number-theory-paper-review-2026/report.html) | [เปิดคลัง PDF](./collatz-number-theory-paper-review-2026/papers/README.md)
+
